@@ -4,6 +4,8 @@ import {connect} from 'react-redux'
 import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 
+// test
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
