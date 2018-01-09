@@ -22,13 +22,32 @@ const Product = db.define('product', {
   currentPrice: {
     type: Sequelize.NUMBER
   },
+  ratingSum: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  numberOfRatings: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   averageRating: {
     type: Sequelize.VIRTUAL,
     get: () => {
-      return 3
+      if (this.numberOfRatings === 0) {
+        return 0
+      } else {
+        return this.ratingSum / this.numberOfRatings
+      }
     }
   }
+
+  // averageRating: {
+  //   type: Sequelize.VIRTUAL,
+  //   defaultValue: 0
+  //   }
 })
+
+
 
 module.exports = Product
 
