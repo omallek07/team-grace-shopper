@@ -1,8 +1,11 @@
 import React from 'react';
 import { Menu, Icon, Header } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
-  const { logstatus } = props;
+  const { logstatus, handleClick } = props;
+  console.log(logstatus)
+  console.log('handle', handleClick)
 
   return (
     <Menu>
@@ -13,15 +16,22 @@ const Navbar = (props) => {
         </Header>
       </Menu.Item>
       {
-        logstatus
+        logstatus //is user logged in or not?
         ?
         <Menu.Menu position="right">
+          <Menu.Item>
+            <Link to="/home">Home</Link>
+          </Menu.Item>
           <Menu.Item>My Account</Menu.Item>
         </Menu.Menu>
         :
         <Menu.Menu position="right">
-          <Menu.Item>Log in</Menu.Item>
-          <Menu.Item>Sign up</Menu.Item>
+          <Menu.Item>
+            <Link to="/login">Log in</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/signup">Sign up</Link>
+          </Menu.Item>
         </Menu.Menu>
       }
     </Menu>

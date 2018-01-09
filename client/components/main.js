@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
+import { Grid } from 'semantic-ui-react';
 import {logout} from '../store'
 import Navbar from './navbar';
+import Sidebar from './sidebar';
 
 // test
 
@@ -18,24 +20,15 @@ const Main = (props) => {
 
   return (
     <div>
-      <Navbar logstatus={isLoggedIn} />
-      <nav>
-        {
-          isLoggedIn
-            ? <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <a href="#" onClick={handleClick}>Logout</a>
-            </div>
-            : <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-        }
-      </nav>
-      <hr />
-      {children}
+      <Navbar logstatus={isLoggedIn} handleClick={handleClick} />
+      <Grid columns={2}>
+        <Grid.Column width={4}>
+          <Sidebar logstatus={isLoggedIn} />
+        </Grid.Column>
+        <Grid.Column width={8}>
+          {children}
+        </Grid.Column>
+      </Grid>
     </div>
   )
 }
@@ -69,3 +62,21 @@ Main.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
+
+
+// ******* CODE commented out for navbar, need ability to log in as user first
+// <nav>
+// {
+//   isLoggedIn
+//     ? <div>
+//       {/* The navbar will show these links after you log in */}
+//       <Link to="/home">Home</Link>
+//       <a href="#" onClick={handleClick}>Logout</a>
+//     </div>
+//     : <div>
+//       {/* The navbar will show these links before you log in */}
+//       <Link to="/login">Login</Link>
+//       <Link to="/signup">Sign Up</Link>
+//     </div>
+// }
+// </nav>
