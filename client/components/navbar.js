@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Icon, Header } from 'semantic-ui-react';
+import { Menu, Dropdown, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
@@ -18,17 +18,36 @@ const Navbar = (props) => {
         ?
         <Menu.Menu position="right">
           <Menu.Item>
-            <Link to="/home">Home</Link>
+            <Link to="/home">
+              <Button primary>
+                Home
+              </Button>
+            </Link>
           </Menu.Item>
-          <Menu.Item>My Account</Menu.Item>
+          <Dropdown item icon="user">
+            <Dropdown.Menu>
+              <Dropdown.Item><Button fluid>My Cart</Button></Dropdown.Item>
+              <Dropdown.Item><Button fluid>My Orders</Button></Dropdown.Item>
+              <Dropdown.Item><Button fluid>My Reviews</Button></Dropdown.Item>
+              <Dropdown.Item><Button fluid onClick={handleClick}>Log Out</Button></Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Menu.Menu>
         :
         <Menu.Menu position="right">
           <Menu.Item>
-            <Link to="/login">Log in</Link>
+            <Link to="/login">
+              <Button secondary>
+                Log In
+              </Button>
+            </Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/signup">Sign up</Link>
+          <Link to="/signup">
+            <Button primary>
+               Sign Up
+            </Button>
+          </Link>
           </Menu.Item>
         </Menu.Menu>
       }

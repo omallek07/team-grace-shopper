@@ -21,37 +21,39 @@ const Sidebar = (props) => {
           </Button>
         </Link>
       </Menu.Item>
-      {
-        logstatus // is user logged in or not?
-        ?
-          <Menu.Item>
-            <Button fluid>
-              <Icon name="user" />
-              My Account
-            </Button>
-          </Menu.Item>
-        :
-          <Menu.Item>
-            <Link to="/signup">
-              <Button fluid>
-                <Icon name="user" />
-                Sign up
-              </Button>
-            </Link>
-          </Menu.Item>
-        }
-        <Menu.Item>
-            <Button fluid>
-              <Icon name="book" />
-              Products
-            </Button>
-        </Menu.Item>
+      <Menu.Item>
+        <Link to="/products">
+          <Button fluid>
+            <Icon name="book" />
+            Products
+          </Button>
+        </Link>
+      </Menu.Item>
+      <Menu.Item>
+        <Button fluid>
+          <Icon name="cart" />
+          Cart
+        </Button>
+      </Menu.Item>
+    {
+      logstatus // is user logged in or not?
+      ?
         <Menu.Item>
           <Button fluid>
-            <Icon name="cart" />
-            Cart
+            <Icon name="user" />
+            My Account
           </Button>
         </Menu.Item>
+      :
+        <Menu.Item>
+          <Link to="/signup">
+            <Button fluid>
+              <Icon name="user" />
+              Sign up
+            </Button>
+          </Link>
+        </Menu.Item>
+      }
     </Menu>
   )
 }
