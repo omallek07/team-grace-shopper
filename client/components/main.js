@@ -18,7 +18,7 @@ const Main = (props) => {
 
   return (
     <div>
-      <h1>BOILERMAKER</h1>
+      <Navbar logstatus={isLoggedIn} />
       <nav>
         {
           isLoggedIn
