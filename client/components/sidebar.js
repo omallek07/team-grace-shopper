@@ -10,6 +10,7 @@ const Sidebar = (props) => {
       <Menu.Item>
         <Header>
           <Icon name="cube" size="huge" color="red" />
+          Welcome
         </Header>
       </Menu.Item>
       <Menu.Item>
