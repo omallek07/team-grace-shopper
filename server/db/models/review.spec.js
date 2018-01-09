@@ -1,4 +1,4 @@
-const db = require('../index')
+const {db} = require('../index')
 const {expect} = require('chai')
 
 const Rating = db.model('review')
