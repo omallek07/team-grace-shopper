@@ -7,10 +7,7 @@ const Order = db.define('order', {
     values: ['cart', 'processing', 'cancelled', 'completed']
   },
   purchaseTime: {
-    type: Sequelize.DATE
-  },
-  sessionId: {
-    type: Sequelize.TEXT
+    type: Sequelize.DATE,
   }
 })
 
