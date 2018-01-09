@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import history from '../history';
 
-function SingleGenre({ bookObjList, bookId, genreId, selectedGenre }) {
+function SingleGenre({ bookObjList, bookId, genreName, selectedGenre }) {
 
     const compare = (a, b) => {
         if (a.id < b.id) return -1;

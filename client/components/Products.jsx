@@ -11,12 +11,4 @@ function Products() {
     )
 }
 
-// const Products = (props) => {
-//     return (
-//         <div>
-//             <h1>HelloWorld</h1>
-//         </div>
-//     )
-// }
-
 export default Products;
