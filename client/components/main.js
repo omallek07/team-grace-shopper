@@ -5,6 +5,8 @@ import {withRouter, Link} from 'react-router-dom'
 import {logout} from '../store'
 import Navbar from './navbar';
 
+// test
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
