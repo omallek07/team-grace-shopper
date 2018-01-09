@@ -4,7 +4,7 @@ const {expect} = require('chai')
 const Rating = db.model('review')
 // const Rating = require('./rating')
 
-describe('Rating model', () => {
+describe('Review model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -14,11 +14,10 @@ describe('Rating model', () => {
       let cody
 
       beforeEach(() => {
-        return Rating.create({comment:'h'})
+        return Rating.create({rating:1})
           .then(user => {
             cody = user
           })
-          .catch(err => {console.error(err)})
       })
 
       it('returns true if the password is correct', () => {

@@ -11,14 +11,18 @@ const Product = db.define('product', {
   },
   stockQuantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0,
+    validate: {
+      min: 0
+    }
   },
   photoUrl: {
     type: Sequelize.STRING,
     defaultValue: 'https://us.toluna.com/dpolls_images/2016/03/12/63ead037-37fb-48cc-8952-60b941602492_x300.jpg'
   },
   currentPrice: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.DECIMAL,
+    allowNull: false
   },
   ratingSum: {
     type: Sequelize.INTEGER,
@@ -30,7 +34,7 @@ const Product = db.define('product', {
   },
   averageRating: {
     type: Sequelize.VIRTUAL,
-    get: () => {
+    get () {
       if (this.numberOfRatings === 0) {
         return 0
       } else {
