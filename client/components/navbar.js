@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
   const { logstatus, handleClick } = props;
-  console.log(logstatus)
-  console.log('handle', handleClick)
 
   return (
     <Menu>
