@@ -1,10 +1,10 @@
-/* global describe beforeEach it */
-
-const {expect} = require('chai')
 const db = require('../index')
-const {User} = db.model('user')
+const {expect} = require('chai')
 
-describe('User model', () => {
+const Rating = db.model('rating')
+// const Rating = require('./rating')
+
+describe('Rating model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -14,22 +14,20 @@ describe('User model', () => {
       let cody
 
       beforeEach(() => {
-        return User.create({
-          email: 'cody@puppybook.com',
-          password: 'bones'
-        })
+        return Rating.create({comment:'h'})
           .then(user => {
             cody = user
           })
+          .catch(err => {console.error(err)})
       })
 
       it('returns true if the password is correct', () => {
-        expect(cody.correctPassword('bones')).to.be.equal(true)
+        expect(cody.comment).to.be.equal(null)
       })
 
-      it('returns false if the password is incorrect', () => {
-        expect(cody.correctPassword('bonez')).to.be.equal(false)
-      })
+      // it('returns false if the password is incorrect', () => {
+      //   expect(cody.correctPassword('bonez')).to.be.equal(false)
+      // })
     }) // end describe('correctPassword')
   }) // end describe('instanceMethods')
 }) // end describe('User model')
