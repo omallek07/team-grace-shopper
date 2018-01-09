@@ -30,7 +30,7 @@ function SingleProduct({ bookObjList, bookId, addBookThunk }) {
             <div className='col-lg-4'>
                 <form onSubmit={submitReview}>
                     <fieldset>
-                        <legend> Review {selectedBook.title}</legend>
+                        <legend> Review for {selectedBook.title}</legend>
                         <div>
                             <textarea id='reviewFieldVal' rows="3" className="form-control" placeholder=". . .">
                             </textarea>
