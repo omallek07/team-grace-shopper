@@ -12,9 +12,6 @@ const Product = db.define('product', {
   stockQuantity: {
     type: Sequelize.INTEGER
   },
-  author: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
   photoUrl: {
     type: Sequelize.STRING,
     defaultValue: 'https://us.toluna.com/dpolls_images/2016/03/12/63ead037-37fb-48cc-8952-60b941602492_x300.jpg'
