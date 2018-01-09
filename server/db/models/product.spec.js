@@ -1,6 +1,6 @@
 import { isatty } from 'tty';
 
-const db = require('../index')
+const {db} = require('../index')
 const { expect } = require('chai')
 
 const Product = db.model('product')
