@@ -1,7 +1,7 @@
 const db = require('../index')
 const {expect} = require('chai')
 
-const Rating = db.model('rating')
+const Rating = db.model('review')
 // const Rating = require('./rating')
 
 describe('Rating model', () => {

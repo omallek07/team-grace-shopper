@@ -10,7 +10,8 @@ const Product = db.define('product', {
     type: Sequelize.TEXT
   },
   stockQuantity: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   photoUrl: {
     type: Sequelize.STRING,
@@ -37,11 +38,6 @@ const Product = db.define('product', {
       }
     }
   }
-
-  // averageRating: {
-  //   type: Sequelize.VIRTUAL,
-  //   defaultValue: 0
-  //   }
 })
 
 
