@@ -4,9 +4,9 @@ import history from '../history';
 
 function SingleProduct({ bookObjList, bookId, addBookThunk }) {
     
-    const selectedBook = bookObjList.filter(book => {
-        return book.Id === bookId;
-    });
+    // const selectedBook = bookObjList.filter(book => {
+    //     return book.Id === bookId;
+    // });
     
     const addBookToCart = event => {
         event.preventDefault();
@@ -16,8 +16,7 @@ function SingleProduct({ bookObjList, bookId, addBookThunk }) {
         event.preventDefault();
     };
 
-    return (
-        <div>
+/*
             <div className='col-lg-4'>
                 <form onSubmit={addBookToCart}>
                     <legend> Add {selectedBook.title} to cart </legend>
@@ -30,7 +29,7 @@ function SingleProduct({ bookObjList, bookId, addBookThunk }) {
             <div className='col-lg-4'>
                 <form onSubmit={submitReview}>
                     <fieldset>
-                        <legend> Review {selectedBook.title}</legend>
+                        <legend> Review for {selectedBook.title}</legend>
                         <div>
                             <textarea id='reviewFieldVal' rows="3" className="form-control" placeholder=". . .">
                             </textarea>
@@ -42,6 +41,10 @@ function SingleProduct({ bookObjList, bookId, addBookThunk }) {
                     </fieldset>
                 </form>
             </div>
+*/ 
+
+    return (
+        <div>
         </div>
 
     )
