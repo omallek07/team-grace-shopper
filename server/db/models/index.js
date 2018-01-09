@@ -20,8 +20,10 @@ const User = require('./user');
  * instead of: const User = require('../db/models/user')
  */
  User.belongsTo(Address);
- Product.belongsTo(Author);
+ Product.belongsToMany(Author, {through: 'bookAuthors'});
+ Author.belongsToMany(Product, {through: 'bookAuthors'});
  Product.belongsToMany(Genre, {through: 'categories'});
+ Genre.belongsToMany(Product, {through: 'categories'});
  Order.belongsTo(User)
  Order.belongsTo(Address)
  // Order.belongsTo(Session)
