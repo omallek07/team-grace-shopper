@@ -25,7 +25,7 @@ describe('Address model', () => {
     })
 
     it('has streetOne, which is required', () => {
-      expect(ourAddress.streetOne).to.be.equal('69 Bone Avenue')
+      expect(ourAddress.streetOne).to.be.equal('69 Boner Avenue')
 
     })
 

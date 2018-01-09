@@ -9,7 +9,7 @@ const LineItems = db.define('lineItems',{
     }
   },
   orderPrice: {
-    type: Sequelize.NUMBER
+    type: Sequelize.DECIMAL
   }
 })
 
