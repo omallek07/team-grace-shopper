@@ -30,10 +30,12 @@ const Sidebar = (props) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
-        <Button fluid>
-          <Icon name="cart" />
-          Cart
-        </Button>
+        <Link to="/cart">
+          <Button fluid>
+            <Icon name="cart" />
+            Cart
+          </Button>
+        </Link>
       </Menu.Item>
     {
       logstatus // is user logged in or not?
