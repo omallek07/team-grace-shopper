@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import history from '../history';
+import SingleProductReviews from './SingleProductReviews';
 
 function SingleProduct({ bookObjList, bookId, addBookThunk }) {
-    
+
     // const selectedBook = bookObjList.filter(book => {
     //     return book.Id === bookId;
     // });
-    
+
     const addBookToCart = event => {
         event.preventDefault();
     }
-    
+
     const submitReview = event => {
         event.preventDefault();
     };
@@ -41,13 +42,16 @@ function SingleProduct({ bookObjList, bookId, addBookThunk }) {
                     </fieldset>
                 </form>
             </div>
-*/ 
+*/
 
-    return (
-        <div>
-        </div>
-
-    )
+  return (
+    <div>
+      This is the single product page
+      -------------------------------
+      Reviews:
+      <SingleProductReviews />
+    </div>
+  )
 }
 
 export default SingleProduct;
