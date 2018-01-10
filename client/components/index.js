@@ -9,3 +9,4 @@ export {Login, Signup} from './auth-form'
 export {default as Products} from './Products.jsx';
 export {default as SingleGenre} from './SingleGenre.jsx';
 export {default as SingleProduct} from './SingleProduct.jsx';
+export {default as Cart} from './cart';
