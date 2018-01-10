@@ -4,9 +4,9 @@
  * having to figure out which file they belong to!
  */
 export {default as Main} from './main'
-export {default as UserHome} from './user-home'
-export {Login, Signup} from './auth-form'
-export {default as Products} from './Products.jsx';
-export {default as SingleGenre} from './SingleGenre.jsx';
-export {default as SingleProduct} from './SingleProduct.jsx';
+export {default as UserHome} from './UserHome'
+export {Login, Signup} from './AuthForm'
+export {default as Products} from './Products.js';
+export {default as SingleGenre} from './SingleGenre.js';
+export {default as SingleProduct} from './SingleProduct.js';
 export {default as Cart} from './cart';
