@@ -9,6 +9,6 @@ class Cart extends Component {
   }
 }
 //
-
+//
 /* Container */
 export default connect(null, null)(Cart);
