@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = (props) => {
   const { logstatus, handleClick } = props;
-
+//
   return (
     <Menu>
       <Menu.Item>
