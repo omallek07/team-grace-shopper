@@ -1,13 +1,17 @@
 import axios from 'axios';
 
-// action types
-const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
+/* ------------ ACTIONS ------------ */
+
+const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
 // const PUT_NEW_PRODUCT = 'PUT_NEW_PRODUCT';
 // const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 // const DELETE_PRODUCT = 'DELETE_PRODUCT';
 // const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 
-// action creators
+/* --------- ACTION CREATORS ------------ */
+
+const getAllBooks = books => ({ type: GET_ALL_BOOKS, books })
+
     // customer actions
 // export const addProductToCart = (productObj) => {
 //     const newAction = {};
@@ -16,12 +20,7 @@ const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 //     return newAction;
 // }
     // customer/admin actions
-export const getAllProducts = (productObjList) => {
-    const newAction = {};
-    newAction.type = GET_ALL_PRODUCTS;
-    newAction.productObjList = productObjList;
-    return newAction;
-}
+
     // admin actions
 // export const makeNewProduct = (productObj) => {
 //     const newAction = {};
@@ -44,25 +43,23 @@ export const getAllProducts = (productObjList) => {
 //     return newAction;
 // }
 
-// thunk creators
-export function fetchAllProducts() {
-    return function (dispatch) {
-        axios.get('/api/products')
-            .then(res => res.data)
-            .then(productObjList => dispatch(getAllProducts(productObjList)))
-    }
+
+/* ------------- DISPATCHERS ------------ */
+
+export const fetchAllBooks = () => dispatch => {
+  axios.get('/api/books')
+  .then(res => dispatch(getAllBooks(res.data)))
+  .catch(err => console.error('Fetching books unsuccessful', err));
 }
 
-function addProduct
+/* ------------- REDUCER ------------ */
 
-// reducer
+export default function productReducer (books = [], action) {
+  switch (action.type) {
+    case GET_ALL_BOOKS:
+      return action.books;
+    default:
+      return books;
+  }
+}
 
-export default function productReducer (products = [], action) {
-    
-        switch (action.type) {
-
-            default:
-                return products
-        }
-    }
-    
