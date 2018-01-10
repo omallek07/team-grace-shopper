@@ -35,6 +35,14 @@ const authors = [
   {
     firstName: 'Marijn',
     lastName: 'Haverbeke'
+  },
+  {
+    firstName: 'David',
+    lastName: 'Flanagan'
+  },
+  {
+    firstName: 'Bruce',
+    lastName: 'Campbell'
   }
 ];
 
@@ -76,50 +84,111 @@ const books = [
     ratingSum: 125,
     numberOfRatings: 30,
   },
-  {
-    title: 'Milton',
-    description: 'Vasani',
-    stockQuantity: 'milton1232@hotmail.com',
-    photoUrl: 3.59,
-    currentPrice: 2,
-    ratingSum:33,
-    numberOfRatings:20,
+  {//7
+    title: `JavaScript: The Definitive Guide`,
+    description: `Since 1996, JavaScript: The Definitive Guide has been the bible for JavaScript programmers—a programmer's guide and comprehensive reference to the core language and to the client-side JavaScript APIs defined by web browsers.`,
+    stockQuantity: 40,
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51WD-F3GobL._SX258_BO1,204,203,200_.jpg',
+    currentPrice: 2476,
+    ratingSum: 25,
+    numberOfRatings: 8,
   },
-  {
-    title: 'Harry',
-    description: 'Potter',
-    stockQuantity: 'harrypotter@hogwards.com',
-    photoUrl: 2.45,
-    currentPrice: 3,
-    ratingSum:33,
-    numberOfRatings:20,
+  {//8
+    title: 'If Chins Could Kill: Confessions of a B Movie Actor',
+    description: `This book is so funny, I'm going to have it tattooed on my back!" - Barack Obama`,
+    stockQuantity: 355,
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51gp-KdBvWL.jpg',
+    currentPrice: 2195,
+    ratingSum: 1696,
+    numberOfRatings: 377,
   },
-  {
-    title: 'Sweetu',
-    description: 'Patel',
-    stockQuantity: 'sweetupatel@gmail.com',
-    photoUrl: 3.75,
-    currentPrice: 3,
-    ratingSum:33,
-    numberOfRatings:20,
-  },
-  {
-    title: 'Harnish',
-    description: 'Shah',
-    stockQuantity: 'harnishshah@gmail.com',
-    photoUrl: 3.00,
-    currentPrice: 4,
-    ratingSum:33,
-    numberOfRatings:20,
-  },
-  {
-    firstName: 'Keya',
-    lastName: 'Pholes',
-    email: 'keya@foles.com',
-    gpa: 3.94,
-    campusId: 4
+  {//8
+    title: 'Make Love! The Bruce Campbell Way',
+    description: `One of the most delightfully deranged experiences you'll have reading this year. Hail to the king, baby.`,
+    stockQuantity: 50,
+    photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51zghlLBYgL._SX329_BO1,204,203,200_.jpg',
+    currentPrice: 1535,
+    ratingSum: 650,
+    numberOfRatings: 139,
   }
 ];
+const bookAuthors = [
+  {
+    bookId: 1,
+    authorId: 1
+  },
+  {
+    bookId: 1,
+    authorId: 2
+  },
+  {
+    bookId: 2,
+    authorId: 3
+  },
+  {
+    bookId: 2,
+    authorId: 4
+  },
+  {
+    bookId: 3,
+    authorId: 5
+  },
+  {
+    bookId: 4,
+    authorId: 6
+  },
+  {
+    bookId: 5,
+    authorId: 7
+  },
+  {
+    bookId: 6,
+    authorId: 8
+  },
+  {
+    bookId: 7,
+    authorId: 8
+  }
+]
+
+const categories = [
+  {
+    bookId: 1,
+    genreId: 1
+  },
+  {
+    bookId: 1,
+    genreId: 2
+  },
+  {
+    bookId: 2,
+    genreId: 3
+  },
+  {
+    bookId: 2,
+    genreId: 4
+  },
+  {
+    bookId: 3,
+    genreId: 5
+  },
+  {
+    bookId: 4,
+    genreId: 6
+  },
+  {
+    bookId: 5,
+    genreId: 7
+  },
+  {
+    bookId: 6,
+    genreId: 8
+  },
+  {
+    bookId: 7,
+    genreId: 8
+  }
+]
 
 const addresses = [
   {
@@ -166,6 +235,14 @@ const users = [
     addressId: 1
   },
   {
+    email: 'rutvikhp@gmail.com',
+    password: 'rutu8534',
+    firstName: 'Rutvik',
+    lastName: 'Patel',
+    isAdmin: true,
+    addressId: 2
+  },
+  {
     email:'cageycoder@gmail.com',
     password:'hellothere',
     firstName:'Tiler',
@@ -189,33 +266,142 @@ const users = [
     isAdmin: false,
     addressId: 5
   },
+]
+
+const reviews = [
   {
-    email: 'rutvikhp@gmail.com',
-    password: 'rutu8534',
-    firstName: 'Rutvik',
-    lastName: 'Patel',
-    isAdmin: true,
+    comment: 'If information is what you want, this book has it. Be forewarned that before starting this book, one should learn the basics of computer programming. There are great free and non-free resources online (I used lynda.com).',
+    rating: 5,
+    userId: 2,
+    bookId: 5
+  },
+  {
+    comment: `Bruce, you da man! Totally enjoyed the editor's writing style that hilariously brings to life your fun, fun story!!! Just kidding! I know you really wrote it (wink, wink). Regardless of who or what wrote it, your book rocks. Every make-love page resonated with a fellow baby-boomer: Looking forward to the audio version turned up real loud (wink, wink).`,
+    rating: 5,
+    userId: 4,
+    bookId: 7
+  },
+  {
+    comment: `Overall, a pretty good intro to JavaScript. I thought they covered the material well and explained things in a way that was easy to understand. I'm not a fan of the tone the book is written in personally. It's goofy to an obnoxious level at times, but that's just my personal taste.`,
+    rating: 4,
+    userId: 1,
+    bookId: 2
+  }
+]
+const orders = [
+  {
+    status: 'cart',
+    userId: 1,
+    addressId: 1
+  },
+  {
+    status: 'processing',
+    purchaseTime: Date.now(),
+    userId: 2,
     addressId: 2
+  },
+  {
+    status: 'cancelled',
+    userId: 3,
+    addressId: 3
+  },
+  {
+    status: 'cart',
+    userId: 4,
+    addressId: 4
+  },
+  {
+    status: 'completed',
+    purchaseTime: Date.now(),
+    userId: 4,
+    addressId: 4
+  },
+]
+const lineItems = [
+  {
+    orderQuantity: 2,
+    orderPrice: 1599,
+    orderId: 1,
+    bookId: 1
+  },
+  {
+    orderQuantity: 1,
+    orderPrice: 3299,
+    orderId: 1,
+    bookId: 2
+  },
+  {
+    orderQuantity: 1,
+    orderPrice: 1078,
+    orderId: 2,
+    bookId: 3
+  },
+  {
+    orderQuantity: 3,
+    orderPrice: 1078,
+    orderId: 4,
+    bookId: 3
+  },
+  {
+    orderQuantity: 1,
+    orderPrice: 2476,
+    orderId: 5,
+    bookId: 5
+  },
+  {
+    orderQuantity: 1,
+    orderPrice: 3196,
+    orderId: 5,
+    bookId: 4
+  },
+]
+
+const genres = [
+  {
+    name: 'science fiction'
+  },
+  {
+    name: 'telepathy'
+  },
+  {
+    name: 'non-fiction'
+  },
+  {
+    name: 'parapsychology'
+  },
+  {
+    name: 'self-improvement'
+  },
+  {
+    name: 'defensive witchcraft'
+  },
+  {
+    name: 'hexes / spells / curses'
+  },
+  {
+    name: '2016 election grief counseling'
   }
 ]
 
-// const seed = () =>
-//   Promise.all(campuses.map(campus =>
-//     Campuses.create(campus))
-//   )
-//   .then(() =>
-//   Promise.all(students.map(student =>
-//     Students.create(student))
-//   )
-// );
+const seed = async () => {
+  const authorArray = await Promise.all(authors.map(author => Author.create(author)))
+  const addressArray = await Promise.all(addresses.map(address => Address.create(address)))
+  const genreArray = await Promise.all(genres.map(genre => Genre.create(genre)))
+  const bookArray = await Promise.all(books.map(book => Book.create(book)))
+  const userArray = await Promise.all(users.map(user => User.create(user)))
+  const reviewArray = await Promise.all(reviews.map(review => Review.create(review)))
+  const orderArray = await Promise.all(orders.map(order => Order.create(order)))
+  const lineItemArray = await Promise.all(lineItems.map(lineItem => LineItems.create(lineItem)))
+  const bookAuthorArray = await Promise.all(bookAuthors.map(bookAuthor => db.models.bookAuthors.create(bookAuthor)));
+  const categoriesArray = await Promise.all(categories.map(category => db.models.categories.create(category)));
+}
 
 const main = () => {
   console.log('Syncing db...');
   db.sync({ force: true })
-    .then(() => {
+    .then(async () => {
       console.log('Seeding databse...');
-      console.log(db.models.bookAuthors.findAll());
-      return seed();
+      return await seed();
     })
     .catch(err => {
       console.log('Error while seeding');
