@@ -19,6 +19,7 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
+        <ErrorDisplay/>
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
