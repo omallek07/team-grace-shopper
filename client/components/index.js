@@ -13,3 +13,4 @@ export {default as Cart} from './Cart';
 export {default as UserReviews} from './UserReviews'
 export {default as UserOrders} from './UserOrders'
 export {default as ConfirmOrderInfo} from './ConfirmOrderInfo';
+export {default as UserAccountDashboard} from './UserAccountDashboard';
