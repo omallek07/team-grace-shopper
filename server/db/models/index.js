@@ -3,7 +3,7 @@ const Author = require('./author');
 const Genre = require('./genre');
 const LineItems = require('./lineItems');
 const Order = require('./order');
-const Product = require('./product');
+const Book = require('./book');
 const Review = require('./review');
 const User = require('./user');
 /**
@@ -20,17 +20,22 @@ const User = require('./user');
  * instead of: const User = require('../db/models/user')
  */
  User.belongsTo(Address);
- Product.belongsToMany(Author, {through: 'bookAuthors'});
- Author.belongsToMany(Product, {through: 'bookAuthors'});
- Product.belongsToMany(Genre, {through: 'categories'});
- Genre.belongsToMany(Product, {through: 'categories'});
+
+ Book.belongsToMany(Author, {through: 'bookAuthors'});
+ Author.belongsToMany(Book, {through: 'bookAuthors'});
+
+ Book.belongsToMany(Genre, {through: 'categories'});
+ Genre.belongsToMany(Book, {through: 'categories'});
+
  Order.belongsTo(User)
  Order.belongsTo(Address)
  // Order.belongsTo(Session)
+
  LineItems.belongsTo(Order)
- LineItems.belongsTo(Product)
+ LineItems.belongsTo(Book)
+
  Review.belongsTo(User)
- Review.belongsTo(Product)
+ Review.belongsTo(Book)
 
  module.exports = {
    Address,
@@ -38,7 +43,7 @@ const User = require('./user');
    Genre,
    LineItems,
    Order,
-   Product,
+   Book,
    Review,
    User
  }

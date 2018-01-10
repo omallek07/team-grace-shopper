@@ -19,10 +19,9 @@ const Address = db.define('address', {
     allowNull: false
   },
   zip: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     validate: {
-      min: 10000,
-      max: 99999
+      is: /^\d{5}$/
     }
   }
 })

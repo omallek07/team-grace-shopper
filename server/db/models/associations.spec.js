@@ -5,7 +5,7 @@ const {
   Genre,
   LineItems,
   Order,
-  Product,
+  Book,
   Review,
   User
 } = require('./index')
