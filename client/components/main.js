@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import { Grid } from 'semantic-ui-react';
+import { Grid, Segment } from 'semantic-ui-react';
 import {logout} from '../store'
 import Navbar from './navbar';
 import Sidebar from './sidebar';
@@ -28,7 +28,7 @@ const Main = (props) => {
         <Grid.Column width={4}>
           <Sidebar logstatus={isLoggedIn} />
         </Grid.Column>
-        <Grid.Column width={8}>
+        <Grid.Column width={11}>
           {children}
         </Grid.Column>
       </Grid>
