@@ -24,10 +24,10 @@ const Navbar = (props) => {
               </Button>
             </Link>
           </Menu.Item>
-          <Dropdown item icon="user">
+          <Dropdown item icon="user" pointing>
             <Dropdown.Menu>
               <Dropdown.Item><Link to="/cart"><Button fluid>My Cart</Button></Link></Dropdown.Item>
-              <Dropdown.Item><Button fluid>My Orders</Button></Dropdown.Item>
+              <Dropdown.Item><Link to="/userOrders"><Button fluid>My Orders</Button></Link></Dropdown.Item>
               <Dropdown.Item><Link to="/userReviews"><Button fluid>My Reviews</Button></Link></Dropdown.Item>
               <Dropdown.Item><Button fluid onClick={handleClick}>Log Out</Button></Dropdown.Item>
             </Dropdown.Menu>
