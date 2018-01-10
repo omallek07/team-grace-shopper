@@ -6,9 +6,6 @@ import { Grid, Segment } from 'semantic-ui-react';
 import {logout} from '../store'
 import Navbar from './navbar';
 import Sidebar from './sidebar';
-// import Products from './Products';
-// import SingleProduct from './SingleProduct';
-// import SingleGenre from './SingleGenre';
 
 // test
 
