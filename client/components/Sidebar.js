@@ -41,10 +41,12 @@ const Sidebar = (props) => {
       logstatus // is user logged in or not?
       ?
         <Menu.Item>
-          <Button fluid>
-            <Icon name="user" />
-            My Account
-          </Button>
+          <Link to="/userAccountDash">
+            <Button fluid>
+              <Icon name="user" />
+              My Account
+            </Button>
+          </Link>
         </Menu.Item>
       :
         <Menu.Item>
