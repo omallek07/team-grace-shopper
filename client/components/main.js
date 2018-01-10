@@ -7,7 +7,7 @@ import {logout} from '../store'
 import Navbar from './navbar';
 import Sidebar from './sidebar';
 
-// test
+// test//
 
 /**
  * COMPONENT

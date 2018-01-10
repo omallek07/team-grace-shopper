@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = (props) => {
   const { logstatus } = props;
-
+//
   return (
     <Menu vertical>
       <Menu.Item>
