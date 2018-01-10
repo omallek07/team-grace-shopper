@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const LineItems = db.define('lineItems',{
+const LineItems = db.define('lineItems', {
   orderQuantity: {
     type: Sequelize.INTEGER,
     validate: {
@@ -9,7 +9,7 @@ const LineItems = db.define('lineItems',{
     }
   },
   orderPrice: {
-    type: Sequelize.DECIMAL
+    type: Sequelize.INTEGER
   }
 })
 

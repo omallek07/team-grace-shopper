@@ -7,7 +7,7 @@ const {
   Genre,
   LineItems,
   Order,
-  Product,
+  Book,
   Review,
   User
   } = require('./models')
@@ -19,7 +19,7 @@ module.exports = {
   Genre,
   LineItems,
   Order,
-  Product,
+  Book,
   Review,
   User
 }

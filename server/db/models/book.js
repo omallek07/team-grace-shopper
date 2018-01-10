@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Product = db.define('product', {
+const Book = db.define('book', {
   title: {
     type: Sequelize.STRING,
     allowNull: false
@@ -21,7 +21,7 @@ const Product = db.define('product', {
     defaultValue: 'https://us.toluna.com/dpolls_images/2016/03/12/63ead037-37fb-48cc-8952-60b941602492_x300.jpg'
   },
   currentPrice: {
-    type: Sequelize.DECIMAL,
+    type: Sequelize.INTEGER,
     allowNull: false
   },
   ratingSum: {
@@ -46,7 +46,7 @@ const Product = db.define('product', {
 
 
 
-module.exports = Product
+module.exports = Book
 
 /*
 

@@ -1,11 +1,11 @@
 const {db} = require('../index')
 const { expect } = require('chai')
 
-const Product = db.model('product')
+const Book = db.model('book')
 
-describe('Product model', () => {
+describe('Book model', () => {
 
-  let ourProduct
+  let ourBook
 
   const defData = {
     title: 'Children of Time',
@@ -17,17 +17,17 @@ describe('Product model', () => {
     numberOfRatings: 104
   }
 
-  function createTestProduct(testData) {
+  function createTestBook(testData) {
     let data = { ...defData, ...testData }
-    return Product.create(data)
+    return Book.create(data)
   }
 
   let newTest
   beforeEach(() => {
     newTest = undefined
-    return createTestProduct()
-      .then(product => {
-        ourProduct = product
+    return createTestBook()
+      .then(book => {
+        ourBook = book
       })
   })
 
@@ -35,9 +35,9 @@ describe('Product model', () => {
 
     it('has title, which is required', () => {
 
-      expect(ourProduct.title, 'takes a valid title').to.be.equal('Children of Time')
-      return createTestProduct({ title: null })
-        .then(product => {
+      expect(ourBook.title, 'takes a valid title').to.be.equal('Children of Time')
+      return createTestBook({ title: null })
+        .then(book => {
           throw 'ummmm, whaaaa? lol jk'
         })
         .catch(err => {
@@ -51,34 +51,34 @@ describe('Product model', () => {
 
     it('has description, not required', () => {
 
-      expect(ourProduct.description, 'takes a valid string').to.be.equal('book about an advanced spider civilization and humanity on the brink of extinction')
-      return createTestProduct({ description: null })
-        .then(product => {
-          newTest = product
-          expect(product.description, 'allows null').to.be.equal(null)
+      expect(ourBook.description, 'takes a valid string').to.be.equal('book about an advanced spider civilization and humanity on the brink of extinction')
+      return createTestBook({ description: null })
+        .then(book => {
+          newTest = book
+          expect(book.description, 'allows null').to.be.equal(null)
         })
         .catch(err => {
           throw err
         })
-      // createTestProduct({description:})
+      // createTestBook({description:})
 
     })
   })
   describe('stockQuantity', () => {
 
     it('has stockQuantity, defaults to 0, no negatives', () => {
-      expect(ourProduct.stockQuantity, 'takes valid quantity').to.be.equal(69)
-      return createTestProduct({ stockQuantity: undefined })
-        .then(product => {
-          expect(product.stockQuantity, 'defaults to 0').to.be.equal(0)
+      expect(ourBook.stockQuantity, 'takes valid quantity').to.be.equal(69)
+      return createTestBook({ stockQuantity: undefined })
+        .then(book => {
+          expect(book.stockQuantity, 'defaults to 0').to.be.equal(0)
         })
         .catch(err => {
           throw err
         })
     })
     it('stockQuantity disallows negatives', () => {
-      return createTestProduct({ stockQuantity: -5 })
-        .then(product => {
+      return createTestBook({ stockQuantity: -5 })
+        .then(book => {
           throw 'ALLOWED NEGATIVES -5 WAS BAD'
         })
         .catch(err => {
@@ -90,26 +90,26 @@ describe('Product model', () => {
   describe('PhotoUrl', () => {
 
     it('defaults to bozo', () => {
-      return createTestProduct({ photoUrl: undefined })
-        .then(product => {
-          expect(product.photoUrl).to.be.equal('https://us.toluna.com/dpolls_images/2016/03/12/63ead037-37fb-48cc-8952-60b941602492_x300.jpg')
+      return createTestBook({ photoUrl: undefined })
+        .then(book => {
+          expect(book.photoUrl).to.be.equal('https://us.toluna.com/dpolls_images/2016/03/12/63ead037-37fb-48cc-8952-60b941602492_x300.jpg')
         })
     })
 
     it('takes valid URL', () => {
-      expect(ourProduct.photoUrl).to.be.equal('https://images-na.ssl-images-amazon.com/images/I/512TBFMt7aL._SX323_BO1,204,203,200_.jpg')
+      expect(ourBook.photoUrl).to.be.equal('https://images-na.ssl-images-amazon.com/images/I/512TBFMt7aL._SX323_BO1,204,203,200_.jpg')
     })
 
   })
 
   describe('currentPrice', () => {
     it('takes valid price (decimal)', () => {
-      expect(ourProduct.currentPrice).to.be.equal('14.99')
+      expect(ourBook.currentPrice).to.be.equal('14.99')
     })
 
     it('does not allow null', () => {
-      return createTestProduct({currentPrice: undefined})
-      .then(product => {
+      return createTestBook({currentPrice: undefined})
+      .then(book => {
         throw 'INCORRECTLY ALLOWED NULL'
       })
       .catch(err => {
@@ -120,9 +120,9 @@ describe('Product model', () => {
 
   describe('ratingSum', () => {
     it('defaults to 0 (for initialization)', () => {
-      return createTestProduct({ratingSum: undefined})
-      .then(product => {
-        expect(product.ratingSum).to.be.equal(0)
+      return createTestBook({ratingSum: undefined})
+      .then(book => {
+        expect(book.ratingSum).to.be.equal(0)
       })
       .catch(console.error)
     })
@@ -130,9 +130,9 @@ describe('Product model', () => {
 
   describe('numberOfRatings', () => {
     it('default to 0 (for initialization', () => {
-      return createTestProduct({numberOfRatings: undefined})
-      .then(product => {
-        expect(product.numberOfRatings).to.be.equal(0)
+      return createTestBook({numberOfRatings: undefined})
+      .then(book => {
+        expect(book.numberOfRatings).to.be.equal(0)
       })
       .catch(console.error)
     })
@@ -141,14 +141,14 @@ describe('Product model', () => {
   describe('averageRating virtual getter', () => {
 
     it('defaults to 0 (ie, if numberOfRatings is equal to 0)', () => {
-      return createTestProduct({numberOfRatings: undefined})
-      .then(product => {
-        expect(product.averageRating).to.be.equal(0)
+      return createTestBook({numberOfRatings: undefined})
+      .then(book => {
+        expect(book.averageRating).to.be.equal(0)
       })
     })
 
     it('gets the average rating (ie, ratingSum / numberOfRatings', () => {
-      expect(ourProduct.averageRating).to.be.equal(420/104)
+      expect(ourBook.averageRating).to.be.equal(420/104)
     })
 
   })
