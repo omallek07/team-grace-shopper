@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-
+//
 const Sidebar = (props) => {
   const { logstatus } = props;
 //

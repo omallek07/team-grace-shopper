@@ -10,3 +10,4 @@ export {default as Products} from './Products.js';
 export {default as SingleGenre} from './SingleGenre.js';
 export {default as SingleProduct} from './SingleProduct.js';
 export {default as Cart} from './cart';
+//
