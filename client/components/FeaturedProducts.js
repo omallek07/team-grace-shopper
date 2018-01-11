@@ -6,9 +6,6 @@ import history from '../history';
 
 function FeaturedProducts(props) {
 
-    let dummyBooks = props.featuredProducts;
-console.log('FEATURED PRODUCTS     ', props)
-
     return (
         <div>
             <h1>Featured Bestsellers</h1>
