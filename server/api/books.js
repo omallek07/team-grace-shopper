@@ -1,33 +1,13 @@
 const router = require('express').Router()
-const {Book, Genre, Author} = require('../db/models')
+const {Book} = require('../db')
+module.exports = router
 
+router.get('/', async (req, res, next) => {
+  let booksPromise = Book.findAll({include: {
+    all: true}
+  })
 
-/*
-router.get('/api/books', async (req, res, next) => {
-  const books = await Book.findAll()
+  let books = await booksPromise
 
   res.json(books)
-})
-*/
-router.get('/', async (req, res, next) => {
-  const booksPromise = await Book.findAll()
-  res.json(booksPromise)
-  // let books = await booksPromise
-  // let genrePromiseArray = []
-  // let authorPromiseArray = []
-
-  // books.forEach(book => {
-  //   genrePromiseArray.push(book.getGenres())
-  //   authorPromiseArray.push(book.getAuthors())
-  // })
-
-  // let bookArray = books.map(async (book, i) => {
-  //   let genres = await genrePromiseArray[i]
-  //   let authors = await authorPromiseArray[i]
-  //   return {...book, genres, authors}
-  // })
-  
-  // res.json(bookArray)
-})
-
-module.exports = router
+});

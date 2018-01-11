@@ -5,7 +5,7 @@ const Address = db.model('address')
 describe('Address model', () => {
 
   beforeEach(() => {
-    return db.sync({force: true})
+    return db.sync()
   })
 
   describe('properties', () => {

@@ -6,7 +6,7 @@ const Rating = db.model('review')
 
 describe('Review model', () => {
   beforeEach(() => {
-    return db.sync({force: true})
+    return db.sync()
   })
 
   describe('instanceMethods', () => {
