@@ -32,6 +32,8 @@ const User = require('./user');
  // Order.belongsTo(Session)
 
  LineItems.belongsTo(Order)
+ Order.hasMany(LineItems)
+
  LineItems.belongsTo(Book)
 
  Review.belongsTo(User)
