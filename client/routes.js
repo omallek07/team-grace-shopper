@@ -3,31 +3,26 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome, Products, SingleGenre, SingleProduct, Cart, UserReviews, UserOrders, UserAccountDashboard} from './components'
+import {Main, Login, Signup, UserHome, Products, SingleProduct, Cart, UserReviews, UserOrders, UserAccountDashboard} from './components'
 import {me} from './store'
-import { getAllBooks } from './store/products'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  // componentDidMount () {
-  //   // this.props.loadInitialData();
-  //   // this.props.getAllBooks();
-  // }
 
   render () {
-    const {isLoggedIn} = this.props
+    const {isLoggedIn} = this.props;
 
     return (
       <Router history={history}>
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route path="/home" component={UserHome} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/products" component = {Products} />) }/>
-            <Route path="/home" component={UserHome} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/products/:productId" component={SingleProduct} />
             {/* <Route path="products/:genre.name" component={SingleGenre} /> */}
@@ -41,8 +36,8 @@ class Routes extends Component {
                   <Route path="/userAccountDash" component={UserAccountDashboard} />
                 </Switch>
             }
-            {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            {/* Displays our Home component as a fallback */}
+            <Route component={UserHome} />
           </Switch>
         </Main>
       </Router>
