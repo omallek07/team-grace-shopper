@@ -8,7 +8,7 @@ import FeaturedProducts from './FeaturedProducts.js';
  */
 export const UserHome = (props) => {
   const {email} = props
-
+// console.log('USER HOME     ', props)
   return (
     <div>
       <h3>Welcome, {email}</h3>
