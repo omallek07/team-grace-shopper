@@ -2,6 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import history from '../history';
 
+
+
+function FeaturedProducts(props) {
+
+    let dummyBooks = props.featuredProducts;
+console.log('FEATURED PRODUCTS     ', props)
+
+    return (
+        <div>
+            <h1>Featured Bestsellers</h1>
+            <div className="book-list ui link cards">
+                {/* {
+                    dummyBooks.map(book => {
+                        return (
+                            <div className="card" key={book.title}>
+                                <div className="image">
+                                    <img src={'./images/' + book.photoUrl} />
+                                </div>
+                                <div className="content">
+                                    <div className="header"> {book.description} </div>
+                                    <div className="description" />
+                                </div>
+                            </div>
+                        )
+                    })
+                } */}
+            </div>
+        </div>
+    )
+
+}
+
+export default FeaturedProducts;
+
+
+/*
 const dummyBooks = [
     {
         title: `Eloquent JavaScript`,
@@ -45,32 +81,4 @@ const dummyBooks = [
         averageRating: 1
     },
 ];
-
-function FeaturedProducts() {
-
-    return (
-        <div>
-            <h1>Featured Bestsellers</h1>
-            <div className="book-list ui link cards">
-                {
-                    dummyBooks.map(book => {
-                        return (
-                            <div className="card" key={book.title}>
-                                <div className="image">
-                                    <img src={'./images/' + book.photoUrl} />
-                                </div>
-                                <div className="content">
-                                    <div className="header"> {book.description} </div>
-                                    <div className="description" />
-                                </div>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        </div>
-    )
-
-}
-
-export default FeaturedProducts;
+*/
