@@ -7,11 +7,16 @@ import FeaturedProducts from './FeaturedProducts.js';
  * COMPONENT
  */
 export const UserHome = (props) => {
-  const {email} = props
-// console.log('USER HOME     ', props)
+  const {email} = props;
+
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+    {
+      email ?
+      <h3>Welcome {email}!</h3>
+      :
+      <h3>Welcome Guest!</h3>
+    }
       <FeaturedProducts />
     </div>
   )
@@ -20,9 +25,9 @@ export const UserHome = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = ({user}) => {
   return {
-    email: state.user.email
+    email: user.email
   }
 }
 

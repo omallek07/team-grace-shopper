@@ -25,7 +25,7 @@ const Sidebar = (props) => {
         <Link to="/products">
           <Button fluid>
             <Icon name="book" />
-            Products
+            Books
           </Button>
         </Link>
       </Menu.Item>
