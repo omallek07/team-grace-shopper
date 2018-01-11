@@ -21,7 +21,7 @@ const BookCard = (props) => {
                   </Card.Header>
                 </NavLink>
                 <Card.Meta>
-                    Bruce Campbell
+                   {book.authors.map(author => author.firstName + ' ' + author.lastName).join('; ')}
                 </Card.Meta>
               </Card.Content>
                 <Card.Content extra textAlign="right">
