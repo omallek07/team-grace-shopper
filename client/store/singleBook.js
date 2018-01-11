@@ -20,7 +20,6 @@ export const getBookByIdThunk = (id) => dispatch => {
 export default function(singleBook = {}, action) {
     switch (action.type) {
       case GET_BOOK_BY_ID:
-        console.log('single book',action.singleBook)
         return action.singleBook
       default:
         return singleBook;

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 // import history from '../history';
 // import SingleProductReviews from './SingleProductReviews';
 import {connect} from 'react-redux';
-import {getBookByIdThunk} from '../store/singleBook'
+import {getBookByIdThunk} from '../store'
 
 class SingleProduct extends Component {
   constructor(){
@@ -11,7 +11,7 @@ class SingleProduct extends Component {
   }
   componentDidMount(){
     const id = this.props.match.params.productId;
-    this.props.getBookByIdThunk(id)
+    this.props.getSingleBook(id)
   }
   render(){
     console.log(this.props.singleBook)
@@ -26,7 +26,17 @@ class SingleProduct extends Component {
   }
 }
 
-const mapStateToProps = ({singleBook}) => ({singleBook})
-const mapStateToDispatch = {getBookByIdThunk}
+const mapStateToProps = (state) => {
+  return {
+    singleBook: state.singleBook
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getSingleBook(id){
+      dispatch(getBookByIdThunk(id))
+    }
+  }
+}
 
-export default connect(mapStateToProps, mapStateToDispatch)(SingleProduct);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct);
