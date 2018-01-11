@@ -5,13 +5,15 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Products, SingleGenre, SingleProduct, Cart, UserReviews, UserOrders, UserAccountDashboard} from './components'
 import {me} from './store'
+import { getAllBooks } from './store/products'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount () {
-    this.props.loadInitialData()
+    this.props.loadInitialData();
+    this.props.getAllBooks();
   }
 
   render () {
@@ -24,7 +26,7 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/products" component={Products} />
+            <Route path="/products" render={() => (<Products products={getAllBooks()} />) }/>
             <Route path="/home" component={UserHome} />
             <Route path="/cart" component={Cart} />
             {/* <Route path="/products/:productId" component={SingleProduct} /> */}
@@ -63,7 +65,8 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
-    }
+    },
+    getAllBooks: () => dispatch(getAllBooks())
   }
 }
 

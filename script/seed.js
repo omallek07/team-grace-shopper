@@ -110,7 +110,17 @@ const books = [
     currentPrice: 1535,
     ratingSum: 650,
     numberOfRatings: 139,
-  }
+  },
+  {
+    title: `Catch-22`,
+    description: `"Hilarious.  And the only decent thing Heller ever wrote." - Gandhi`,
+    stockQuantity: 8,
+    currentPrice: 8,
+    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/61k33tU1CaL.jpg",
+    ratingSum: 0,
+    numberOfRatings: 1,
+    averageRating: 1
+}
 ];
 const bookAuthors = [
   {
