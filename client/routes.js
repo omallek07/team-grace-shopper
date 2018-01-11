@@ -26,10 +26,10 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/products" render={() => (<Products products={getAllBooks()} />) }/>
+            <Route exact path="/products" render={() => (<Products products={getAllBooks()} />) }/>
             <Route path="/home" component={UserHome} />
             <Route path="/cart" component={Cart} />
-            {/* <Route path="/products/:productId" component={SingleProduct} /> */}
+            <Route exact path="/products/:productId" component={SingleProduct} />
             {/* <Route path="products/:genre.name" component={SingleGenre} /> */}
             {
               isLoggedIn &&

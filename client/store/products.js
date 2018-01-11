@@ -15,20 +15,20 @@ const getBooks = (products) => {
 
 export const getAllBooks = () => dispatch => {
     return axios
-      .get('api/books')
+      .get('/api/books')
       .then(res => res.data)
       .then(products => dispatch(getBooks(products)))
       .catch(err => console.log(err));
-} 
+}
 
 export default function(state = initialState, action) {
     let newState = Object.assign({}, state);
-  
+
     switch (action.type) {
       case GET_ALL_BOOKS:
         newState.list = action.list;
         return newState;
-  
+
       default:
         return state;
     }
@@ -38,7 +38,7 @@ export default function(state = initialState, action) {
 
 import axios from 'axios';
 
- ------------ ACTIONS ------------ 
+ ------------ ACTIONS ------------
 
 const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
 const PUT_NEW_PRODUCT = 'PUT_NEW_PRODUCT';
@@ -46,7 +46,7 @@ const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 const DELETE_PRODUCT = 'DELETE_PRODUCT';
 const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
 
- --------- ACTION CREATORS ------------ 
+ --------- ACTION CREATORS ------------
 
 const getAllBooks = bookObjList => {
   return {
@@ -87,7 +87,7 @@ export const deleteProduct = productObj => {
 }
 
 
-//  ------------- DISPATCHERS ------------ 
+//  ------------- DISPATCHERS ------------
 
 export const fetchAllBooks = () => dispatch => {
   return axios
@@ -97,7 +97,7 @@ export const fetchAllBooks = () => dispatch => {
     .catch(err => console.log(err));
 }
 
-// ------------- REDUCER ------------ 
+// ------------- REDUCER ------------
 
 const initialState = {
   list: []
