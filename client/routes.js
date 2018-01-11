@@ -11,10 +11,10 @@ import { getAllBooks } from './store/products'
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount () {
-    this.props.loadInitialData();
-    this.props.getAllBooks();
-  }
+  // componentDidMount () {
+  //   // this.props.loadInitialData();
+  //   // this.props.getAllBooks();
+  // }
 
   render () {
     const {isLoggedIn} = this.props
@@ -26,10 +26,10 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/products" render={() => (<Products products={getAllBooks()} />) }/>
+            <Route exact path="/products" component = {Products} />) }/>
             <Route path="/home" component={UserHome} />
             <Route path="/cart" component={Cart} />
-            {/* <Route path="/products/:productId" component={SingleProduct} /> */}
+            <Route exact path="/products/:productId" component={SingleProduct} />
             {/* <Route path="products/:genre.name" component={SingleGenre} /> */}
             {
               isLoggedIn &&
@@ -61,21 +61,21 @@ const mapState = (state) => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    loadInitialData () {
-      dispatch(me())
-    },
-    getAllBooks: () => dispatch(getAllBooks())
-  }
-}
+// const mapDispatch = (dispatch) => {
+//   return {
+//     loadInitialData () {
+//       dispatch(me())
+//     },
+//     getAllBooks: () => dispatch(getAllBooks())
+//   }
+// }
 
-export default connect(mapState, mapDispatch)(Routes)
+export default connect(mapState)(Routes)
 
 /**
  * PROP TYPES
  */
 Routes.propTypes = {
-  loadInitialData: PropTypes.func.isRequired,
+  // loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }

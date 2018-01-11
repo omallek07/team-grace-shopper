@@ -1,25 +1,29 @@
 import React from 'react';
 import { Card, Image, Icon, Rating, Grid } from "semantic-ui-react";
+import { NavLink } from 'react-router-dom';
 
 const BookCard = (props) => {
 
     const book = props.book;
-    console.log('book', book)
 
     return (
         <div>
             {
             book &&
             <Card >
+              <NavLink to = {`/products/${book.id}`}>
                 <Image size="small" src={book.photoUrl} />
-                <Card.Content>
-                    <Card.Header>
-                        {book.title}
-                    </Card.Header>
-                    <Card.Meta>
-                        {book.authors.map(author => author.firstName + ' ' + author.lastName).join('; ')}
-                    </Card.Meta>
-                </Card.Content>
+              </NavLink>
+              <Card.Content>
+                <NavLink to = {`/products/${book.id}`}>
+                  <Card.Header>
+                      {book.title}
+                  </Card.Header>
+                </NavLink>
+                <Card.Meta>
+                   {book.authors.map(author => author.firstName + ' ' + author.lastName).join('; ')}
+                </Card.Meta>
+              </Card.Content>
                 <Card.Content extra textAlign="right">
                     <Grid columns={2} >
                         <Grid.Column textAlign="left">
