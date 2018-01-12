@@ -51,6 +51,11 @@ export class AdminOrdersInfo extends Component {
           key: 5,
           text: 'Completed Orders',
           value: 'completedOrders'
+        },
+        {
+          key: 6,
+          text: 'Close List',
+          value: 'empty'
         }
       ]
 
@@ -82,7 +87,8 @@ const mapState = ({adminAllOrders}) => ({
   createdOrders: adminAllOrders.filter(order => order.status === 'cart'),
   processingOrders: adminAllOrders.filter(order => order.status === 'processing' ),
   cancelledOrders: adminAllOrders.filter(order => order.status === 'cancelled' ),
-  completedOrders: adminAllOrders.filter(order => order.status === 'completed' )
+  completedOrders: adminAllOrders.filter(order => order.status === 'completed' ),
+  empty: []
  })
 
 const mapDispatch = { allOrdersThunk }
