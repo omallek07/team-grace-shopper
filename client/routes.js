@@ -68,9 +68,8 @@ const mapState = ({user}) => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData: () => {
-      dispatch(me())
-      dispatch(getCart())
+    loadInitialData:  () => {
+      dispatch(me()).then(() => dispatch(getCart()))
     }
   }
 }

@@ -24,7 +24,7 @@ router.get('/cart', async (req, res, next) => {
         where: {
           orderId: id
         },
-        include: [{ model: Book }]
+        include: [{ model: Book, include:{all:true} }]
       })
 
       cart = {id: cart.id, address: cart.address, userId: cart.userId, lineItems}
