@@ -8,6 +8,9 @@ const Order = db.define('order', {
   },
   purchaseTime: {
     type: Sequelize.DATE,
+  },
+  sid: {
+    type: Sequelize.STRING
   }
 })
 

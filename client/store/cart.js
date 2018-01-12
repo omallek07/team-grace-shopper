@@ -26,9 +26,9 @@ export const getCart = () => dispatch => {
 }
 
 export const updateItem = (lineItem) => dispatch => {
-  return axios.put('api/orders/cart', lineItem)
+  return axios.put('/api/orders/cart', lineItem)
     .then(lineItem => {
-      return axios.get('api/orders/cart')
+      return axios.get('/api/orders/cart')
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))
         .catch(err => console.log(err))
