@@ -2,9 +2,6 @@ import axios from 'axios'
 
 const SET_CART = 'SET_CART'
 // const UPDATE_CART = 'UPDATE_CART'
-const initialState = {
-  cart: []
-}
 
 const setCart = (cart) => {
   return {
@@ -21,15 +18,13 @@ export const getCart = () => dispatch => {
     .catch(err => console.log(err));
 }
 
-export default function(state = initialState, action) {
-  let newState = Object.assign({}, state);
+export default function(cart = {}, action) {
 
   switch (action.type) {
     case SET_CART:
-      newState.cart = action.cart;
-      return newState;
+      return action.cart;
 
     default:
-      return state;
+      return cart;
   }
 }
