@@ -5,7 +5,7 @@ import { Card, Header } from 'semantic-ui-react';
 import {getAllBooksThunk} from '../store'
 
 
-class Products extends Component {
+export class Products extends Component {
 
   componentDidMount(){
     this.props.getBooks()
