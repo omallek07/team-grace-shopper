@@ -1,12 +1,48 @@
-import React from 'react-redux';
+import React from 'react';
+import {connect} from 'react-redux'
+import {Rating} from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
+function SingleProductReviews (props){
 
-const SingleProductReviews = () => {
-  return (
-    <div>
-    This will map out all reviews for single product
-    </div>
-  )
+    const reviews = props.singleBookReviews
+    return (
+      <div>
+        {
+          reviews.map((bookReview) => {
+            return (
+              <div key = {bookReview.id}>
+                <div>
+                  <strong>
+                    {bookReview.user.name}
+                  </strong>
+                </div>
+                <div>
+                  <Rating
+                    icon = "star"
+                    defaultRating={bookReview.rating}
+                    maxRating={5}
+                    disabled
+                  />
+                </div>
+                <div>
+                  {bookReview.comment}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      )
+  }
+
+const mapStateToProps = (state) => {
+  return {
+    singleBookReviews: state.singleBookReviews,
+  }
 }
 
-export default SingleProductReviews;
+export default connect(mapStateToProps)(SingleProductReviews);
+
+SingleProductReviews.propTypes = {
+  singleBookReviews: PropTypes.array.isRequired
+}

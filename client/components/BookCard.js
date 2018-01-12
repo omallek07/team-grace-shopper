@@ -7,6 +7,7 @@ const BookCard = (props) => {
     const book = props.book;
 
     return (
+
         <Card centered >
           <NavLink to = {`/products/${book.id}`}>
             <Image className="cardImage" src={book.photoUrl} />
