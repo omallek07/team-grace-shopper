@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, Item, Grid} from 'semantic-ui-react'
+import {Rating, Item, Grid, Label, Header, Icon} from 'semantic-ui-react'
 import SingleProductReviews from './SingleProductReviews';
 import {connect} from 'react-redux';
 import {getBookByIdThunk, getBookReviewThunk} from '../store'
@@ -34,6 +34,48 @@ class SingleProduct extends Component {
                     <Item.Description>
                       {book.description}
                     </Item.Description>
+                    <br />
+                    <Item.Extra>
+                      <b>Book Genres:</b>
+                      {
+                        book.genres.map(genre => {
+                          return (
+                            <div key={genre.id}>
+                              {genre.name}
+                            </div>
+                          )
+                        })
+                      }
+                    </Item.Extra>
+                    <br />
+                    <b>Rating</b>
+                    <Rating icon = "star"
+                      defaultRating={book.averageRating}
+                      maxRating={5}
+                      disabled
+                    />({book.numberOfRatings})
+                    <Item.Extra>
+                      <br />
+                      <Label.Group tag>
+                        <Label size = "large" color = "orange">
+                          Price :
+                          <Label.Detail>
+                            ${book.currentPrice / 100}
+                          </Label.Detail>
+                        </Label>
+                        <Icon name='cart' size='big' />
+                      </Label.Group>
+                      {
+                        (book.stockQuantity > 0) ?
+                        <Header color ='green'>
+                          In Stock.
+                        </Header>
+                        :
+                        <Header color ='red'>
+                          Out Of Stock
+                        </Header>
+                      }
+                    </Item.Extra>
                   </Item.Content>
                 </Item>
               </Grid.Row>
