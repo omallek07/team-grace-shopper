@@ -8,10 +8,10 @@ router.get('/cart', async (req, res, next) => {
     let cart
     let id
     let lineItems
-    if (req.user.id) {
+    if (req.session.id) {
       cart = await Order.findOrCreate({
         where: {
-          userId: req.user.id,
+          sid: req.session.id,
           status: 'cart'
         }, include: {
           all: true
@@ -27,7 +27,7 @@ router.get('/cart', async (req, res, next) => {
         include: [{ model: Book, include:{all:true} }]
       })
 
-      cart = {id: cart.id, address: cart.address, userId: cart.userId, lineItems}
+      cart = {id: cart.id, address: cart.address, lineItems}
 
       res.json(cart)
       // let books = await Promise.all(cart.lineItems.map(lineItem => lineItem.getBook()))

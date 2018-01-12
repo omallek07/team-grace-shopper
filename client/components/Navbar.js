@@ -67,7 +67,7 @@ const Navbar = (props) => {
 
 const mapState = state => {
   return {
-    numberOfItems: state.cart.lineItems && state.cart.lineItems.map(x => x.orderQuantity).reduce((a,b) => a+b)
+    numberOfItems: state.cart.lineItems && state.cart.lineItems.map(x => x.orderQuantity).reduce((a,b) => a+b, 0)
   }
 }
 

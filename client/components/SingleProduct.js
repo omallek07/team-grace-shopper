@@ -64,7 +64,7 @@ class SingleProduct extends Component {
                           </Label.Detail>
                         </Label>
                         <Icon name='cart' size='big' onClick={() => {
-                          this.props.updateItem(this.props.orderId, this.props.singleBook.id)
+                          this.props.updateItem(this.props.cart.id, this.props.singleBook.id)
                         }} />
                       </Label.Group>
                       {
@@ -98,7 +98,7 @@ class SingleProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     singleBook: state.singleBook,
-    cart: state.singleCart
+    cart: state.cart
   }
 }
 const mapDispatchToProps = (dispatch) => {
