@@ -12,7 +12,7 @@ const setCart = (cart) => {
 
 export const getCart = () => dispatch => {
   return axios
-    .get('api/orders/cart')
+    .get('/api/orders/cart')
     .then(res => res.data)
     .then(cart => dispatch(setCart(cart)))
     .catch(err => console.log(err));
