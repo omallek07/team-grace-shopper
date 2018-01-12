@@ -5,7 +5,6 @@ module.exports = router
 
 router.get('/cart', async (req, res, next) => {
   try {
-    console.log(req.session.id)
     let cart
     let id
     let lineItems
