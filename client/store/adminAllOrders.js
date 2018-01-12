@@ -22,7 +22,8 @@ const allOrders = (orders) => {
 export const allOrdersThunk = () => dispatch => {
   return axios
     .get('api/orders/adminAllOrders')
-    .then(res => res.data)
+    .then(res => {
+      return res.data })
     .then(orders => dispatch(allOrders(orders)))
     .catch(err => console.log(err));
 }

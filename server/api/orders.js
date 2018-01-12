@@ -51,7 +51,11 @@ router.get('/', async (req, res, next) => {
 
 // Gets all orders for logged in Admin
 router.get('/adminAllOrders', async (req, res, next) => {
-  let allOrders = await Order.findAll()
+  let allOrders = await Order.findAll({
+    include: {
+      all: true
+    }
+  })
   res.json(allOrders)
 })
 
