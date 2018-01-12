@@ -17,14 +17,14 @@ import Sidebar from './Sidebar';
  */
 const Main = (props) => {
   // console.log('props',props)
-  const {children, handleClick, isLoggedIn} = props
+  const {children, handleClick, isLoggedIn, isAdmin} = props
 
   return (
     <div>
-      <Navbar logstatus={isLoggedIn} handleClick={handleClick} />
+      <Navbar logstatus={isLoggedIn} handleClick={handleClick} isAdmin={isAdmin} />
       <Grid columns={2}>
         <Grid.Column width={4}>
-          <Sidebar logstatus={isLoggedIn} />
+          <Sidebar logstatus={isLoggedIn} isAdmin={isAdmin} />
         </Grid.Column>
         <Grid.Column width={11}>
           {children}
@@ -37,9 +37,10 @@ const Main = (props) => {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = ({user}) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!user.id,
+    isAdmin: !!user.isAdmin
   }
 }
 

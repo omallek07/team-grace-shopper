@@ -1,17 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import history from '../history';
 import AdminOrdersList from './AdminOrdersList';
+import { Header } from 'semantic-ui-react';
 
-function AdminDashboard () {
+const AdminDashboard = () => {
 
     return (
         <div>
-          <h1> Admin dashboard placeholder </h1>
-          {
-            /* potential display for all orders within admin dashboard */
-          }
-          <AdminOrdersList />
+          <Header> Welcome to the Administrative Dashboard </Header>
+          All Orders Listed below:
+            <AdminOrdersList />
         </div>
     )
 }

@@ -7,14 +7,17 @@ import books from './products';
 import singleBook from './singleBook'
 import singleBookReviews from './singleBookReviews'
 import cart from './cart'
+import adminAllOrders from './adminAllOrders';
 
 const reducer = combineReducers({
   user,
   books,
   singleBook,
   singleBookReviews,
-  cart
+  cart,
+  adminAllOrders
 })
+
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
