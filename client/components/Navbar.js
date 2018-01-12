@@ -3,8 +3,8 @@ import { Menu, Dropdown, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 //
 const Navbar = (props) => {
-  const { logstatus, handleClick } = props;
-//
+  const { logstatus, isAdmin, handleClick } = props;
+
   return (
     <Menu>
       <Menu.Item>
@@ -26,12 +26,21 @@ const Navbar = (props) => {
             </Link>
           </Menu.Item>
           <Menu.Item>
+          {
+            isAdmin ?  //Is user admin or shopper?
+            <Link to="/adminDash">
+              <Button primary>
+                Admin Dashboard
+              </Button>
+            </Link>
+            :
             <Link to="/cart">
               <Button primary>
                 <Icon name="cart" />
                 My Cart
               </Button>
             </Link>
+          }
           </Menu.Item>
           <Dropdown item icon="user" pointing>
             <Dropdown.Menu>
