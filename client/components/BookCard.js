@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Image, Icon, Rating, Grid } from "semantic-ui-react";
 import { NavLink } from 'react-router-dom';
+import { updateItem } from '../store/cart';
+import {connect} from 'react-redux'
 
 const BookCard = (props) => {
 
@@ -30,7 +32,9 @@ const BookCard = (props) => {
                     </Grid.Column>
                     <Grid.Column textAlign="right">
                         {"$" + (book.currentPrice / 100)}
-                        <Icon name='cart' link corner bordered />
+                        <Icon name='cart' link corner bordered onClick={() => {
+                          props.updateItem(props.cart.id, props.book.id)
+                        }}/>
                     </Grid.Column>
                 </Grid>
             </Card.Content>
@@ -38,4 +42,22 @@ const BookCard = (props) => {
     )
 }
 
-export default BookCard;
+const mapState = state => {
+  return {
+    cart: state.cart
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+    updateItem: (orderId, bookId) => {
+      dispatch(updateItem({
+        orderId,
+        bookId,
+        orderQuantity: 1
+      }))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(BookCard);
