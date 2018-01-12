@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Rating, Item, Grid, Label, Header, Icon} from 'semantic-ui-react'
 import SingleProductReviews from './SingleProductReviews';
 import {connect} from 'react-redux';
-import {getBookByIdThunk, getBookReviewThunk} from '../store'
+import {getBookByIdThunk, getBookReviewThunk, updateItem} from '../store'
 
 class SingleProduct extends Component {
 
@@ -63,7 +63,9 @@ class SingleProduct extends Component {
                             ${book.currentPrice / 100}
                           </Label.Detail>
                         </Label>
-                        <Icon name='cart' size='big' />
+                        <Icon name='cart' size='big' onClick={() => {
+                          this.props.updateItem(this.props.orderId, this.props.singleBook.id)
+                        }} />
                       </Label.Group>
                       {
                         (book.stockQuantity > 0) ?
@@ -95,7 +97,8 @@ class SingleProduct extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    singleBook: state.singleBook
+    singleBook: state.singleBook,
+    cart: state.singleCart
   }
 }
 const mapDispatchToProps = (dispatch) => {
@@ -103,6 +106,13 @@ const mapDispatchToProps = (dispatch) => {
     getSingleBook(id){
       dispatch(getBookByIdThunk(id))
       dispatch(getBookReviewThunk(id))
+    },
+    updateItem: (orderId, bookId) => {
+      dispatch(updateItem({
+        orderId,
+        bookId,
+        orderQuantity: 1
+      }))
     }
   }
 }
