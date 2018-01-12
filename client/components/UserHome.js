@@ -13,7 +13,7 @@ export const UserHome = (props) => {
     <div>
     {
       email ?
-      <h3>Welcome {email}!</h3>
+      <h3>Welcome, {email}!</h3>
       :
       <h3>Welcome Guest!</h3>
     }

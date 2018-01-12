@@ -3,8 +3,10 @@ import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
+
 import {Main, Login, Signup, UserHome, Products, SingleProduct, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard} from './components'
 import {me, getCart, getAllBooksThunk} from './store'
+
 
 /**
  * COMPONENT
@@ -69,7 +71,6 @@ const mapDispatch = dispatch => {
     loadInitialData: () => {
       dispatch(me())
       dispatch(getCart())
-      dispatch(getAllBooksThunk())
     }
   }
 }

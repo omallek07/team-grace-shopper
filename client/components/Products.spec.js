@@ -1,3 +1,4 @@
+
 /* global describe beforeEach it */
 
 import {expect} from 'chai'
@@ -10,6 +11,7 @@ const adapter = new Adapter()
 enzyme.configure({adapter})
 
 describe('Products Component', () => {
+
   let products
 
   beforeEach(() => {
@@ -25,4 +27,3 @@ describe('Products Component', () => {
   })
 
 })
-

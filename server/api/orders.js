@@ -67,8 +67,14 @@ router.put('/cart', async (req, res, next) => {
         all: true
       }
     })
+    if (lineItem[0].orderQuantity) {
+      orderQuantity += lineItem[0].orderQuantity
+    }
     console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
+    if (typeof lineItem === 'number') {
+      lineItem = {lineItem: 'destroyed'}
+    }
     res.json(lineItem)
   }
   catch (err) {
