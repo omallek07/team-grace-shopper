@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import BookCard from './BookCard';
 import { Card, Header } from 'semantic-ui-react';
 import {getAllBooksThunk} from '../store'
-
+import PropTypes from 'prop-types'
 
 export class Products extends Component {
 
@@ -42,3 +42,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
+
+Products.propTypes = {
+  books: PropTypes.array.isRequired,
+  getBooks: PropTypes.func.isRequired
+}
