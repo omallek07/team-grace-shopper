@@ -6,12 +6,14 @@ import user from './user';
 import books from './products';
 import singleBook from './singleBook'
 import singleBookReviews from './singleBookReviews'
+import cart from './cart'
 
 const reducer = combineReducers({
   user,
   books,
   singleBook,
-  singleBookReviews
+  singleBookReviews,
+  cart
 })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
@@ -24,3 +26,5 @@ export * from './user'
 export * from './products'
 export * from './singleBook'
 export * from './singleBookReviews'
+export * from './cart'
+

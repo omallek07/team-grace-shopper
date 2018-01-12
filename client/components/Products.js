@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
-import history from '../history';
 import BookCard from './BookCard';
-import { Card } from "semantic-ui-react";
+import { Card, Header } from 'semantic-ui-react';
 import {getAllBooksThunk} from '../store'
 import PropTypes from 'prop-types'
 
@@ -13,17 +11,20 @@ class Products extends Component {
     this.props.getBooks()
   }
   render(){
-  let books = this.props.books
-  return (
-    <div>
-      <h1> All Books</h1>
-      <Card.Group itemsPerRow={6} >
-        { books.map(book => {
-          return (
-              <BookCard book={book} key={book.id} />
-          )})
+    let books = this.props.books
+    return (
+      <div>
+        <Header> All Books </Header>
+        <Card.Group itemsPerRow={4}>
+          { books.map(book => {
+            return (
+              <React.Fragment key={book.id}>
+                <BookCard book={book} />
+              </React.Fragment>
+            )
+          })
         }
-        </Card.Group >
+        </Card.Group>
     </div>
   )}
 }
