@@ -25,7 +25,7 @@ router.get('/cart', async (req, res, next) => {
         where: {
           orderId: id
         },
-        include: [{ model: Book }]
+        include: [{ model: Book, include:{all:true} }]
       })
 
       cart = {id: cart.id, address: cart.address, userId: cart.userId, lineItems}
@@ -47,8 +47,13 @@ router.get('/cart', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
   let order = await Order.findById(1)
-
   res.json(order)
+})
+
+// Gets all orders for logged in Admin
+router.get('/adminAllOrders', async (req, res, next) => {
+  let allOrders = await Order.findAll()
+  res.json(allOrders)
 })
 
 router.put('/cart', async (req, res, next) => {

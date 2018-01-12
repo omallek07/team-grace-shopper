@@ -3,7 +3,7 @@ import { Menu, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 //
 const Sidebar = (props) => {
-  const { logstatus } = props;
+  const { logstatus, isAdmin } = props;
 //
   return (
     <Menu vertical>
@@ -30,12 +30,22 @@ const Sidebar = (props) => {
         </Link>
       </Menu.Item>
       <Menu.Item>
+      {
+        isAdmin ?  //Is user admin or shopper?
+        <Link to="/adminDash">
+          <Button fluid>
+            <Icon name="user circle outline" />
+            Admin Dashboard
+          </Button>
+        </Link>
+        :
         <Link to="/cart">
           <Button fluid>
             <Icon name="cart" />
-            Cart
+            My Cart
           </Button>
         </Link>
+      }
       </Menu.Item>
     {
       logstatus // is user logged in or not?

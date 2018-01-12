@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 //
 const Navbar = (props) => {
-  const { logstatus, handleClick } = props;
-  //
+  const { logstatus, isAdmin, handleClick } = props;
+
   return (
     <Menu>
       <Menu.Item>
