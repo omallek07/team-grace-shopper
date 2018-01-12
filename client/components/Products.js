@@ -5,12 +5,10 @@ import history from '../history';
 import BookCard from './BookCard';
 import { Card } from "semantic-ui-react";
 import {getAllBooksThunk} from '../store'
-
+import PropTypes from 'prop-types'
 
 class Products extends Component {
-  constructor(){
-    super()
-  }
+
   componentDidMount(){
     this.props.getBooks()
   }
@@ -44,13 +42,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
-
-//  <div className="card" key={book.id}>
-//                                 <div className="image">
-//                                     <img src={book.photoUrl} />
-//                                 </div>
-//                                 <div className="content">
-//                                     <div className="header"> {book.description} </div>
-//                                     <div className="description" />
-//                                 </div>
-//                             </div>
+Products.propTypes = {
+  books: PropTypes.array.isRequired,
+  getBooks: PropTypes.func.isRequired
+}
