@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Order, Address, LineItems, Book,  } = require('../db')
+const { Order, Address, LineItems } = require('../db')
 
 module.exports = router
 
@@ -14,6 +14,8 @@ router.get('/cart', async (req, res, next) => {
         }, include: [{model: Address}, {model: LineItems}]
       })
       res.json(cart[0])
+    } else {
+      res.json([])
     }
   }
   catch (err) {
@@ -44,5 +46,6 @@ router.put('/cart', async (req, res, next) => {
   }
   catch (err) {
     console.error(err)
+    res.json([])
   }
 })

@@ -4,12 +4,16 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome, Products, SingleProduct, Cart, UserReviews, UserOrders, UserAccountDashboard} from './components'
-import {me} from './store'
+import {me, getCart} from './store'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+
+  componentDidMount() {
+    this.props.getCart()
+  }
 
   render () {
     const {isLoggedIn} = this.props;
@@ -56,6 +60,14 @@ const mapState = (state) => {
   }
 }
 
+const mapDispatch = dispatch => {
+  return {
+    getCart: () => {
+      dispatch(getCart())
+    }
+  }
+}
+
 // const mapDispatch = (dispatch) => {
 //   return {
 //     loadInitialData () {
@@ -65,7 +77,7 @@ const mapState = (state) => {
 //   }
 // }
 
-export default connect(mapState)(Routes)
+export default connect(mapState, mapDispatch)(Routes)
 
 /**
  * PROP TYPES
