@@ -3,44 +3,49 @@ const { Order, Address, LineItems, Book } = require('../db')
 
 module.exports = router
 
+function getCart(sessionId) {
+  return Order.findOrCreate({
+    where: {
+      sid: sessionId,
+      status: 'cart'
+    }
+  })
+  .then(order => order[0])
+}
+
 router.get('/cart', async (req, res, next) => {
   try {
     let cart
     let id
     let lineItems
-    if (req.session.id) {
-      cart = await Order.findOrCreate({
-        where: {
-          sid: req.session.id,
-          status: 'cart'
-        }, include: {
+
+    cart = await getCart(req.session.id)
+    console.log(cart)
+    id = cart.id
+
+    lineItems = await LineItems.findAll({
+      where: {
+        orderId: id
+      },
+      include: [{
+        model: Book,
+        include: {
           all: true
         }
-      })
-      cart = cart[0]
-      id = cart.id
+      }]
+    })
 
-      lineItems = await LineItems.findAll({
-        where: {
-          orderId: id
-        },
-        include: [{ model: Book, include:{all:true} }]
-      })
+    // console.log(lineItems)
 
-      cart = {id: cart.id, address: cart.address, lineItems}
+    res.json(lineItems)
+    // let books = await Promise.all(cart.lineItems.map(lineItem => lineItem.getBook()))
 
-      res.json(cart)
-      // let books = await Promise.all(cart.lineItems.map(lineItem => lineItem.getBook()))
+    // cart.lineItems = cart.lineItems.map((lineItem, i) => ({...lineItem, book: [books[i]]}))
 
-      // cart.lineItems = cart.lineItems.map((lineItem, i) => ({...lineItem, book: [books[i]]}))
-
-      // res.json(cart[0])
-    } else {
-      res.json([])
-    }
+    // res.json(cart[0])
   }
   catch (err) {
-    console.error(err)
+    next(err)
   }
 })
 
@@ -61,9 +66,15 @@ router.get('/adminAllOrders', async (req, res, next) => {
 
 router.put('/cart', async (req, res, next) => {
   try {
-    let orderId = req.body.orderId
+    // console.log(req.body)
+    let cart = await getCart(req.session.id)
+
+    let orderId = cart.id
+
     let bookId = req.body.bookId
+
     let orderQuantity = req.body.orderQuantity
+
     let lineItem = await LineItems.findOrCreate({
       where: {
         orderId, bookId
@@ -71,13 +82,14 @@ router.put('/cart', async (req, res, next) => {
         all: true
       }
     })
-    if (lineItem[0].orderQuantity) {
+
+    if (orderQuantity) {
       orderQuantity += lineItem[0].orderQuantity
     }
     console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
     if (typeof lineItem === 'number') {
-      lineItem = {lineItem: 'destroyed'}
+      lineItem = { lineItem: 'destroyed' }
     }
     res.json(lineItem)
   }

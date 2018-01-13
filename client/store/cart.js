@@ -27,7 +27,7 @@ export const getCart = () => dispatch => {
 
 export const updateItem = (lineItem) => dispatch => {
   return axios.put('/api/orders/cart', lineItem)
-    .then(lineItem => {
+    .then(() => {
       return axios.get('/api/orders/cart')
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))
@@ -36,7 +36,7 @@ export const updateItem = (lineItem) => dispatch => {
 }
 
 
-export default function (cart = {}, action) {
+export default function (cart = [], action) {
 
   switch (action.type) {
     case SET_CART:

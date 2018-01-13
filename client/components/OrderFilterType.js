@@ -27,7 +27,11 @@ const OrderFilterType = (props) => {
                     {order.purchaseTime}
                   </Table.Cell>
                   <Table.Cell>
-                    {order.user.name}
+                    { // Is order tied to user or visitor?
+                    (order.user.firstName === null)
+                      ? <div>Anonymous Guest</div>
+                      : <div>{`${order.user.firstName} ${order.user.lastName}`}</div>
+                    }
                   </Table.Cell>
                   <Table.Cell>
                     {

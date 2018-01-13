@@ -177,7 +177,7 @@ const bookAuthors = [
     bookId: 8,
     authorId: 7
   },
-  { 
+  {
     bookId: 9,
     authorId: 8
   }
