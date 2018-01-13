@@ -149,10 +149,10 @@ router.put('/checkout', async (req, res, next) => {
         .then(book => [book, item.orderQuantity, book.stockQuantity >= item.orderQuantity])
     }))
 
-    if (stockCheck.filter(x => x[1]) === stockCheck) {
+    if (stockCheck.filter(x => x[2]) === stockCheck) {
       await Promise.all(stockCheck.map(x => {
         let [book, orderQuantity, bool] = x
-        let stockQuantity = book.stockQuantity - orderQuanity
+        let stockQuantity = book.stockQuantity - orderQuantity
         return book.update({ stockQuantity })
       }))
 
@@ -170,7 +170,7 @@ router.put('/checkout', async (req, res, next) => {
       }
 
     } else {
-      throw new Error("shit, dog. you ordered more of something than was in stock")
+      throw new Error('shit, dog. you ordered more of something than was in stock')
     }
 
 
