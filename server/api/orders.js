@@ -61,11 +61,12 @@ router.get('/adminAllOrders', async (req, res, next) => {
 
 // Find all orders by user
 router.get('/:userId', async (req, res, next) => {
-  let userOrder = await Order.findAll({where:
-     {userId: req.params.userId},
-     include: {
-       all: true
-     }
+  let userOrder = await Order.findAll({
+    where:
+      { userId: req.params.userId },
+    include: {
+      all: true
+    }
   })
   res.json(userOrder)
 })
@@ -121,9 +122,10 @@ router.delete('/cart/:bookId', async (req, res, next) => {
       });
     res.status(204).end();
   }
-  catch (err){
+  catch (err) {
     console.error(err)
   }
+})
 
 router.put('/checkout', async (req, res, next) => {
 
@@ -140,28 +142,38 @@ router.put('/checkout', async (req, res, next) => {
       }
     })
 
-    await Promise.all(lineItems.map(item => {
+    let stockCheck = await Promise.all(lineItems.map(item => {
       let orderPrice = item.book.currentPrice
       return item.update({ orderPrice })
         .then(() => Book.findById(item.bookId))
-        .then(book => {
-          let stockQuantity = book.stockQuantity - item.orderQuantity
-          return book.update({ stockQuantity })
-        })
+        .then(book => [book, item.orderQuantity, book.stockQuantity >= item.orderQuantity])
     }))
 
-    if (req.user.id) {
-      await cart.update({
-        status: 'processing',
-        userId: req.user.id,
-        purchaseTime: Date.now()
-      })
+    if (stockCheck.filter(x => x[1]) === stockCheck) {
+      await Promise.all(stockCheck.map(x => {
+        let [book, orderQuantity, bool] = x
+        let stockQuantity = book.stockQuantity - orderQuanity
+        return book.update({ stockQuantity })
+      }))
+
+      if (req.user.id) {
+        await cart.update({
+          status: 'processing',
+          userId: req.user.id,
+          purchaseTime: Date.now()
+        })
+      } else {
+        await cart.update({
+          status: 'processing',
+          purchaseTime: Date.now()
+        })
+      }
+
     } else {
-      await cart.update({
-        status: 'processing',
-        purchaseTime: Date.now()
-      })
+      throw new Error("shit, dog. you ordered more of something than was in stock")
     }
+
+
 
     res.json('success')
 
