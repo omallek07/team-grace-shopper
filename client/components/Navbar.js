@@ -14,26 +14,37 @@ const Navbar = (props) => {
           GRACESHOPPER
         </Header>
       </Menu.Item>
-      {
-        logstatus //is user logged in or not?
-          ?
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Link to="/home">
-                <Button primary>
-                  <Icon name="home" />
-                  Home
+
+      <Menu.Menu position="right">
+        <Menu.Item>
+          <Link to="/home">
+            <Button primary>
+              <Icon name="home" />
+              Home
+            </Button>
+          </Link>
+        </Menu.Item>
+      <Menu.Item>
+        <Link to="/cart">
+          <Button primary>
+            <Icon name="cart" />
+              My Cart ({props.numberOfItems})
+          </Button>
+        </Link>
+      </Menu.Item>
+        { // view adminDash if logged in as admin
+          isAdmin &&
+          <Menu.Item>
+            <Link to="/adminDash">
+              <Button primary>
+                <Icon name="user circle outline" />
+                  Admin Dashboard
               </Button>
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/cart">
-                <Button primary>
-                  <Icon name="cart" />
-                  My Cart ({props.numberOfItems})
-              </Button>
-              </Link>
-            </Menu.Item>
+            </Link>
+          </Menu.Item>
+        }
+        {  // If logged in, view drop down
+          logstatus &&
             <Dropdown item icon="user" pointing>
               <Dropdown.Menu>
                 <Dropdown.Item><Link to="/userAccountDash"><Button fluid>My Account</Button></Link></Dropdown.Item>
@@ -42,25 +53,28 @@ const Navbar = (props) => {
                 <Dropdown.Item><Button fluid onClick={handleClick}>Log Out</Button></Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          </Menu.Menu>
-          :
-          <Menu.Menu position="right">
-            <Menu.Item>
-              <Link to="/login">
-                <Button secondary>
-                  Log In
+        }
+        { //not logged in view login and signup
+          !logstatus &&
+          <Menu.Item>
+            <Link to="/login">
+              <Button>
+                Log In
               </Button>
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <Link to="/signup">
-                <Button primary>
-                  Sign Up
-            </Button>
-              </Link>
-            </Menu.Item>
-          </Menu.Menu>
-      }
+            </Link>
+          </Menu.Item>
+        }
+        {
+          !logstatus &&
+          <Menu.Item>
+            <Link to="/signup">
+              <Button>
+                Sign Up
+              </Button>
+            </Link>
+          </Menu.Item>
+        }
+      </Menu.Menu>
     </Menu>
   )
 }
