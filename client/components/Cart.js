@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Grid, Item, Label, Icon} from 'semantic-ui-react'
-import {updateItem} from '../store'
+import {updateItem, deleteItemThunk} from '../store'
 
 function Cart (props){
   const isLoggedIn = props.isLoggedIn;
@@ -36,9 +36,9 @@ function Cart (props){
                     </div>
                   )}
               </h5>
-              <Label>
+              <Label >
                 Delete
-                <Icon name='delete' />
+                <Icon name='delete' onClick = {() => props.deleteItem(lineItem.bookId)}/>
               </Label>
             </Grid.Column>
             <Grid.Column width={2}>
@@ -46,7 +46,7 @@ function Cart (props){
             </Grid.Column>
             <Grid.Column width={2}>
               <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value)}}>
-                {  [1,2,3,4,5,6,7,8,9,10].map(num=>{
+                {  Array.from({length: lineItem.book.stockQuantity}, (x,i)=>i+1).map(num=>{
                   return (
                     <option key={num} value={num}>
                       {num}
@@ -95,6 +95,9 @@ const mapDispatch = (dispatch) => {
   return {
     changeCart(bookId, orderQuantity){
       dispatch(updateItem({bookId, orderQuantity}))
+    },
+    deleteItem(bookId){
+      dispatch(deleteItemThunk(bookId))
     }
   }
 }
