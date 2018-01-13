@@ -14,7 +14,7 @@ class UserOrders extends Component {
 
     return (
       <div>
-        <Header>Previous Orders</Header>
+        <Header>My Previous Orders</Header>
         { // Does user have previous orders?
           userOrders
           ?
