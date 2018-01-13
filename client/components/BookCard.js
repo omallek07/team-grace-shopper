@@ -33,7 +33,7 @@ const BookCard = (props) => {
                     <Grid.Column textAlign="right">
                         {"$" + (book.currentPrice / 100)}
                         <Icon name='cart' link corner bordered onClick={() => {
-                          props.updateItem(props.cart.id, props.book.id)
+                          props.updateItem(props.cart, book.id)
                         }}/>
                     </Grid.Column>
                 </Grid>
@@ -50,11 +50,17 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    updateItem: (orderId, bookId) => {
+    updateItem: (cart, bookId) => {
+      let orderQuantity
+      let lineItem = cart.find(item => (item.bookId === bookId))
+      if (lineItem) {
+        orderQuantity = lineItem.orderQuantity + 1
+      } else {
+        orderQuantity = 1
+      }
       dispatch(updateItem({
-        orderId,
         bookId,
-        orderQuantity: 1
+        orderQuantity
       }))
     }
   }
