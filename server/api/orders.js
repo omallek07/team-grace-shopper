@@ -68,11 +68,8 @@ router.put('/cart', async (req, res, next) => {
   try {
     // console.log(req.body)
     let cart = await getCart(req.session.id)
-
     let orderId = cart.id
-
     let bookId = req.body.bookId
-
     let orderQuantity = req.body.orderQuantity
 
     let lineItem = await LineItems.findOrCreate({
@@ -82,11 +79,9 @@ router.put('/cart', async (req, res, next) => {
         all: true
       }
     })
-
     if (!orderQuantity) {
       orderQuantity = lineItem[0].orderQuantity + 1
     }
-
     // console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
     if (typeof lineItem === 'number') {
@@ -97,5 +92,24 @@ router.put('/cart', async (req, res, next) => {
   catch (err) {
     console.error(err)
     res.json([])
+  }
+})
+
+router.delete('/cart/:bookId', async (req, res, next) => {
+  try {
+    let cart = await getCart(req.session.id);
+    let orderId = cart.id;
+    let bookId = req.params.bookId
+    let lineItem = await LineItems.destroy(
+      {
+        where: {
+          orderId,
+          bookId
+        }
+      });
+    res.status(204).end();
+  }
+  catch (err){
+    console.error(err)
   }
 })
