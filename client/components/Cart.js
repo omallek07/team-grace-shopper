@@ -6,7 +6,7 @@ function Cart (props){
   const isLoggedIn = props.isLoggedIn;
   const cart = props.cart;
   return (
-    cart.lineItems ?
+    cart ?
     <Grid celled>
       <Grid.Row>
         <Grid.Column width={12}>
@@ -19,7 +19,7 @@ function Cart (props){
           <h2>Quantity</h2>
         </Grid.Column>
       </Grid.Row>
-      {cart.lineItems.map(lineItem => {
+      {cart.map(lineItem => {
         return (
           <Grid.Row key={lineItem.id}>
             <Grid.Column width={4}>
@@ -64,10 +64,10 @@ function Cart (props){
           <Label color ='red'>
             SubTotal (
             {
-              cart.lineItems && cart.lineItems.map(x => x.orderQuantity).reduce((a,b) => a+b)
+              cart && cart.map(x => x.orderQuantity).reduce((a,b) => a+b)
             } items ) : $
             {
-              cart.lineItems && cart.lineItems.map(x => {
+              cart && cart.map(x => {
                 return (
                   x.orderQuantity * (x.book.currentPrice/100)
                 )
