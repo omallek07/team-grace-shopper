@@ -64,14 +64,14 @@ function Cart (props){
           <Label color ='red'>
             SubTotal (
             {
-              cart.lineItems && cart.lineItems.map(x => x.orderQuantity).reduce((a,b) => a+b)
+              cart.lineItems && cart.lineItems.map(x => x.orderQuantity).reduce((a,b) => a+b,0)
             } items ) : $
             {
               cart.lineItems && cart.lineItems.map(x => {
                 return (
                   x.orderQuantity * (x.book.currentPrice/100)
                 )
-              }).reduce((a,b) => a+b)
+              }).reduce((a,b) => a+b,0)
             }
           </Label>
         </Grid.Column>
@@ -90,5 +90,6 @@ const mapState = ({user, cart}) => {
     cart: cart
   }
 }
+
 
 export default connect(mapState)(Cart);
