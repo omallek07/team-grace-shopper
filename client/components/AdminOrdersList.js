@@ -22,10 +22,8 @@ export class AdminOrdersInfo extends Component {
   }
 
   render () {
-    console.log('props in admin', this.props)
 
     const value = this.state.value;
-    console.log('value', value)
     const orderOptions = [
         {
           key: 1,

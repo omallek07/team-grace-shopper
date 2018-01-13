@@ -22,9 +22,7 @@ const allUsers = (users) => {
 export const allUsersThunk = () => dispatch => {
   return axios
     .get('/api/users/adminAllUsers')
-    .then(res => {
-      console.log('res', res.data)
-      return res.data })
+    .then(res => res.data)
     .then(users => dispatch(allUsers(users)))
     .catch(err => console.log(err));
 }
