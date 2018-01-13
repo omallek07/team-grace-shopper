@@ -1,4 +1,4 @@
-const {db} = require('../server/db');
+const { db } = require('../server/db');
 const {
   Author,
   Address,
@@ -43,6 +43,10 @@ const authors = [
   {
     firstName: 'Bruce',
     lastName: 'Campbell'
+  },
+  {
+    firstName: 'Joseph',
+    lastName: 'Heller'
   }
 ];
 
@@ -120,7 +124,17 @@ const books = [
     ratingSum: 0,
     numberOfRatings: 1,
     averageRating: 1
-}
+  },
+  {
+    title: `Hail to the Chin: Further Confessions of a B Movie Actor`,
+    description: `“An insightful and rant-filled guide to being almost famous.” ― Jesus`,
+    stockQuantity: 8,
+    currentPrice: 65,
+    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/51TCRF%2BKPYL._SX327_BO1,204,203,200_.jpg",
+    ratingSum: 0,
+    numberOfRatings: 1,
+    averageRating: 5
+  }
 ];
 const bookAuthors = [
   {
@@ -157,6 +171,14 @@ const bookAuthors = [
   },
   {
     bookId: 7,
+    authorId: 8
+  },
+  {
+    bookId: 8,
+    authorId: 7
+  },
+  { 
+    bookId: 9,
     authorId: 8
   }
 ]
@@ -237,10 +259,10 @@ const addresses = [
 
 const users = [
   {
-    email:'grubbycoder@gmail.com',
-    password:'hello',
-    firstName:'Erda',
-    lastName:'Wadleigh',
+    email: 'grubbycoder@gmail.com',
+    password: 'hello',
+    firstName: 'Erda',
+    lastName: 'Wadleigh',
     isAdmin: false,
     addressId: 1
   },
@@ -253,18 +275,18 @@ const users = [
     addressId: 2
   },
   {
-    email:'cageycoder@gmail.com',
-    password:'hellothere',
-    firstName:'Tiler',
-    lastName:'Thurston',
+    email: 'cageycoder@gmail.com',
+    password: 'hellothere',
+    firstName: 'Tiler',
+    lastName: 'Thurston',
     isAdmin: false,
     addressId: 3
   },
   {
-    email:'aspiring@gmail.com',
-    password:'abcd',
-    firstName:'Leandra',
-    lastName:'Franconi',
+    email: 'aspiring@gmail.com',
+    password: 'abcd',
+    firstName: 'Leandra',
+    lastName: 'Franconi',
     isAdmin: false,
     addressId: 4
   },
