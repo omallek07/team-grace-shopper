@@ -83,9 +83,6 @@ router.put('/cart', async (req, res, next) => {
       }
     })
 
-    if (orderQuantity) {
-      orderQuantity += lineItem[0].orderQuantity
-    }
     console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
     if (typeof lineItem === 'number') {
