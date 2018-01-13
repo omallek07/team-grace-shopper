@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Grid, Item, Label, Icon} from 'semantic-ui-react'
+import {updateItem} from '../store'
 
 function Cart (props){
   const isLoggedIn = props.isLoggedIn;
@@ -44,7 +45,7 @@ function Cart (props){
               <Label color = 'orange'>${lineItem.book.currentPrice/100}</Label>
             </Grid.Column>
             <Grid.Column width={2}>
-              <select value={lineItem.orderQuantity} >
+              <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value)}}>
                 {  [1,2,3,4,5,6,7,8,9,10].map(num=>{
                   return (
                     <option key={num} value={num}>
@@ -64,14 +65,14 @@ function Cart (props){
           <Label color ='red'>
             SubTotal (
             {
-              cart && cart.map(x => x.orderQuantity).reduce((a,b) => a+b)
+              cart && cart.map(x => x.orderQuantity).reduce((a,b) => a+b,0)
             } items ) : $
             {
               cart && cart.map(x => {
                 return (
                   x.orderQuantity * (x.book.currentPrice/100)
                 )
-              }).reduce((a,b) => a+b)
+              }).reduce((a,b) => a+b,0)
             }
           </Label>
         </Grid.Column>
@@ -90,5 +91,12 @@ const mapState = ({user, cart}) => {
     cart: cart
   }
 }
+const mapDispatch = (dispatch) => {
+  return {
+    changeCart(bookId, orderQuantity){
+      dispatch(updateItem({bookId, orderQuantity}))
+    }
+  }
+}
 
-export default connect(mapState)(Cart);
+export default connect(mapState,mapDispatch)(Cart);
