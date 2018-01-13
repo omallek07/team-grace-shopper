@@ -20,7 +20,7 @@ router.get('/cart', async (req, res, next) => {
     let lineItems
 
     cart = await getCart(req.session.id)
-    console.log(cart)
+    // console.log(cart)
     id = cart.id
 
     lineItems = await LineItems.findAll({
@@ -83,7 +83,11 @@ router.put('/cart', async (req, res, next) => {
       }
     })
 
-    console.log(lineItem)
+    if (!orderQuantity) {
+      orderQuantity = lineItem[0].orderQuantity + 1
+    }
+
+    // console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
     if (typeof lineItem === 'number') {
       lineItem = { lineItem: 'destroyed' }
