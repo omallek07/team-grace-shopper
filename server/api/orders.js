@@ -10,7 +10,7 @@ function getCart(sessionId) {
       status: 'cart'
     }
   })
-  .then(order => order[0])
+    .then(order => order[0])
 }
 
 router.get('/cart', async (req, res, next) => {
@@ -107,7 +107,53 @@ router.put('/cart', async (req, res, next) => {
     res.json(lineItem)
   }
   catch (err) {
-    console.error(err)
-    res.json([])
+    next(err)
   }
+})
+
+router.put('/checkout', async (req, res, next) => {
+
+  try {
+
+    let cart = await getCart(res.session.id)
+
+    let lineItems = await LineItems.findAll({
+      where: {
+        id: cart.id
+      },
+      include: {
+        all: true
+      }
+    })
+
+    await Promise.all(lineItems.map(item => {
+      let orderPrice = item.book.currentPrice
+      return item.update({ orderPrice })
+        .then(() => Book.findById(item.bookId))
+        .then(book => {
+          let stockQuantity = book.stockQuantity - item.orderQuantity
+          return book.update({ stockQuantity })
+        })
+    }))
+
+    if (req.user.id) {
+      await cart.update({
+        status: 'processing',
+        userId: req.user.id,
+        purchaseTime: Date.now()
+      })
+    } else {
+      await cart.update({
+        status: 'processing',
+        purchaseTime: Date.now()
+      })
+    }
+
+    res.json('success')
+
+  }
+  catch (err) {
+    next(err)
+  }
+
 })
