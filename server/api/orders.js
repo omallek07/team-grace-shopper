@@ -114,10 +114,31 @@ router.put('/checkout', async (req, res, next) => {
       }
     })
 
-    await cart.update({
-      status: 'processing',
-      purchaseTime: Date.now()
-    })
+    await Promise.all(lineItems.map(item => {
+      let orderPrice = item.book.currentPrice
+      return item.update({ orderPrice })
+        .then(() => Book.findById(item.bookId))
+        .then(book => {
+          let stockQuantity = book.stockQuantity - item.orderQuantity
+          return book.update({ stockQuantity })
+        })
+    }))
+
+    if (req.user.id) {
+      await cart.update({
+        status: 'processing',
+        userId: req.user.id,
+        purchaseTime: Date.now()
+      })
+    } else {
+      await cart.update({
+        status: 'processing',
+        purchaseTime: Date.now()
+      })
+    }
+
+    res.json('success')
+
   }
   catch (err) {
     next(err)
