@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Image, Icon, Rating, Grid } from "semantic-ui-react";
 import { NavLink } from 'react-router-dom';
-import { updateItem } from '../store/cart';
+import { updateItem } from '../store';
 import {connect} from 'react-redux'
 
 const BookCard = (props) => {
@@ -33,7 +33,7 @@ const BookCard = (props) => {
                     <Grid.Column textAlign="right">
                         {"$" + (book.currentPrice / 100)}
                         <Icon name='cart' link corner bordered onClick={() => {
-                          props.updateItem(props.cart.id, props.book.id)
+                          props.updateItem(props.book.id)
                         }}/>
                     </Grid.Column>
                 </Grid>
@@ -50,11 +50,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    updateItem: (orderId, bookId) => {
+    updateItem: (bookId) => {
       dispatch(updateItem({
-        orderId,
-        bookId,
-        orderQuantity: 1
+        bookId
       }))
     }
   }
