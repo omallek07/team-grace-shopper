@@ -18,15 +18,12 @@ export class AdminAllUsers extends Component {
   }
 
   changeBool(e, {value}) {
-    console.log('value', {value})
     this.setState({value})
   }
 
   render() {
     const {users} = this.props;
     const {value} = this.state;
-    console.log('users', users)
-    console.log(value, 'value')
 
     const orderOptions = [
       {

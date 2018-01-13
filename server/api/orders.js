@@ -54,6 +54,17 @@ router.get('/', async (req, res, next) => {
   res.json(order)
 })
 
+// Find all orders by user
+router.get('/:userId', async (req, res, next) => {
+  let userOrder = await Order.findAll({where:
+     {userId: req.params.userId},
+     include: {
+       all: true
+     }
+  })
+  res.json(userOrder)
+})
+
 // Gets all orders for logged in Admin
 router.get('/adminAllOrders', async (req, res, next) => {
   let allOrders = await Order.findAll({
