@@ -49,11 +49,6 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
-router.get('/', async (req, res, next) => {
-  let order = await Order.findById(1)
-  res.json(order)
-})
-
 // Gets all orders for logged in Admin
 router.get('/adminAllOrders', async (req, res, next) => {
   let allOrders = await Order.findAll({
@@ -62,6 +57,23 @@ router.get('/adminAllOrders', async (req, res, next) => {
     }
   })
   res.json(allOrders)
+})
+
+// Find all orders by user
+router.get('/:userId', async (req, res, next) => {
+  let userOrder = await Order.findAll({where:
+     {userId: req.params.userId},
+     include: {
+       all: true
+     }
+  })
+  res.json(userOrder)
+})
+
+
+router.get('/', async (req, res, next) => {
+  let order = await Order.findById(1)
+  res.json(order)
 })
 
 router.put('/cart', async (req, res, next) => {
