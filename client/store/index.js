@@ -9,6 +9,7 @@ import singleBookReviews from './singleBookReviews'
 import cart from './cart'
 import adminAllOrders from './adminAllOrders';
 import adminAllUsers from './adminAllUsers';
+import userOrders from './userOrders';
 
 
 const reducer = combineReducers({
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   singleBookReviews,
   cart,
   adminAllOrders,
-  adminAllUsers
+  adminAllUsers,
+  userOrders
 })
 
 const middleware = composeWithDevTools(applyMiddleware(

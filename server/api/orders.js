@@ -10,7 +10,7 @@ function getCart(sessionId) {
       status: 'cart'
     }
   })
-  .then(order => order[0])
+    .then(order => order[0])
 }
 
 router.get('/cart', async (req, res, next) => {
@@ -49,11 +49,6 @@ router.get('/cart', async (req, res, next) => {
   }
 })
 
-router.get('/', async (req, res, next) => {
-  let order = await Order.findById(1)
-  res.json(order)
-})
-
 // Gets all orders for logged in Admin
 router.get('/adminAllOrders', async (req, res, next) => {
   let allOrders = await Order.findAll({
@@ -62,6 +57,23 @@ router.get('/adminAllOrders', async (req, res, next) => {
     }
   })
   res.json(allOrders)
+})
+
+// Find all orders by user
+router.get('/:userId', async (req, res, next) => {
+  let userOrder = await Order.findAll({where:
+     {userId: req.params.userId},
+     include: {
+       all: true
+     }
+  })
+  res.json(userOrder)
+})
+
+
+router.get('/', async (req, res, next) => {
+  let order = await Order.findById(1)
+  res.json(order)
 })
 
 router.put('/cart', async (req, res, next) => {
@@ -90,10 +102,10 @@ router.put('/cart', async (req, res, next) => {
     res.json(lineItem)
   }
   catch (err) {
-    console.error(err)
-    res.json([])
+    next(err)
   }
 })
+
 
 router.delete('/cart/:bookId', async (req, res, next) => {
   try {
@@ -112,4 +124,51 @@ router.delete('/cart/:bookId', async (req, res, next) => {
   catch (err){
     console.error(err)
   }
+
+router.put('/checkout', async (req, res, next) => {
+
+  try {
+
+    let cart = await getCart(res.session.id)
+
+    let lineItems = await LineItems.findAll({
+      where: {
+        id: cart.id
+      },
+      include: {
+        all: true
+      }
+    })
+
+    await Promise.all(lineItems.map(item => {
+      let orderPrice = item.book.currentPrice
+      return item.update({ orderPrice })
+        .then(() => Book.findById(item.bookId))
+        .then(book => {
+          let stockQuantity = book.stockQuantity - item.orderQuantity
+          return book.update({ stockQuantity })
+        })
+    }))
+
+    if (req.user.id) {
+      await cart.update({
+        status: 'processing',
+        userId: req.user.id,
+        purchaseTime: Date.now()
+      })
+    } else {
+      await cart.update({
+        status: 'processing',
+        purchaseTime: Date.now()
+      })
+    }
+
+    res.json('success')
+
+  }
+  catch (err) {
+    next(err)
+  }
+
+
 })
