@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {individualUserOrdersThunk} from '../store/userOrders';
-import {Table, Header} from 'semantic-ui-react';
+import {Table, Header, Image} from 'semantic-ui-react';
 
 class UserOrders extends Component {
 
@@ -11,6 +12,7 @@ class UserOrders extends Component {
 
   render () {
     const {userOrders} = this.props;
+    console.log(userOrders);
 
     return (
       <div>
@@ -46,7 +48,12 @@ class UserOrders extends Component {
                         order.lineItems.map(item => {
                           return (
                             <div key={item.id}>
-                            {item.orderPrice}
+                              <Link to={`/products/${item.id}`}>
+                                <Image size="mini" src={item.book.photoUrl} />
+                              </Link>
+                            {item.book.title}
+                            {'$ ' + (item.orderPrice / 100)}
+                            {item.orderQuantity}
                             </div>
                           )
                         })
