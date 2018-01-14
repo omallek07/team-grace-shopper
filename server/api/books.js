@@ -18,7 +18,8 @@ router.get('/:id/reviews', async (req, res, next) => {
 
 //get book by id
 router.get('/:id', async (req, res, next) => {
-  let bookPromise = Book.findById(req.params.id,{include:{all:true}})
+  let bookPromise = Book.findById(req.params.id, {include:
+    { all: true }})
   let book = await bookPromise;
   res.json(book)
 });
