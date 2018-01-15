@@ -15,7 +15,10 @@ export const getBookByIdThunk = (id) => dispatch => {
     .get(`/api/books/${id}`)
     .then(res => res.data)
     .then(singleBook => dispatch(getBookByIdAction(singleBook)))
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+      return {}
+    });
   }
 
 export default function(singleBook = {}, action) {

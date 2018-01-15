@@ -4,6 +4,7 @@ import SingleProductReviews from './SingleProductReviews';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getBookByIdThunk, getBookReviewThunk, updateItem } from '../store'
+import ReviewInput from './ReviewInput'
 
 class SingleProduct extends Component {
 
@@ -53,8 +54,8 @@ class SingleProduct extends Component {
                     <br />
                     <b>Rating</b>
                     <Rating icon="star"
-                      defaultRating={book.averageRating}
                       maxRating={5}
+                      defaultRating={Math.round(book.averageRating)}
                       disabled
                     />({book.numberOfRatings})
                     <Item.Extra>
@@ -83,6 +84,9 @@ class SingleProduct extends Component {
                     </Item.Extra>
                   </Item.Content>
                 </Item>
+              </Grid.Row>
+              <Grid.Row>
+                <ReviewInput />
               </Grid.Row>
               <Grid.Row>
                 -------------------------------

@@ -185,7 +185,7 @@ const books = [
    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/41ak9Ds2dWL._SX258_BO1,204,203,200_.jpg",
    ratingSum: 5,
    numberOfRatings: 1,
-   averageRating: 5 
+   averageRating: 5
   },
   { //13
     title: `Where the Sidewalk Ends`,
@@ -195,7 +195,7 @@ const books = [
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/81zRl2vuuLL.jpg",
     ratingSum: 5,
     numberOfRatings: 1,
-    averageRating: 5 
+    averageRating: 5
   }, //
   { // 14
     title: `The Catcher in the Rye`,
@@ -205,9 +205,9 @@ const books = [
     photoUrl: "http://www.jmdonellan.com/wp-content/uploads/the-catcher-in-the-rye-cover-6c8dab7d64192277315d6bf528d6f7b2.jpg",
     ratingSum: 2,
     numberOfRatings: 1,
-    averageRating: 5 
+    averageRating: 5
   },
-  { //15 
+  { //15
     title: `Man's Search for Meaning`,
     description: `Auschwitz survivor and eventual founder of logotherapy discusses reasons for living in a world that doesn't readily offer them`,
     stockQuantity: 8,

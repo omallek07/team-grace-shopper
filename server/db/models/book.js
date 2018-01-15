@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const Review = require('./review')
 
 const Book = db.define('book', {
   title: {
@@ -43,8 +44,6 @@ const Book = db.define('book', {
     }
   }
 })
-
-
 
 module.exports = Book
 
