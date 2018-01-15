@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 function SingleProductReviews (props){
 
-    const reviews = props.singleBookReviews
+    const reviews = props.singleBookReviews.filter(review => review.userId !== props.userId)
     return (
       <div>
         {
@@ -38,6 +38,7 @@ function SingleProductReviews (props){
 const mapStateToProps = (state) => {
   return {
     singleBookReviews: state.singleBookReviews,
+    userId: state.user.id
   }
 }
 
