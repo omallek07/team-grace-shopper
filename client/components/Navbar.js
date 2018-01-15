@@ -2,6 +2,7 @@ import React from 'react';
 import { Menu, Dropdown, Icon, Header, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import SearchForm from './SearchForm';
 
 const Navbar = (props) => {
   const { logstatus, isAdmin, handleClick } = props;
@@ -18,6 +19,9 @@ const Navbar = (props) => {
       </a>
 
       <Menu.Menu position="right">
+        <Menu.Item>
+          <SearchForm />
+        </Menu.Item>
         <Menu.Item>
           <Link to="/home">
             <Button primary>

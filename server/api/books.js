@@ -22,10 +22,11 @@ router.get('/:id/reviews', async (req, res, next) => {
 router.get('/title/:query', (req, res, next) => {
   const query = req.params.query.slice(1, req.params.query.length)
   Book.findAll({
+    attributes: ['id', 'description', 'title'],
     limit: 4,
     where: {
       title: { $iLike: `%${query}%`
-      }
+      },
     }
   })
   .then(matchingBooks => res.json(matchingBooks))
