@@ -25,3 +25,7 @@ form div {
   height: 250px;
   width: 100%;
 }
+
+#gh-logo {
+  margin-top: 10px;
+}

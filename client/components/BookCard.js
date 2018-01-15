@@ -34,7 +34,7 @@ const BookCard = (props) => {
                         {"$" + (book.currentPrice / 100)}
                         <Icon name='cart' link corner bordered onClick={() => {
                           props.updateItem(props.book.id)
-                        }}/>
+                        }} />
                     </Grid.Column>
                 </Grid>
             </Card.Content>
