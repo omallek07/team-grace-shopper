@@ -13,6 +13,7 @@ import userOrders from './userOrders';
 import userReviews from './userReviews';
 import currentOrder from './currentOrder';
 import singleGenre from './singleGenre';
+import searchBookResult from './searchBookResult';
 
 const reducer = combineReducers({
   user,
@@ -25,7 +26,8 @@ const reducer = combineReducers({
   userOrders,
   userReviews,
   currentOrder,
-  singleGenre
+  singleGenre,
+  searchBookResult
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
