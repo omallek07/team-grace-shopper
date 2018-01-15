@@ -13,8 +13,6 @@ describe('Book model', () => {
     stockQuantity: 69,
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/512TBFMt7aL._SX323_BO1,204,203,200_.jpg',
     currentPrice: 14.99,
-    ratingSum: 420,
-    numberOfRatings: 104
   }
 
   function createTestBook(testData) {

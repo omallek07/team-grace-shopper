@@ -51,8 +51,8 @@ class SingleProduct extends Component {
                     <br />
                     <b>Rating</b>
                     <Rating icon="star"
-                      defaultRating={book.averageRating}
                       maxRating={5}
+                      defaultRating={Math.round(book.averageRating)}
                       disabled
                     />({book.numberOfRatings})
                     <Item.Extra>

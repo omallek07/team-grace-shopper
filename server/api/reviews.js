@@ -22,8 +22,12 @@ router.put('/', async (req, res, next) => {
       where: {
         bookId: req.body.bookId,
         userId: req.user.id
+      },
+      include: {
+        all: true
       }
     })
+    review = review[0]
     if (req.body.rating) {
       review = await review.update({ rating: req.body.rating })
     }
@@ -34,6 +38,6 @@ router.put('/', async (req, res, next) => {
     res.json(review)
   }
   catch (err) {
-    next(err)
+    console.log(err)
   }
 })

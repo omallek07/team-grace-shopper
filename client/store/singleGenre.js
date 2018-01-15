@@ -3,7 +3,7 @@ import axios from 'axios';
 const GET_GENRE_BY_ID = 'GET_GENRE_BY_ID';
 
 
-const getGenreByIdAction = (singleBook) => {
+const getGenreByIdAction = (singleGenre) => {
   return {
     type: GET_GENRE_BY_ID,
     singleGenre
