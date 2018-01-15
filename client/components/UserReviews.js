@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {individualUserReviewsThunk} from '../store/userReviews';
-import {Table, Header, Rating} from 'semantic-ui-react';
+import {Table, Header, Rating, Image } from 'semantic-ui-react';
 
 class UserReviews extends Component {
 
@@ -11,7 +12,7 @@ class UserReviews extends Component {
 
   render () {
     const {userReviews} = this.props;
-
+    console.log(userReviews)
     return (
       <div>
         <Header>My Reviews</Header>
@@ -32,8 +33,11 @@ class UserReviews extends Component {
                 userReviews.map(review => {
                 return (
                   <Table.Row key={review.id}>
-                    <Table.Cell>
-                      {review.bookId}
+                    <Table.Cell verticalAlign="middle">
+                      <Link to={`/products/${review.book.id}`}>
+                        <Image src={review.book.photoUrl} size="mini" floated="left" />
+                      </Link>
+                      <b>{review.book.title}</b>
                     </Table.Cell>
                     <Table.Cell>
                       <Rating icon="star" defaultRating={review.rating} maxRating={5} disable />

@@ -12,7 +12,6 @@ class UserOrders extends Component {
 
   render () {
     const {userOrders} = this.props;
-    console.log(userOrders);
 
     return (
       <div>
@@ -26,7 +25,9 @@ class UserOrders extends Component {
                 <Table.HeaderCell>Status</Table.HeaderCell>
                 <Table.HeaderCell>Purchase Date</Table.HeaderCell>
                 <Table.HeaderCell>Purchase Time</Table.HeaderCell>
-                <Table.HeaderCell>Items Purchased</Table.HeaderCell>
+                <Table.HeaderCell>Item</Table.HeaderCell>
+                <Table.HeaderCell>QNTY</Table.HeaderCell>
+                <Table.HeaderCell>Price</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -38,27 +39,46 @@ class UserOrders extends Component {
                       {order.status}
                     </Table.Cell>
                     <Table.Cell>
-                      {order.purchaseTime.slice(0, 9)}
+                      {order.purchaseTime && order.purchaseTime.slice(0, 9)}
                     </Table.Cell>
                     <Table.Cell>
-                      {order.purchaseTime.slice(12, 19)}
+                      {order.purchaseTime && order.purchaseTime.slice(12, 19)}
                     </Table.Cell>
                     <Table.Cell>
                       {
-                        order.lineItems.map(item => {
+                        order.lineItems && order.lineItems.map(item => {
                           return (
                             <div key={item.id}>
                               <Link to={`/products/${item.id}`}>
-                                <Image size="mini" src={item.book.photoUrl} />
+                                <Image floated="left" size="mini" src={item.book.photoUrl} />
                               </Link>
-                            {item.book.title}
-                            {'$ ' + (item.orderPrice / 100)}
-                            {item.orderQuantity}
                             </div>
                           )
                         })
                       }
                     </Table.Cell>
+                  <Table.Cell>
+                      {
+                        order.lineItems && order.lineItems.map(item => {
+                          return (
+                            <div key={item.id}>
+                              {item.orderQuantity}
+                            </div>
+                          )
+                        })
+                      }
+                  </Table.Cell>
+                  <Table.Cell>
+                      {
+                        order.lineItems && order.lineItems.map(item => {
+                          return (
+                            <div key={item.id}>
+                              {`$${item.orderPrice / 100}`}
+                            </div>
+                          )
+                        })
+                      }
+                  </Table.Cell>
                   </Table.Row>
                   )
                 })
