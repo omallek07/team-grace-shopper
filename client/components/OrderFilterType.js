@@ -10,7 +10,7 @@ export class OrderFilterType extends Component {
     this.onSelectHandler = this.onSelectHandler.bind(this)
   }
 
-  componentDidUpdate(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.type !== this.props.type) {
       this.props = nextProps.type;
     }
@@ -60,8 +60,8 @@ export class OrderFilterType extends Component {
               <Table.HeaderCell>QNTY</Table.HeaderCell>
               <Table.HeaderCell>Price</Table.HeaderCell>
             </Table.Row>
-            </Table.Header>
-            <Table.Body>
+          </Table.Header>
+          <Table.Body>
             {
               filteredOrders && filteredOrders.map(order => {
                 return (
@@ -135,7 +135,7 @@ export class OrderFilterType extends Component {
                         })
                       }
                   </Table.Cell>
-                  </Table.Row>
+                </Table.Row>
                 )
               })
             }
