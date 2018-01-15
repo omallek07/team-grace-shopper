@@ -12,10 +12,18 @@ class SingleProduct extends Component {
     const id = this.props.match.params.productId;
     this.props.getSingleBook(id)
   }
+
+  componentWillUpdate(nextProps) {
+    const currentProps = this.props.match.params.productId;
+    const newProps = nextProps.match.params.productId;
+    if (newProps !== currentProps) {
+      this.props.getSingleBook(newProps)
+    }
+  }
+
   render() {
     const book = this.props.singleBook;
-    console.log('BOOK', book)
-    console.log('PROPS    ', this.props)
+
     return (
       <div>
         {

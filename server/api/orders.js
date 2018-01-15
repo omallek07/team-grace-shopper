@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { Order, User, Address, LineItems, Book } = require('../db')
+const { Order, LineItems, Book } = require('../db')
 
 module.exports = router
 
@@ -55,39 +55,6 @@ router.get('/cart/:userId', async (req, res, next) => {
   }
 })
 
-// Gets all orders for logged in Admin
-router.get('/adminAllOrders', async (req, res, next) => {
-  try {
-    let allOrders = await Order.findAll({
-    include: [
-      { model: Address },
-      { model: User,
-        attributes: ['id', 'firstName', 'lastName']
-      },
-      {
-        model: LineItems,
-          include: [{ model: Book,
-            attributes: ['id', 'title', 'stockQuantity', 'currentPrice', 'photoUrl']
-          }]
-        }
-      ]
-    })
-    res.json(allOrders)
-  }
-  catch (err) { next(err) }
-})
-
-//Admin can update order status
-router.put('/adminAllOrders/:orderId', (req, res, next) => {
-  Order.findById(req.params.orderId)
-  .then(matchingOrder => {
-    matchingOrder.update({status: req.body.status})
-  .then(updatedOrder => {
-    res.json(updatedOrder)
-  })
-  .catch(next)
-  })
-})
 
 // Find all orders by user
 router.get('/:userId', async (req, res, next) => {
