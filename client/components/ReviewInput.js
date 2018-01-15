@@ -68,7 +68,7 @@ class ReviewInput extends Component {
           <Form onSubmit={this.handleSubmit}>
             <label htmlFor="rating">Your Rating: </label>
             <Rating icon="star"
-              defaultRating={0}
+              defaultRating={this.props.ourReview ? this.props.ourReview.rating : 0}
               maxRating={5}
               name="rating"
               onRate={this.ratingChange}
