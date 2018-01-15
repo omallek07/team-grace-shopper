@@ -32,8 +32,7 @@ export const auth = (email, password, firstName, lastName, method) =>
   dispatch =>
     axios.post(`/auth/${method}`, { email, password, firstName, lastName })
       .then(res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
+        return dispatch(getUser(res.data))
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
         dispatch(getUser({error: authError}))
       })
@@ -44,7 +43,6 @@ export const logout = () =>
     axios.post('/auth/logout')
       .then(_ => {
         dispatch(removeUser())
-        history.push('/home')
       })
       .catch(err => console.log(err))
 

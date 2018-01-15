@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Grid, Item, Label, Icon} from 'semantic-ui-react'
-import {updateItem, deleteItemThunk} from '../store'
+import {Grid, Item, Label, Icon, Button} from 'semantic-ui-react'
+import {updateItem, deleteItemThunk, setOrderAddressAction} from '../store'
+import {withRouter} from 'react-router-dom'
 
 function Cart (props){
   const isLoggedIn = props.isLoggedIn;
@@ -38,14 +39,14 @@ function Cart (props){
               </h5>
               <Label >
                 Delete
-                <Icon name='delete' onClick = {() => props.deleteItem(lineItem.bookId)}/>
+                <Icon name='delete' onClick = {() => props.deleteItem(lineItem.bookId, props.user.id)}/>
               </Label>
             </Grid.Column>
             <Grid.Column width={2}>
               <Label color = 'orange'>${lineItem.book.currentPrice/100}</Label>
             </Grid.Column>
             <Grid.Column width={2}>
-              <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value)}}>
+              <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value,props.user.id)}}>
                 {  Array.from({length: lineItem.book.stockQuantity}, (x,i)=>i+1).map(num=>{
                   return (
                     <option key={num} value={num}>
@@ -77,6 +78,26 @@ function Cart (props){
           </Label>
         </Grid.Column>
       </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={12}></Grid.Column>
+        <Grid.Column width={4}>
+        { props.location &&
+          (props.location.pathname.includes('confirm')) ?
+            <Button color='green'>
+              Place Order
+            </Button>
+            :
+            <Button onClick = {() => {
+              if (props.user.address){
+                props.setOrderAddress(props.user.name,props.user.address)
+              }
+              props.history.push('/cart/confirm')}
+            }>
+              Proceed to Checkout
+            </Button>
+        }
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
     :
     <div>Empty Cart</div>
@@ -93,13 +114,16 @@ const mapState = ({user, cart}) => {
 }
 const mapDispatch = (dispatch) => {
   return {
-    changeCart(bookId, orderQuantity){
-      dispatch(updateItem({bookId, orderQuantity}))
+    changeCart(bookId, orderQuantity, userId){
+      dispatch(updateItem({bookId, orderQuantity, userId}))
     },
-    deleteItem(bookId){
-      dispatch(deleteItemThunk(bookId))
+    deleteItem(bookId,userId){
+      dispatch(deleteItemThunk({bookId, userId}))
+    },
+    setOrderAddress(name,address){
+      dispatch(setOrderAddressAction({name,address}))
     }
   }
 }
 
-export default connect(mapState,mapDispatch)(Cart);
+export default withRouter(connect(mapState,mapDispatch)(Cart));

@@ -17,11 +17,11 @@ export const getAllBooksThunk = () => dispatch => {
     .catch(err => console.log(err));
 }
 
+
 export default function(books = [], action) {
     switch (action.type) {
       case GET_ALL_BOOKS:
         return action.books;
-
       default:
         return books;
     }

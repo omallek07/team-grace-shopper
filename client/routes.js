@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import {Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard} from './components'
+import {Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard, OrderConfirmation} from './components'
 import {me, getCart, getAllBooksThunk} from './store'
 
 
@@ -18,6 +18,7 @@ class Routes extends Component {
   }
 
   render () {
+
     const {isLoggedIn, isAdmin} = this.props;
 
     return (
@@ -30,9 +31,10 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/products" component = {Products} />
-            <Route path="/cart" component={Cart} />
+            <Route exact path="/cart/confirm" component = {OrderConfirmation} />
+            <Route exact path="/cart" component={Cart} />
             <Route exact path="/products/:productId" component={SingleProduct} />
-            <Route path="products/:genre.name" component={SingleGenre} />
+            <Route path="/products/genre/:genreId" component={SingleGenre} />
             {
               isLoggedIn &&
                 <Switch>
@@ -62,14 +64,15 @@ class Routes extends Component {
 const mapState = ({user}) => {
   return {
     isLoggedIn: !!user.id,
-    isAdmin: !!user.isAdmin
+    isAdmin: !!user.isAdmin,
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     loadInitialData:  () => {
-      dispatch(me()).then(() => dispatch(getCart()))
+      dispatch(me()).then((x) => {
+         dispatch(getCart(x.user.id))})
     }
   }
 }

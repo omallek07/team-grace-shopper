@@ -63,6 +63,10 @@ const authors = [
   { //13
     firstName: 'Viktor',
     lastName: 'Frankl'
+  },
+  { // 14
+    firstName: 'Ernest',
+    lastName: 'Hemingway'
   }
 ];
 
@@ -211,7 +215,17 @@ const books = [
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/41GFZ8A93QL._SX285_BO1,204,203,200_.jpg",
     ratingSum: 2,
     numberOfRatings: 1,
-    averageRating: 5
+    averageRating: 2
+  },
+  { // 16 
+    title: `The Old Man and the Sea`,
+    description: `Old fisherman faces one of his biggest challenges just when he thinks his life on the sea is over`,
+    stockQuantity: 8,
+    currentPrice: 65,
+    photoUrl: "https://cdn3.volusion.com/zjhys.xrwrf/v/vspfiles/photos/FEGDJOMATS-2.jpg?1443537283",
+    ratingSum: 4,
+    numberOfRatings: 1,
+    averageRating: 4
   }
 
 ];
@@ -283,6 +297,10 @@ const bookAuthors = [
   {
     bookId: 15,
     authorId: 13
+  },
+  {
+    bookId: 16,
+    authorId: 14
   }
 ]
 
@@ -354,6 +372,10 @@ const categories = [
   {
     bookId: 15,
     genreId: 1
+  },
+  {
+    bookId: 16,
+    genreId: 8
   }
 ]
 
@@ -471,6 +493,12 @@ const reviews = [
     rating: 5,
     userId: 2,
     bookId: 14
+  },
+  {
+    comment: `Obligatory reading`,
+    rating: 5,
+    userId: 3,
+    bookId: 16
   }
 
 ]
@@ -544,28 +572,28 @@ const lineItems = [
 
 const genres = [
   { //1
-    name: 'science fiction'
+    name: 'Science Fiction'
   },
   { //2
-    name: 'telepathy'
+    name: 'Telepathy'
   },
   { //3
-    name: 'non-fiction'
+    name: 'Non-fiction'
   },
   { //4
-    name: 'parapsychology'
+    name: 'Parapsychology'
   },
   { //5
-    name: 'self-improvement'
+    name: 'Self Improvement'
   },
   { //6
-    name: 'defensive witchcraft'
+    name: 'Defensive Witchcraft'
   },
   { //7
-    name: 'hexes / spells / curses'
+    name: 'Hexes / Spells / Curses'
   },
   { //8
-    name: '2016 election grief counseling'
+    name: '2016 Election Grief Counseling'
   }
 ]
 

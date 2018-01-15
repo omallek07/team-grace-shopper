@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Rating, Item, Grid, Label, Header, Icon } from 'semantic-ui-react'
 import SingleProductReviews from './SingleProductReviews';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getBookByIdThunk, getBookReviewThunk, updateItem } from '../store'
 import ReviewInput from './ReviewInput'
@@ -13,6 +14,8 @@ class SingleProduct extends Component {
   }
   render() {
     const book = this.props.singleBook;
+    console.log('BOOK', book)
+    console.log('PROPS    ', this.props)
     return (
       <div>
         {
@@ -37,13 +40,13 @@ class SingleProduct extends Component {
                     </Item.Description>
                     <br />
                     <Item.Extra>
-                      <b>Book Genres:</b>
+                      <b>Genre:  </b>
                       {
                         book.genres.map(genre => {
                           return (
-                            <div key={genre.id}>
-                              {genre.name}
-                            </div>
+                            <NavLink key={genre.id} to={`/products/genre/${genre.id}`}>
+                              {genre.name} <span>&nbsp;</span>
+                            </NavLink>
                           )
                         })
                       }
@@ -105,6 +108,7 @@ const mapStateToProps = (state) => {
     cart: state.cart
   }
 }
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getSingleBook(id) {

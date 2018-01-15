@@ -9,7 +9,7 @@ const getGenreByIdAction = (singleGenre) => {
     singleGenre
   }
 }
-
+             
 export const getGenreByIdThunk = (id) => dispatch => {
   return axios
     .get(`/api/genres/${id}`)

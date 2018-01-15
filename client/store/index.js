@@ -11,7 +11,9 @@ import adminAllOrders from './adminAllOrders';
 import adminAllUsers from './adminAllUsers';
 import userOrders from './userOrders';
 import userReviews from './userReviews';
-
+import currentOrder from './currentOrder';
+import singleGenre from './singleGenre';
+import searchBookResult from './searchBookResult';
 
 const reducer = combineReducers({
   user,
@@ -22,7 +24,10 @@ const reducer = combineReducers({
   adminAllOrders,
   adminAllUsers,
   userOrders,
-  userReviews
+  userReviews,
+  currentOrder,
+  singleGenre,
+  searchBookResult
 })
 
 const middleware = composeWithDevTools(applyMiddleware(
@@ -37,4 +42,6 @@ export * from './products'
 export * from './singleBook'
 export * from './singleBookReviews'
 export * from './cart'
+export * from './currentOrder'
+export * from './singleGenre'
 
