@@ -9,10 +9,10 @@ class ReviewInput extends Component {
 
   constructor(props) {
     super()
+    let rating
     this.state = {
       comment: '',
       valid: false,
-      rating: 0,
       editing: false
     }
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -25,8 +25,8 @@ class ReviewInput extends Component {
   }
 
   ratingChange(e, { rating }) {
+    this.props.postReview({ bookId: this.props.bookId, rating: rating })
     this.setState({ rating })
-    this.props.postReview({ bookId: this.props.bookId, rating: this.state.rating })
   }
 
   handleSubmit(e) {
@@ -35,8 +35,15 @@ class ReviewInput extends Component {
   }
 
   render() {
+    let rating
+    if (this.props.ourReview) {
+      rating = this.props.ourReview.rating
+    } else {
+      rating = 0
+    }
+
     if (this.props.isLoggedIn) {
-      if (this.props.ourReview && !this.state.editing) {
+      if (this.props.ourReview && this.props.ourReview.comment && !this.state.editing) {
         return (
           <div>
             <div>
@@ -47,7 +54,7 @@ class ReviewInput extends Component {
             <div>
               <Rating
                 icon="star"
-                defaultRating={this.props.ourReview.rating}
+                defaultRating={rating}
                 maxRating={5}
                 disabled
               />
@@ -56,7 +63,7 @@ class ReviewInput extends Component {
               {this.props.ourReview.comment}
             </div>
             <Button onClick={() => {
-              this.setState({ editing: true })
+              this.setState({ editing: true, comment: '', rating: this.props.ourReview.rating })
             }}>
               Edit
             </Button>
@@ -68,7 +75,7 @@ class ReviewInput extends Component {
           <Form onSubmit={this.handleSubmit}>
             <label htmlFor="rating">Your Rating: </label>
             <Rating icon="star"
-              defaultRating={this.props.ourReview ? this.props.ourReview.rating : 0}
+              defaultRating={rating}
               maxRating={5}
               name="rating"
               onRate={this.ratingChange}
