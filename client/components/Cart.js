@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import {Grid, Item, Label, Icon} from 'semantic-ui-react'
-import {updateItem, deleteItemThunk} from '../store'
+import {Grid, Item, Label, Icon, Button} from 'semantic-ui-react'
+import {updateItem, deleteItemThunk, setOrderAddressAction} from '../store'
+import {withRouter} from 'react-router-dom'
 
 function Cart (props){
   const isLoggedIn = props.isLoggedIn;
@@ -77,6 +78,26 @@ function Cart (props){
           </Label>
         </Grid.Column>
       </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={12}></Grid.Column>
+        <Grid.Column width={4}>
+        { props.location &&
+          (props.location.pathname.includes('confirm')) ?
+            <Button color='green'>
+              Place Order
+            </Button>
+            :
+            <Button onClick = {() => {
+              if (props.user.address){
+                props.setOrderAddress(props.user.name,props.user.address)
+              }
+              props.history.push('/cart/confirm')}
+            }>
+              Proceed to Checkout
+            </Button>
+        }
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
     :
     <div>Empty Cart</div>
@@ -98,8 +119,11 @@ const mapDispatch = (dispatch) => {
     },
     deleteItem(bookId){
       dispatch(deleteItemThunk(bookId))
+    },
+    setOrderAddress(name,address){
+      dispatch(setOrderAddressAction({name,address}))
     }
   }
 }
 
-export default connect(mapState,mapDispatch)(Cart);
+export default withRouter(connect(mapState,mapDispatch)(Cart));
