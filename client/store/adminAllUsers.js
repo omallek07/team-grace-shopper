@@ -18,21 +18,21 @@ const updateUserAdminStatus = (updatedUser) => ({type: UPDATE_USER_ADMIN_STATUS,
  * THUNK CREATORS
  */
 export const allUsersThunk = () => dispatch => {
-  axios.get('/api/users/adminAllUsers')
+  axios.get('/api/admin/users')
   .then(res => res.data)
   .then(users => dispatch(allUsers(users)))
   .catch(err => console.log(err));
 }
 
 export const deleteUserThunk = (userId) => dispatch => {
-  axios.delete(`/api/users/adminAllUsers/${userId}`)
+  axios.delete(`/api/admin/users/${userId}`)
   .then(() => {
     return dispatch(deleteUser(userId))})
   .catch(err => console.log(err))
 }
 
 export const updateUserAdminStatusThunk = (userId, status) => dispatch => {
-  axios.put(`/api/users/adminAllUsers/${userId}`, {status: status})
+  axios.put(`/api/admin/users/${userId}`, {status: status})
   .then(res => res.data)
   .then(updatedUser => dispatch(updateUserAdminStatus(updatedUser)))
   .catch(err => console.log(err));

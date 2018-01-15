@@ -19,7 +19,7 @@ const updateOrderStatus = (orderStatus) => ({type: UPDATE_ORDER_STATUS, orderSta
  */
 export const allOrdersThunk = () => dispatch => {
   return axios
-    .get('/api/orders/adminAllOrders')
+    .get('/api/admin/orders')
     .then(res => res.data)
     .then(orders => dispatch(allOrders(orders)))
     .catch(err => console.log(err));
@@ -27,7 +27,7 @@ export const allOrdersThunk = () => dispatch => {
 
 export const updateOrderStatusThunk = ( orderId, status) => dispatch => {
   return axios
-    .put(`/api/orders/adminAllOrders/${orderId}`, {status})
+    .put(`/api/admin/orders/${orderId}`, {status})
     .then(res => res.data)
     .then(orderStatus => dispatch(updateOrderStatus(orderStatus)))
     .catch(err => console.log(err));
