@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { Grid } from 'semantic-ui-react';
-import {logout} from '../store'
+import {logout, getCart} from '../store'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-
+import history from '../history'
 // test//
 
 /**
@@ -48,6 +48,10 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick () {
       dispatch(logout())
+      .then(() => {
+        dispatch( getCart())
+        history.push('/home')
+      })
     }
   }
 }
