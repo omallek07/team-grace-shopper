@@ -29,7 +29,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/products" component = {Products} />) }/>
+            <Route exact path="/products" component = {Products} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/products/:productId" component={SingleProduct} />
             <Route path="products/:genre.name" component={SingleGenre} />

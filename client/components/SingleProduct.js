@@ -1,31 +1,32 @@
-import React, {Component} from 'react';
-import {Rating, Item, Grid, Label, Header, Icon} from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Rating, Item, Grid, Label, Header, Icon } from 'semantic-ui-react'
 import SingleProductReviews from './SingleProductReviews';
-import {connect} from 'react-redux';
-import {getBookByIdThunk, getBookReviewThunk, updateItem} from '../store'
+import { connect } from 'react-redux';
+import { getBookByIdThunk, getBookReviewThunk, updateItem } from '../store'
+import ReviewInput from './ReviewInput'
 
 class SingleProduct extends Component {
 
-  componentDidMount(){
+  componentDidMount() {
     const id = this.props.match.params.productId;
     this.props.getSingleBook(id)
   }
-  render(){
+  render() {
     const book = this.props.singleBook;
     return (
-        <div>
+      <div>
         {
           book.title &&
           <div>
             <Grid>
               <Grid.Row>
                 <Item>
-                  <Item.Image size='medium' floated = 'left' src={book.photoUrl} />
+                  <Item.Image size='medium' floated='left' src={book.photoUrl} />
                   <Item.Content>
-                    <Item.Header as = 'h1'> {book.title} </Item.Header>
-                    <Item.Meta as = 'h4'> {book.authors.map(author => {
+                    <Item.Header as='h1'> {book.title} </Item.Header>
+                    <Item.Meta as='h4'> {book.authors.map(author => {
                       return (
-                        <div key = {author.id}>
+                        <div key={author.id}>
                           {author.firstName + ' ' + author.lastName}
                           <br />
                         </div>
@@ -49,7 +50,7 @@ class SingleProduct extends Component {
                     </Item.Extra>
                     <br />
                     <b>Rating</b>
-                    <Rating icon = "star"
+                    <Rating icon="star"
                       defaultRating={book.averageRating}
                       maxRating={5}
                       disabled
@@ -57,7 +58,7 @@ class SingleProduct extends Component {
                     <Item.Extra>
                       <br />
                       <Label.Group tag>
-                        <Label size = "large" color = "orange">
+                        <Label size="large" color="orange">
                           Price :
                           <Label.Detail>
                             ${book.currentPrice / 100}
@@ -69,12 +70,12 @@ class SingleProduct extends Component {
                       </Label.Group>
                       {
                         (book.stockQuantity > 0) ?
-                        <Header color ='green'>
-                          In Stock.
+                          <Header color='green'>
+                            In Stock.
                         </Header>
-                        :
-                        <Header color ='red'>
-                          Out Of Stock
+                          :
+                          <Header color='red'>
+                            Out Of Stock
                         </Header>
                       }
                     </Item.Extra>
@@ -82,12 +83,15 @@ class SingleProduct extends Component {
                 </Item>
               </Grid.Row>
               <Grid.Row>
+                <ReviewInput />
+              </Grid.Row>
+              <Grid.Row>
                 -------------------------------
                 User Reviews:
                 -------------------------------
                 <SingleProductReviews />
               </Grid.Row>
-          </Grid>
+            </Grid>
           </div>
         }
       </div>
@@ -103,7 +107,7 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    getSingleBook(id){
+    getSingleBook(id) {
       dispatch(getBookByIdThunk(id))
       dispatch(getBookReviewThunk(id))
     },
