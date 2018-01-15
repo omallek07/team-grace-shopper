@@ -39,14 +39,14 @@ function Cart (props){
               </h5>
               <Label >
                 Delete
-                <Icon name='delete' onClick = {() => props.deleteItem(lineItem.bookId)}/>
+                <Icon name='delete' onClick = {() => props.deleteItem(lineItem.bookId, props.user.id)}/>
               </Label>
             </Grid.Column>
             <Grid.Column width={2}>
               <Label color = 'orange'>${lineItem.book.currentPrice/100}</Label>
             </Grid.Column>
             <Grid.Column width={2}>
-              <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value)}}>
+              <select value={lineItem.orderQuantity} onChange = {(e)=>{props.changeCart(lineItem.book.id,e.target.value,props.user.id)}}>
                 {  Array.from({length: lineItem.book.stockQuantity}, (x,i)=>i+1).map(num=>{
                   return (
                     <option key={num} value={num}>
@@ -114,11 +114,11 @@ const mapState = ({user, cart}) => {
 }
 const mapDispatch = (dispatch) => {
   return {
-    changeCart(bookId, orderQuantity){
-      dispatch(updateItem({bookId, orderQuantity}))
+    changeCart(bookId, orderQuantity, userId){
+      dispatch(updateItem({bookId, orderQuantity, userId}))
     },
-    deleteItem(bookId){
-      dispatch(deleteItemThunk(bookId))
+    deleteItem(bookId,userId){
+      dispatch(deleteItemThunk({bookId, userId}))
     },
     setOrderAddress(name,address){
       dispatch(setOrderAddressAction({name,address}))

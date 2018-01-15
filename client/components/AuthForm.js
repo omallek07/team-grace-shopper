@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {auth} from '../store'
+import {auth,getCart} from '../store'
+import history from '../history'
 import { Segment, Form, Button, Container, Header, Grid } from 'semantic-ui-react';
 
 /**
@@ -82,6 +83,10 @@ const mapDispatch = (dispatch) => {
       const firstName = "John"
       const lastName = "Doe"
       dispatch(auth(email, password, firstName, lastName, formName))
+      .then((user) => {
+        dispatch(getCart(user.user.id))
+        history.push('/home')
+      })
     }
   }
 }

@@ -3,24 +3,38 @@ const { Order, User, Address, LineItems, Book } = require('../db')
 
 module.exports = router
 
-function getCart(sessionId) {
-  return Order.findOrCreate({
-    where: {
-      sid: sessionId,
-      status: 'cart'
-    }
-  })
-    .then(order => order[0])
+function getCart(sessionId, userId) {
+  if (userId){
+    return Order.findOrCreate({
+      where: {
+        status: 'cart',
+        userId: userId,
+      }
+    })
+      .then(order => order[0])
+  }
+  else {
+    return Order.findOrCreate({
+      where: {
+        status: 'cart',
+        sid: sessionId,
+      }
+    })
+      .then(order => order[0])
+  }
 }
 
-router.get('/cart', async (req, res, next) => {
+router.get('/cart/:userId', async (req, res, next) => {
   try {
     let cart
     let id
     let lineItems
-
-    cart = await getCart(req.session.id)
-    // console.log(cart)
+    if (req.params.userId === 'undefined'){
+        cart = await getCart(req.session.id)
+    }
+    else {
+      cart = await getCart(req.session.id, req.params.userId)
+    }
     id = cart.id
 
     lineItems = await LineItems.findAll({
@@ -34,15 +48,7 @@ router.get('/cart', async (req, res, next) => {
         }
       }]
     })
-
-    // console.log(lineItems)
-
     res.json(lineItems)
-    // let books = await Promise.all(cart.lineItems.map(lineItem => lineItem.getBook()))
-
-    // cart.lineItems = cart.lineItems.map((lineItem, i) => ({...lineItem, book: [books[i]]}))
-
-    // res.json(cart[0])
   }
   catch (err) {
     next(err)
@@ -110,8 +116,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/cart', async (req, res, next) => {
   try {
-    // console.log(req.body)
-    let cart = await getCart(req.session.id)
+    let cart = await getCart(req.session.id, req.body.userId)
     let orderId = cart.id
     let bookId = req.body.bookId
     let orderQuantity = req.body.orderQuantity
@@ -139,9 +144,15 @@ router.put('/cart', async (req, res, next) => {
 })
 
 
-router.delete('/cart/:bookId', async (req, res, next) => {
+router.delete('/cart/:bookId/:userId', async (req, res, next) => {
   try {
-    let cart = await getCart(req.session.id);
+    let cart;
+    if (req.params.userId === 'undefined'){
+        cart = await getCart(req.session.id)
+    }
+    else {
+      cart = await getCart(req.session.id, req.params.userId)
+    }
     let orderId = cart.id;
     let bookId = req.params.bookId
     let lineItem = await LineItems.destroy(
@@ -162,7 +173,7 @@ router.put('/checkout', async (req, res, next) => {
 
   try {
 
-    let cart = await getCart(res.session.id)
+    let cart = await getCart(res.session.id, req.body.userId)
 
     let lineItems = await LineItems.findAll({
       where: {

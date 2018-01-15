@@ -25,9 +25,9 @@ const deleteItem = (bookId) => {
   }
 }
 
-export const getCart = () => dispatch => {
+export const getCart = (userId) => dispatch => {
   return axios
-    .get('/api/orders/cart')
+    .get(`/api/orders/cart/${userId}`)
     .then(res => res.data)
     .then(cart => dispatch(setCart(cart)))
     .catch(err => console.log(err));
@@ -36,7 +36,7 @@ export const getCart = () => dispatch => {
 export const updateItem = (lineItem) => dispatch => {
   return axios.put('/api/orders/cart', lineItem)
     .then(() => {
-      return axios.get('/api/orders/cart')
+      return axios.get(`/api/orders/cart/${lineItem.userId}`)
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))
         .catch(err => console.log(err))
@@ -44,8 +44,8 @@ export const updateItem = (lineItem) => dispatch => {
 }
 
 export const deleteItemThunk = (bookId) => dispatch => {
-  return axios.delete(`/api/orders/cart/${bookId}`)
-    .then(() => dispatch(deleteItem(bookId)))
+  return axios.delete(`/api/orders/cart/${bookId.bookId}/${bookId.userId}`)
+    .then(() => dispatch(deleteItem(bookId.bookId)))
     .catch(err => console.error(err))
 }
 

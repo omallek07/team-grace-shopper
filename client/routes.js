@@ -18,6 +18,7 @@ class Routes extends Component {
   }
 
   render () {
+
     const {isLoggedIn, isAdmin} = this.props;
 
     return (
@@ -63,14 +64,15 @@ class Routes extends Component {
 const mapState = ({user}) => {
   return {
     isLoggedIn: !!user.id,
-    isAdmin: !!user.isAdmin
+    isAdmin: !!user.isAdmin,
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     loadInitialData:  () => {
-      dispatch(me()).then(() => dispatch(getCart()))
+      dispatch(me()).then((x) => {
+         dispatch(getCart(x.user.id))})
     }
   }
 }
