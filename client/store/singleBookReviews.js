@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const GET_BOOK_REVIEW = 'GET_BOOK_REVIEW'
+const POST_REVIEW = 'POST_REVIEW'
 
 const getBookReview = (review) => {
   return {
@@ -17,6 +18,14 @@ export const getBookReviewThunk = (id) => dispatch => {
     .catch(err => console.log(err));
 }
 
+// export const postReviewThunk = body => dispatch => {
+//   return axios.put('/api/reviews', body)
+//   .then(res => res.data)
+//   .then(data => getBookReviewThunk(body.bookId))
+//   .catch(console.error)
+// }
+
+
 export default function(singleBookReviews = [], action) {
     switch (action.type) {
       case GET_BOOK_REVIEW:
@@ -25,3 +34,4 @@ export default function(singleBookReviews = [], action) {
         return singleBookReviews;
     }
   }
+
