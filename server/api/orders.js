@@ -101,37 +101,6 @@ router.put('/cart', async (req, res, next) => {
   }
 })
 
-router.post('/email', async (req, res, next) => {
-  try {
-    var smtpTransport = nodemailer.createTransport({
-      service: "gmail",
-      host: "smtp.gmail.com",
-      auth: {
-        user: "examplecody@gmail.com",
-        pass: "examplecode"
-      }
-    })
-    var mailOptions = {
-      to: 'examplecody@gmail.com',
-      subject: 'testing email',
-      text: 'Rutvik Patel'
-    }
-    console.log(mailOptions);
-    smtpTransport.sendMail(mailOptions, function (error, response) {
-      if (error) {
-        console.log(error);
-        res.end("error");
-      } else {
-        console.log("Message sent: " + response.message);
-        res.end("sent");
-      }
-    });
-  }
-  catch (err) {
-    console.log(err)
-  }
-})
-
 router.delete('/cart/:bookId/:userId', async (req, res, next) => {
   try {
     let cart = await getCart(req)
@@ -217,5 +186,64 @@ router.post('/checkout', async (req, res, next) => {
   catch (err) {
 
     res.status(500).send(err)
+  }
+})
+
+router.post('/email', async (req, res, next) => {
+  try {
+    let toEmail;
+    if (req.user) {
+      toEmail = req.user.email
+    }
+    else {
+      toEmail = req.body.email
+    }
+    let cart = await getCart(req)
+    let lineItems = await LineItems.findAll({
+      where: {
+        orderId: cart.id
+      },
+      include: {
+        all: true
+      }
+    })
+    let books = lineItems.map(item=>item.book)
+    let html = '<div> <h2>Order Details are below:</h2><br />'
+    for (let i=0; i<books.length; i++){
+      html += '<div>'
+      html += '<img src = "'+books[i].photoUrl+'" height=150 width=90/><br />'
+      html += '<b>'+books[i].title+'</b><br />'
+      html += 'quantity is : '+ lineItems[i].orderQuantity+'<br />'
+      html += 'price for this book is : $'+books[i].currentPrice/100+'<br />'
+      html += '</div><br />'
+    }
+    html += '</div>'
+    var smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      auth: {
+        user: "examplecody@gmail.com",
+        pass: "examplecode"
+      }
+    })
+
+    var mailOptions = {
+      to: toEmail,
+      subject: 'Order is Placed',
+      html: html
+    }
+
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+      if (error) {
+        console.log(error);
+        res.end("error");
+      } else {
+        console.log("Message sent: " + response.message);
+        res.send("Email sent");
+      }
+    });
+  }
+  catch (err) {
+    console.log(err)
   }
 })
