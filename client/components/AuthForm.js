@@ -80,9 +80,10 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
+      const method = 'login'
       const firstName = "John"
       const lastName = "Doe"
-      dispatch(auth(email, password, firstName, lastName, formName))
+      dispatch(auth({email, password, firstName, lastName, method, formName}))
       .then((user) => {
         dispatch(getCart(user.user.id))
         history.push('/home')
