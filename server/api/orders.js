@@ -3,12 +3,12 @@ const { Order, LineItems, Book } = require('../db')
 
 module.exports = router
 
-function getCart(sessionId, userId) {
-  if (userId){
+function getCart(req) {
+  if (req.user){
     return Order.findOrCreate({
       where: {
         status: 'cart',
-        userId: userId,
+        userId: req.user.id,
       }
     })
       .then(order => order[0])
@@ -17,7 +17,7 @@ function getCart(sessionId, userId) {
     return Order.findOrCreate({
       where: {
         status: 'cart',
-        sid: sessionId,
+        sid: req.session.id,
       }
     })
       .then(order => order[0])
@@ -26,19 +26,10 @@ function getCart(sessionId, userId) {
 
 router.get('/cart', async (req, res, next) => {
   try {
-    let cart
-    let id
-    let lineItems
-    if (req.user){
-      cart = await getCart(req.session.id, req.user.id)
-    }
-    else {
-      cart = await getCart(req.session.id)
-    }
+    const cart = await getCart(req)
+    const id = cart.id
 
-    id = cart.id
-
-    lineItems = await LineItems.findAll({
+    const lineItems = await LineItems.findAll({
       where: {
         orderId: id
       },
@@ -84,7 +75,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/cart', async (req, res, next) => {
   try {
-    let cart = await getCart(req.session.id, req.body.userId)
+    let cart = await getCart(req)
     let orderId = cart.id
     let bookId = req.body.bookId
     let orderQuantity = req.body.orderQuantity
@@ -113,16 +104,10 @@ router.put('/cart', async (req, res, next) => {
 
 router.delete('/cart/:bookId/:userId', async (req, res, next) => {
   try {
-    let cart;
-    if (req.params.userId === 'undefined'){
-        cart = await getCart(req.session.id)
-    }
-    else {
-      cart = await getCart(req.session.id, req.params.userId)
-    }
+    let cart = await getCart(req)
     let orderId = cart.id;
     let bookId = req.params.bookId
-    let lineItem = await LineItems.destroy(
+    await LineItems.destroy(
       {
         where: {
           orderId,
@@ -137,17 +122,9 @@ router.delete('/cart/:bookId/:userId', async (req, res, next) => {
 })
 
 router.post('/checkout', async (req, res, next) => {
-
   try {
-    let userId
     let cart
-    if (req.user){
-      userId = req.user.id
-      cart = await getCart(req.session.id, userId)
-    }
-    else {
-      cart = await getCart(req.session.id)
-    }
+    cart = await getCart(req)
     let lineItems = await LineItems.findAll({
       where: {
         orderId: cart.id
@@ -195,11 +172,20 @@ router.post('/checkout', async (req, res, next) => {
       }
     }
     else {
+      try {
+        await cart.update({
+          status: 'cancelled',
+        })
+      }
+      catch (err){
+        next(err)
+      }
       throw new Error('shit, dog. you ordered more of something than was in stock')
     }
     res.json('success')
   }
   catch (err) {
+
     res.status(500).send(err)
   }
 })
