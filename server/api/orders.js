@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { Order, LineItems, Book } = require('../db')
-
+const nodemailer = require('nodemailer');
 module.exports = router
 
 function getCart(req) {
-  if (req.user){
+  if (req.user) {
     return Order.findOrCreate({
       where: {
         status: 'cart',
@@ -52,15 +52,15 @@ router.get('/cart', async (req, res, next) => {
 router.get('/userId', async (req, res, next) => {
   try {
     let userOrder = await Order.findAll({
-    include: [{
-      model: LineItems,
+      include: [{
+        model: LineItems,
         include: [{
           model: Book,
           attributes: ['id', 'title', 'stockQuantity', 'currentPrice', 'photoUrl']
         }]
       }],
-    where:
-      { userId: req.user.id }
+      where:
+        { userId: req.user.id }
     })
     res.json(userOrder)
   }
@@ -101,6 +101,36 @@ router.put('/cart', async (req, res, next) => {
   }
 })
 
+router.post('/email', async (req, res, next) => {
+  try {
+    var smtpTransport = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      auth: {
+        user: "examplecody@gmail.com",
+        pass: "examplecode"
+      }
+    })
+    var mailOptions = {
+      to: 'examplecody@gmail.com',
+      subject: 'testing email',
+      text: 'Rutvik Patel'
+    }
+    console.log(mailOptions);
+    smtpTransport.sendMail(mailOptions, function (error, response) {
+      if (error) {
+        console.log(error);
+        res.end("error");
+      } else {
+        console.log("Message sent: " + response.message);
+        res.end("sent");
+      }
+    });
+  }
+  catch (err) {
+    console.log(err)
+  }
+})
 
 router.delete('/cart/:bookId/:userId', async (req, res, next) => {
   try {
@@ -141,7 +171,7 @@ router.post('/checkout', async (req, res, next) => {
         .then(book => [book, item.orderQuantity, book.stockQuantity >= item.orderQuantity])
     }))
 
-    if (stockCheck.filter(x => x[2]).length === stockCheck.length ) {
+    if (stockCheck.filter(x => x[2]).length === stockCheck.length) {
       await Promise.all(stockCheck.map(x => {
         let [book, orderQuantity, bool] = x
         let stockQuantity = book.stockQuantity - orderQuantity
@@ -149,7 +179,7 @@ router.post('/checkout', async (req, res, next) => {
       }))
       let addressId
 
-      if (req.body.address){
+      if (req.body.address) {
         addressId = req.body.address.id
       }
       else {
@@ -177,7 +207,7 @@ router.post('/checkout', async (req, res, next) => {
           status: 'cancelled',
         })
       }
-      catch (err){
+      catch (err) {
         next(err)
       }
       throw new Error('shit, dog. you ordered more of something than was in stock')

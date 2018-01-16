@@ -67,6 +67,22 @@ const authors = [
   { // 14
     firstName: 'Ernest',
     lastName: 'Hemingway'
+  },
+  { // 15
+    firstName: 'Jane',
+    lastName: 'Austen'
+  },
+  { //16
+    firstName: 'Bo',
+    lastName: 'Jackson'
+  },
+  { //17
+    firstName: 'Fyodor',
+    lastName: 'Dostoyevsky'
+  },
+  { // 18
+    firstName: 'Leo',
+    lastName: 'Tolstoy'
   }
 ];
 
@@ -115,7 +131,7 @@ const books = [
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51WD-F3GobL._SX258_BO1,204,203,200_.jpg',
     currentPrice: 2476,
     ratingSum: 25,
-    numberOfRatings: 8,
+    numberOfRatings: 7,
   },
   {//6
     title: 'If Chins Could Kill: Confessions of a B Movie Actor',
@@ -124,7 +140,7 @@ const books = [
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51gp-KdBvWL.jpg',
     currentPrice: 2195,
     ratingSum: 5,
-    numberOfRatings: 377,
+    numberOfRatings: 1,
   },
   {//7
     title: 'Make Love! The Bruce Campbell Way',
@@ -133,13 +149,13 @@ const books = [
     photoUrl: 'https://images-na.ssl-images-amazon.com/images/I/51zghlLBYgL._SX329_BO1,204,203,200_.jpg',
     currentPrice: 1535,
     ratingSum: 5,
-    numberOfRatings: 139,
+    numberOfRatings: 1,
   },
   {//8
     title: `Catch-22`,
     description: `"Hilarious.  And the only decent thing Heller ever wrote." - Gandhi`,
     stockQuantity: 8,
-    currentPrice: 8,
+    currentPrice: 899,
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/61k33tU1CaL.jpg",
     ratingSum: 5,
     numberOfRatings: 1,
@@ -149,7 +165,7 @@ const books = [
     title: `Hail to the Chin: Further Confessions of a B Movie Actor`,
     description: `“An insightful and rant-filled guide to being almost famous.” ― Jesus`,
     stockQuantity: 8,
-    currentPrice: 65,
+    currentPrice: 40099,
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/51TCRF%2BKPYL._SX327_BO1,204,203,200_.jpg",
     ratingSum: 5,
     numberOfRatings: 1,
@@ -158,8 +174,8 @@ const books = [
   { //10
     title: `Heart of Darkness`,
     description: `“A significant and crucial work of writing that has influenced much of English literature. The novella takes place in 19th Century western Africa, mainly in the European colonized Congo. The story focuses on two characters by the name of Marlow and Kurtz. Marlow is the captain of a steamship in Africa and is sent on a mission to find Kurtz, who is said to be in an insane state of mind."`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 879,
+    currentPrice: 1445,
     photoUrl: "https://msu.edu/~jungahre/transmedia/uploads/5/3/9/9/5399521/4427591.jpg?315",
     ratingSum: 3,
     numberOfRatings: 1,
@@ -169,29 +185,29 @@ const books = [
     //11
     title: `Under Western Eyes`,
     description: `Under Western Eyes traces the experiences of Razumov, a young Russian student of philosophy who is uninvolved in politics or protest. Against his will he finds himself caught up in the aftermath of a terrorist bombing directed against the Tsarist authorities. He is pulled in different directions -- by his conscience and his ambitions, by powerful opposed political forces, but most of all by personal emotions he is unable to suppress. Set in St Petersburg and Geneva, the novel is in part a critical response to Dostoevsky's Crime and Punishment, but it is also a startlingly modern book. Viewed through the 'Western eyes' of Conrad's English narrator, Razumov's story forces the reader to confront the same moral issues: the defensibility of terrorist resistance to tyranny, the loss of individual privacy in a surveillance society, and the demands thrown up by the interplay of power and knowledge."`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 679,
+    currentPrice: 1099,
     photoUrl: "https://images.penguinrandomhouse.com/cover/9780375757358",
     ratingSum: 4,
     numberOfRatings: 1,
     averageRating: 5
   },
   {
-   //12
-   title: `The Giving Tree`,
-   description: `A fairy tale analogy of a parents love for a child told through the relationship between an adoring tree who sacrifices itself to a boy as he grows into a man.`,
-   stockQuantity: 8,
-   currentPrice: 65,
-   photoUrl: "https://images-na.ssl-images-amazon.com/images/I/41ak9Ds2dWL._SX258_BO1,204,203,200_.jpg",
-   ratingSum: 5,
-   numberOfRatings: 1,
-   averageRating: 5
+    //12
+    title: `The Giving Tree`,
+    description: `A fairy tale analogy of a parents love for a child told through the relationship between an adoring tree who sacrifices itself to a boy as he grows into a man.`,
+    stockQuantity: 799,
+    currentPrice: 895,
+    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/41ak9Ds2dWL._SX258_BO1,204,203,200_.jpg",
+    ratingSum: 5,
+    numberOfRatings: 1,
+    averageRating: 5
   },
   { //13
     title: `Where the Sidewalk Ends`,
     description: `A collection of adventures, stories and parables arranged into poetry by one of the 20th century's great rhymemasters.`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 599,
+    currentPrice: 1200,
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/81zRl2vuuLL.jpg",
     ratingSum: 5,
     numberOfRatings: 1,
@@ -200,8 +216,8 @@ const books = [
   { // 14
     title: `The Catcher in the Rye`,
     description: `One of the more influential post-World War II coming of age tales, emulated in fiction and movies to this day.  It is a critique of the mid-twentieth century American materialism`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 1199,
+    currentPrice: 900,
     photoUrl: "http://www.jmdonellan.com/wp-content/uploads/the-catcher-in-the-rye-cover-6c8dab7d64192277315d6bf528d6f7b2.jpg",
     ratingSum: 2,
     numberOfRatings: 1,
@@ -210,8 +226,8 @@ const books = [
   { //15
     title: `Man's Search for Meaning`,
     description: `Auschwitz survivor and eventual founder of logotherapy discusses reasons for living in a world that doesn't readily offer them`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 699,
+    currentPrice: 850,
     photoUrl: "https://images-na.ssl-images-amazon.com/images/I/41GFZ8A93QL._SX285_BO1,204,203,200_.jpg",
     ratingSum: 2,
     numberOfRatings: 1,
@@ -220,12 +236,62 @@ const books = [
   { // 16 
     title: `The Old Man and the Sea`,
     description: `Old fisherman faces one of his biggest challenges just when he thinks his life on the sea is over`,
-    stockQuantity: 8,
-    currentPrice: 65,
+    stockQuantity: 2299,
+    currentPrice: 700,
     photoUrl: "https://cdn3.volusion.com/zjhys.xrwrf/v/vspfiles/photos/FEGDJOMATS-2.jpg?1443537283",
     ratingSum: 4,
     numberOfRatings: 1,
     averageRating: 4
+  },
+  { // 17 
+    title: `Pride and Prejudice`,
+    description: `Nineteenth century British gentry family with several daughters struggles to marry them off`,
+    stockQuantity: 1423,
+    currentPrice: 700,
+    photoUrl: "https://s-i.huffpost.com/gen/961618/images/o-FACTS-PRIDE-AND-PREJUDICE-facebook.jpg",
+    ratingSum: 5,
+    numberOfRatings: 1,
+    averageRating: 5
+  }, { //18
+    title: `Bo Knows Bo`,
+    description: `Best athlete who ever lived thinks back on his awesomeness`,
+    stockQuantity: 1179,
+    currentPrice: 700,
+    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/51l8tau6x8L._SX330_BO1,204,203,200_.jpg",
+    ratingSum: 5,
+    numberOfRatings: 1,
+    averageRating: 5
+  }, 
+  { // 19 
+    title: `Sense and Sensibility`,
+    description: `Nothing to do with Bruce Campbell.  I never read it.  Something Britishy happens to Brits, probably women, probably troubles with men somehow.  No sex.  Zero explosions.  British.`,
+    stockQuantity: 907,
+    currentPrice: 700,
+    photoUrl: "https://images-na.ssl-images-amazon.com/images/I/51Dm88iD5kL._SX309_BO1,204,203,200_.jpg",
+    ratingSum: 3,
+    numberOfRatings: 1,
+    averageRating: 3
+  },
+  { //20
+    title: `Crime and Punishment`,
+    description: `Fun romp through torture, mental anguish, atheism and oppressive government.  Very Russian.`,
+    stockQuantity: 1399,
+    currentPrice: 700,
+    photoUrl: "http://getkhana.com/wp-content/uploads/2015/06/CrimeandPunishment.png",
+    ratingSum: 3,
+    numberOfRatings: 1,
+    averageRating: 3
+  }, 
+  { //21
+    title: `War and Peace`,
+    description: `Long.`,
+    stockQuantity: 899,
+    currentPrice: 700,
+    photoUrl: "https://images.gr-assets.com/books/1396760414l/21851991.jpg",
+    ratingSum: 3,
+    numberOfRatings: 1,
+    averageRating: 3
+
   }
 
 ];
@@ -301,6 +367,26 @@ const bookAuthors = [
   {
     bookId: 16,
     authorId: 14
+  },
+  {
+    bookId: 15,
+    authorId: 17
+  },
+  {
+    bookId: 18,
+    authorId: 16
+  },
+  {
+    bookId: 19,
+    authorId: 15
+  },
+  {
+    bookId: 20,
+    authorId: 17
+  },
+  {
+    bookId: 21,
+    authorId: 18
   }
 ]
 
@@ -376,6 +462,26 @@ const categories = [
   {
     bookId: 16,
     genreId: 8
+  },
+  {
+    bookId: 17,
+    genreId: 7
+  },
+  {
+    bookId: 18,
+    genreId: 6
+  },
+  {
+    bookId: 19,
+    genreId: 5
+  },
+  {
+    bookId: 20,
+    genreId: 4
+  },
+  {
+    bookId: 21,
+    genreId: 3
   }
 ]
 
@@ -495,7 +601,7 @@ const reviews = [
     bookId: 14
   },
   {
-    comment: `Obligatory reading`,
+    comment: `Obligatory reading for morose high school students and English majors.`,
     rating: 5,
     userId: 3,
     bookId: 16
