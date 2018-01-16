@@ -17,11 +17,11 @@ const Navbar = (props) => {
         </Header>
         </Menu.Item>
       </a>
+      <div id="search">
+        <SearchForm />
+      </div>
 
       <Menu.Menu position="right">
-        <Menu.Item>
-          <SearchForm />
-        </Menu.Item>
         <Menu.Item>
           <Link to="/home">
             <Button primary>
