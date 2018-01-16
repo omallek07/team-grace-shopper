@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const User = require('../db/models/user')
-const { Order } = require('../db')
+const { Order, Address } = require('../db')
 module.exports = router
 
 router.post('/login', (req, res, next) => {
@@ -22,33 +22,40 @@ router.post('/login', (req, res, next) => {
 })
 
 router.post('/signup', async (req, res, next) => {
-  const {email, password, firstName, lastName, method} = req.body
+  try {
+    const { email, password, firstName, lastName, streetOne, streetTwo, city, state, zip } = req.body
 
-  let ourUser
-  let cart = await Order.find({
-    where: {
-      sid: req.session.id,
-      status: 'cart'
-    }
-  })
-  User.create({email, password, firstName, lastName, method})
-    .then(user => {
-      ourUser = user
-      return cart.update({
-        userId: user.id,
-        sid: null
-      })
-    })
-    .then(() => {
-      req.login(ourUser, err => (err ? next(err) : res.json(ourUser)))
-    })
-    .catch(err => {
-      if (err.name === 'SequelizeUniqueConstraintError') {
-        res.status(401).send('User already exists')
-      } else {
-        next(err)
+    let ourAddress = await Address.create({streetOne, streetTwo, city, state, zip})
+    console.log('addresscreated')
+    let ourUser
+    let cart = await Order.find({
+      where: {
+        sid: req.session.id,
+        status: 'cart'
       }
     })
+    console.log('cart found')
+    User.create({ email, password, firstName, lastName, addressId: ourAddress.id})
+      .then(user => {
+        console.log('user created')
+        ourUser = user
+        return cart.update({
+          userId: user.id,
+          sid: null
+        })
+      })
+      .then(() => {
+        console.log('cart updated')
+        req.login(ourUser, err => (err ? next(err) : res.json(ourUser)))
+      })
+
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+  }
 })
 
 router.post('/logout', (req, res) => {
