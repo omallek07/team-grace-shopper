@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { Grid } from 'semantic-ui-react';
-import {logout, getCart} from '../store'
+import {logout, getCart, setOrderAddressAction} from '../store'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import history from '../history'
@@ -50,6 +50,7 @@ const mapDispatch = (dispatch) => {
       dispatch(logout())
       .then(() => {
         dispatch( getCart())
+        // dispatch( setOrderAddressAction({}))
         history.push('/home')
       })
     }

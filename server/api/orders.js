@@ -26,15 +26,22 @@ function getCart(sessionId, userId) {
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {
+    console.log('hello from route')
     let cart
     let id
     let lineItems
     if (req.params.userId === 'undefined'){
-        cart = await getCart(req.session.id)
+        if(req.user){
+          cart = await getCart(req.session.id, req.user.id)
+        }
+        else{
+          cart = await getCart(req.session.id)
+        }
     }
     else {
       cart = await getCart(req.session.id, req.params.userId)
     }
+
     id = cart.id
 
     lineItems = await LineItems.findAll({
@@ -136,15 +143,21 @@ router.delete('/cart/:bookId/:userId', async (req, res, next) => {
   }
 })
 
-router.put('/checkout', async (req, res, next) => {
+router.post('/checkout', async (req, res, next) => {
 
   try {
-
-    let cart = await getCart(res.session.id, req.body.userId)
-
+    let userId
+    let cart
+    if (req.user){
+      userId = req.user.id
+      cart = await getCart(req.session.id, userId)
+    }
+    else {
+      cart = await getCart(req.session.id)
+    }
     let lineItems = await LineItems.findAll({
       where: {
-        id: cart.id
+        orderId: cart.id
       },
       include: {
         all: true
@@ -158,14 +171,16 @@ router.put('/checkout', async (req, res, next) => {
         .then(book => [book, item.orderQuantity, book.stockQuantity >= item.orderQuantity])
     }))
 
-    if (stockCheck.filter(x => x[2]) === stockCheck) {
+    console.log('length is',stockCheck.filter(x=>x[2]).length)
+    console.log('stockCheck length is', stockCheck.length)
+    if (stockCheck.filter(x => x[2]).length === stockCheck.length ) {
       await Promise.all(stockCheck.map(x => {
         let [book, orderQuantity, bool] = x
         let stockQuantity = book.stockQuantity - orderQuantity
         return book.update({ stockQuantity })
       }))
-
-      if (req.user.id) {
+console.log('hello')
+      if (req.user) {
         await cart.update({
           status: 'processing',
           userId: req.user.id,
@@ -178,7 +193,8 @@ router.put('/checkout', async (req, res, next) => {
         })
       }
 
-    } else {
+    }
+    else {
       throw new Error('shit, dog. you ordered more of something than was in stock')
     }
 
