@@ -102,11 +102,9 @@ class SingleProduct extends Component {
                 <ReviewInput />
               </Grid.Row>
               <Grid.Row>
-                -------------------------------
-                User Reviews:
-                -------------------------------
-                <SingleProductReviews />
-              </Grid.Row>
+                <h3>User Reviews:</h3>
+               </Grid.Row>
+               <SingleProductReviews id="singprod" />
             </Grid>
           </div>
         }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Item, Label, Icon, Button } from 'semantic-ui-react'
-import { updateItem, deleteItemThunk, setOrderAddressAction, placeUserOrderThunk } from '../store'
-import { withRouter } from 'react-router-dom'
+
+import {Grid, Item, Label, Icon, Button} from 'semantic-ui-react'
+import {updateItem, deleteItemThunk, sendEmailThunk, setOrderAddressAction, placeUserOrderThunk} from '../store'
+import {withRouter} from 'react-router-dom'
+
 import history from '../history'
 function Cart(props) {
   const isLoggedIn = props.isLoggedIn;
@@ -128,6 +130,7 @@ const mapDispatch = (dispatch, state) => {
     },
     placeOrder(cart, user, currentOrder) {
       dispatch(placeUserOrderThunk(currentOrder))
+      dispatch(sendEmailThunk())
       history.push('/cart/orderStatus')
     }
   }
