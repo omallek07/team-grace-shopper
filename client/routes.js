@@ -4,7 +4,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
 
-import {Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard, OrderConfirmation} from './components'
+import {ConfirmOrderInfo, Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard, OrderConfirmation} from './components'
 import {me, getCart, getAllBooksThunk} from './store'
 
 
@@ -31,6 +31,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path="/products" component = {Products} />
+            <Route exact path="/cart/orderStatus" component = {ConfirmOrderInfo} />
             <Route exact path="/cart/confirm" component = {OrderConfirmation} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products/:productId" component={SingleProduct} />
