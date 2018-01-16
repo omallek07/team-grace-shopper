@@ -117,7 +117,7 @@ const mapState = ({ user, cart, currentOrder }) => {
   }
 }
 
-const mapDispatch = (dispatch, state) => {
+const mapDispatch = (dispatch) => {
   return {
     changeCart(bookId, orderQuantity, userId) {
       dispatch(updateItem({ bookId, orderQuantity, userId }))
@@ -130,7 +130,7 @@ const mapDispatch = (dispatch, state) => {
     },
     placeOrder(cart, user, currentOrder) {
       dispatch(placeUserOrderThunk(currentOrder))
-      dispatch(sendEmailThunk())
+      dispatch(sendEmailThunk(currentOrder))
       history.push('/cart/orderStatus')
     }
   }
