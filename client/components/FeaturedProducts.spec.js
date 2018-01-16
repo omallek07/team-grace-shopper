@@ -17,12 +17,8 @@ describe('Featured Products Component', () => {
     features = shallow(<FeaturedProducts books ={[]} getBooks={() => {}} />)
   })
 
-  it('Shows a book authored by Bruce Campbell', () => {
-    expect(features.find('Book').props().children).to.be.equal(' All Books ')
-  })
-
-  it('FeaturedProducts component contains 4 items per row', () => {
-    expect(features.childAt(1).props().itemsPerRow).to.be.equal(4)
+  it('Should display a Featured Bestsellers header', () => {
+    expect(features.find('Header').children().contains('Featured Bestsellers')).to.be.equal(true)
   })
 
 })

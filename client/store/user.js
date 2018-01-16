@@ -28,9 +28,9 @@ export const me = () =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
 
-export const auth = (email, password, firstName, lastName, method) =>
+export const auth = ({email, password, firstName, lastName, streetOne, streetTwo, city, state, zip, method}) =>
   dispatch =>
-    axios.post(`/auth/${method}`, { email, password, firstName, lastName })
+    axios.post(`/auth/${method}`, {email, password, firstName, lastName, streetOne, streetTwo, city, state, zip})
       .then(res => {
         return dispatch(getUser(res.data))
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler

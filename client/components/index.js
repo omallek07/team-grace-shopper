@@ -5,7 +5,8 @@
  */
 export {default as Main} from './Main'
 export {default as UserHome} from './UserHome'
-export {Login, Signup} from './AuthForm'
+export {Login} from './AuthForm'
+export {Signup} from './Signup'
 export {default as Products} from './Products.js';
 export {default as SingleGenre} from './SingleGenre.js';
 export {default as SingleProduct} from './SingleProduct.js';
