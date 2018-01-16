@@ -52,6 +52,7 @@ export class OrderFilterType extends Component {
        { filteredOrders.length ? <Table compact collapsing celled structured>
           <Table.Header>
             <Table.Row>
+              <Table.HeaderCell>ID</Table.HeaderCell>
               <Table.HeaderCell>Status</Table.HeaderCell>
               <Table.HeaderCell>Purchase Date</Table.HeaderCell>
               <Table.HeaderCell>Name</Table.HeaderCell>
@@ -66,6 +67,9 @@ export class OrderFilterType extends Component {
               filteredOrders && filteredOrders.map(order => {
                 return (
                   <Table.Row key={order.id}>
+                    <Table.Cell>
+                      {order.id}
+                    </Table.Cell>
                     <Table.Cell>
                       <Dropdown
                         id={order.id}

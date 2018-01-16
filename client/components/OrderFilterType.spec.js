@@ -47,17 +47,17 @@ describe('Order filter type Component', () => {
     expect(wrapper.find('TableBody')).to.be.length(1)
   })
 
-  it('Should have 7 Table Cells', () => {
-    expect(wrapper.find('TableCell')).to.be.length(7)
+  it('Should have 8 Table Cells', () => {
+    expect(wrapper.find('TableCell')).to.be.length(8)
   })
 
   it('Should display name correctly inside table cell', () => {
-    expect(wrapper.find('TableCell').at(2).children()
+    expect(wrapper.find('TableCell').at(3).children()
     .contains('John Doe')).to.equal(true);
   })
 
   it('Table should display streetTwo address if provided', () => {
-    expect(wrapper.find('TableCell').at(3).children()
+    expect(wrapper.find('TableCell').at(4).children()
     .contains('1430 Drive St Apt 3F, Chicago, IL, 34343')).to.equal(true);
   })
 })
