@@ -25,7 +25,7 @@ const deleteItem = (bookId) => {
   }
 }
 
-export const getCart = (userId) => dispatch => {
+export const getCart = () => dispatch => {
   return axios
     .get(`/api/orders/cart/`)
     .then(res => res.data)
