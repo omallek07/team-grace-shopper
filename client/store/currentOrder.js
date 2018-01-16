@@ -2,11 +2,17 @@ import axios from 'axios';
 
 const SET_ORDER_ADDRESS = 'SET_ORDER_ADDRESS'
 const ADD_ERROR = 'ADD_ERROR'
+const SET_ORDER_ADDRESS_EMPTY = 'SET_ORDER_ADDRESS_EMPTY'
 
 export const setOrderAddressAction = ( currentOrder ) => {
   return {
     type: SET_ORDER_ADDRESS,
     currentOrder
+  }
+}
+export const setOrderAddressEmptyAction = () => {
+  return {
+    type: SET_ORDER_ADDRESS_EMPTY
   }
 }
 
@@ -16,6 +22,7 @@ export const addError = (error) => {
     error
   }
 }
+
 export const changeOrderAddressThunk = (name, address) => dispatch => {
   return axios.post('/api/address', address)
     .then(res => res.data)
@@ -28,6 +35,8 @@ export default function (currentOrder = {}, action){
       return action.currentOrder
     case ADD_ERROR:
       return {...currentOrder, error: action.error}
+    case SET_ORDER_ADDRESS_EMPTY:
+      return {}
     default:
       return currentOrder;
   }

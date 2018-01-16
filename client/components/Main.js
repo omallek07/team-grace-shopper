@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import { Grid } from 'semantic-ui-react';
-import {logout, getCart, setOrderAddressAction} from '../store'
+import {logout, getCart, setOrderAddressEmptyAction} from '../store'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import history from '../history'
@@ -16,9 +16,7 @@ import history from '../history'
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  // console.log('props',props)
   const {children, handleClick, isLoggedIn, isAdmin} = props
-
   return (
     <div>
       <Navbar logstatus={isLoggedIn} handleClick={handleClick} isAdmin={isAdmin} />
@@ -50,7 +48,7 @@ const mapDispatch = (dispatch) => {
       dispatch(logout())
       .then(() => {
         dispatch( getCart())
-        // dispatch( setOrderAddressAction({}))
+        dispatch( setOrderAddressEmptyAction({}))
         history.push('/home')
       })
     }
