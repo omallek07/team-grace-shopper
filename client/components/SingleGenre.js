@@ -1,71 +1,63 @@
 import React, { Component } from 'react';
 import { Card, Rating, Item, Grid, Label, Header, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux';
-import { getGenreByIdThunk } from '../store'
-import { NavLink } from 'react-router-dom';
+import { getAllBooksThunk, getGenreByIdThunk } from '../store'
 import BookCard from './BookCard';
 
-class SingleGenre extends Component {
+export class SingleGenre extends Component {
 
     componentDidMount() {
-        const id = this.props.match.params.genreId;
-        // console.log('GENRE PROPS     ', this.props)
-        this.props.getSingleGenre(id);
+        this.props.getBooks()
     }
 
     render() {
-        const books = this.props.singleGenre.books;
-        // console.log('books    ', books)
-        const genre = this.props.singleGenre.name;
-        // console.log('GENRE', genre)
-        console.log('PROPS    ',this.props)
+        const books = this.props.books
+        const id = this.props.match.params.genreId;
+        const allGenreObjList = books.reduce((previousValue, currentValue) => {
+            return previousValue.concat(currentValue.genres);
+        }, [])
+        const currentGenreObjList = allGenreObjList.filter(genre => {
+            return genre.id === Number(id);
+        })
+        const booksByGenreId = books.filter(book => {
+            const genreIds = book.genres.map(el => {
+                return el.id;
+            });
+            if (genreIds.includes(Number(id))) {
+                return book
+            }
+        })
         return (
             <div>
-            <h1>{genre} Books</h1>
-                {books && 
-                books.map(book => {
-                    return (<div key={book.id}>
-                        
-                        {book.title}
-                        </div>
-                    )
-                } )
-                   
+                {currentGenreObjList[0] &&
+                    <Header>  {currentGenreObjList[0].name} Books </Header>
                 }
+                <Card.Group itemsPerRow={4}>
+                    {booksByGenreId.map(book => {
+                        return (
+                            <React.Fragment key={book.id}>
+                                <BookCard book={book} />
+                            </React.Fragment>
+                        );
+                    })}
+                </Card.Group>
             </div>
         )
-
     }
 }
 
-/*
-return (
-      <div>
-        <Header> All Books </Header>
-        <Card.Group itemsPerRow={4}>
-          { books.map(book => {
-            return (
-              <React.Fragment key={book.id}>
-                <BookCard book={book} />
-              </React.Fragment>
-            )
-          })
-        }
-        </Card.Group>
-    </div>
-  )
-*/
-
 const mapStateToProps = (state) => {
     return {
-        singleGenre: state.singleGenre,
-        // books: state.singleGenre.books
+        books: state.books
     }
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSingleGenre(id) {
-            dispatch(getGenreByIdThunk(id))
+        getBooks() {
+            dispatch(getAllBooksThunk())
+        },
+        getSingleGenre() {
+            dispatch(getGenreByIdThunk())
         }
     }
 }
