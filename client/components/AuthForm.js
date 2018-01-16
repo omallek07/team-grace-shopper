@@ -85,7 +85,7 @@ const mapDispatch = (dispatch) => {
       const lastName = "Doe"
       dispatch(auth({email, password, firstName, lastName, method, formName}))
       .then((user) => {
-        dispatch(getCart(user.user.id))
+        dispatch(getCart())
         history.push('/home')
       })
     }

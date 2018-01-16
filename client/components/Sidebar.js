@@ -75,7 +75,7 @@ const Sidebar = (props) => {
             {
               props.genres.map(genre => (
 
-                <Dropdown.Item as="a" href={`/products/genre/${genre.id}`} >{genre.name}</Dropdown.Item>
+                <Dropdown.Item key={genre.id} as="a" href={`/products/genre/${genre.id}`} >{genre.name}</Dropdown.Item>
               ))
             }
             {/* <Dropdown.Item icon='edit' text='Edit Profile' />
