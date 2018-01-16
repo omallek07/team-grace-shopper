@@ -27,7 +27,7 @@ const deleteItem = (bookId) => {
 
 export const getCart = (userId) => dispatch => {
   return axios
-    .get(`/api/orders/cart/${userId}`)
+    .get(`/api/orders/cart/`)
     .then(res => res.data)
     .then(cart => dispatch(setCart(cart)))
     .catch(err => console.log(err));
@@ -36,7 +36,7 @@ export const getCart = (userId) => dispatch => {
 export const updateItem = (lineItem) => dispatch => {
   return axios.put('/api/orders/cart', lineItem)
     .then(() => {
-      return axios.get(`/api/orders/cart/${lineItem.userId}`)
+      return axios.get(`/api/orders/cart`)
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))
         .catch(err => console.log(err))
