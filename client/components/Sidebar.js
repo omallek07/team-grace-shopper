@@ -1,7 +1,8 @@
 import React from 'react';
 import { Menu, Icon, Header, Button, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux'
+
 //
 const Sidebar = (props) => {
   const { logstatus, isAdmin } = props;
@@ -70,19 +71,25 @@ const Sidebar = (props) => {
           </Menu.Item>
       }
       <Menu.Item>
-        <Dropdown item fluid as="Button" className="ui button" text='Genres'>
-          <Dropdown.Menu>
-            {
-              props.genres.map(genre => (
-
-                <Dropdown.Item key={genre.id} as="a" href={`/products/genre/${genre.id}`} >{genre.name}</Dropdown.Item>
-              ))
-            }
+        <Button>
+          <Dropdown item fluid className="ui button" text='Genres'>
+            <Dropdown.Menu>
+              {
+                props.genres.map(genre => (
+                  <Dropdown.Item
+                    key={genre.id}
+                  >
+                    <NavLink
+                      to={`/products/genre/${genre.id}`}>{genre.name}</NavLink>
+                  </Dropdown.Item>
+                ))
+              }
             {/* <Dropdown.Item icon='edit' text='Edit Profile' />
             <Dropdown.Item icon='globe' text='Choose Language' />
             <Dropdown.Item icon='settings' text='Account Settings' /> */}
-          </Dropdown.Menu>
-        </Dropdown>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Button>
       </Menu.Item>
     </Menu>
   )
