@@ -3,8 +3,25 @@ const { Order, LineItems, Book } = require('../db')
 const nodemailer = require('nodemailer');
 module.exports = router
 
-function getCart(req) {
-  if (req.user) {
+async function getCart(req) {
+  let sessionCart = await Order.findOne({where: {sid: req.session.id, status: 'cart'}})
+  let lineItems = await LineItems.findAll({where: {orderId: sessionCart.id}})
+
+  if (req.user && lineItems.length>0) {
+
+    let userCart = await Order.findOrCreate({where: {userId: req.user.id, status: 'cart'}})
+    userCart = userCart[0]
+    let userItems = await LineItems.findAll({where: {orderId: userCart.id}})
+
+    await Promise.all(userItems.map(item => item.update({orderQuantity: 0})))
+    await Promise.all(lineItems.map(item => item.update({orderId: userCart.id})))
+
+    return Order.findById(userCart.id)
+
+  } else if (req.user) {
+
+
+
     return Order.findOrCreate({
       where: {
         status: 'cart',
