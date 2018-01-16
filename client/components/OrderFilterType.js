@@ -92,7 +92,7 @@ export class OrderFilterType extends Component {
                         order.address  //is address confirmed?
                         ?
                         <div>
-                          {`${order.address.streetOne} ${order.address.streetTwo || ' '}, ${order.address.city}, ${order.address.zip}, ${order.address.state}`}
+                          {`${order.address.streetOne} ${order.address.streetTwo || ' '}, ${order.address.city}, ${order.address.state}, ${order.address.zip}`}
                         </div>
                         :
                         <div>

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { updateItem } from '../store';
 import {connect} from 'react-redux'
 
-const BookCard = (props) => {
+export const BookCard = (props) => {
 
     const book = props.book;
 
