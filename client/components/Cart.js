@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {Grid, Item, Label, Icon, Button} from 'semantic-ui-react'
-import {updateItem, deleteItemThunk, setOrderAddressAction} from '../store'
+import {updateItem, deleteItemThunk, setOrderAddressAction, placeUserOrderThunk} from '../store'
 import {withRouter} from 'react-router-dom'
-
+import history from '../history'
 function Cart (props){
   const isLoggedIn = props.isLoggedIn;
   const cart = props.cart;
@@ -83,7 +83,7 @@ function Cart (props){
         <Grid.Column width={4}>
         { props.location &&
           (props.location.pathname.includes('confirm')) ?
-            <Button color='green'>
+            <Button color='green' onClick = {()=> props.placeOrder(props.cart, props.user, props.currentOrder)}>
               Place Order
             </Button>
             :
@@ -105,14 +105,16 @@ function Cart (props){
 }
 
 
-const mapState = ({user, cart}) => {
+const mapState = ({user, cart, currentOrder}) => {
   return {
     isLoggedIn: !!Object.keys(user).length,     // Kanter wrote this --> isLoggedIn: !!user,
     user: user,
-    cart: cart
+    cart: cart,
+    currentOrder: currentOrder
   }
 }
-const mapDispatch = (dispatch) => {
+
+const mapDispatch = (dispatch, state) => {
   return {
     changeCart(bookId, orderQuantity, userId){
       dispatch(updateItem({bookId, orderQuantity, userId}))
@@ -122,6 +124,10 @@ const mapDispatch = (dispatch) => {
     },
     setOrderAddress(name,address){
       dispatch(setOrderAddressAction({name,address}))
+    },
+    placeOrder(cart,user,currentOrder){
+      dispatch(placeUserOrderThunk(currentOrder))
+      history.push('/cart/orderStatus')
     }
   }
 }

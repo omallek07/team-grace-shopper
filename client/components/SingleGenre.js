@@ -31,6 +31,9 @@ export class SingleGenre extends Component {
             <div>
                 {currentGenreObjList[0] &&
                     <Header>  {currentGenreObjList[0].name} Books </Header>
+
+
+
                 }
                 <Card.Group itemsPerRow={4}>
                     {booksByGenreId.map(book => {
