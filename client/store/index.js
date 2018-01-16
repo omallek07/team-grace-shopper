@@ -44,4 +44,5 @@ export * from './singleBookReviews'
 export * from './cart'
 export * from './currentOrder'
 export * from './singleGenre'
-
+export * from './searchBookResult'
+export * from './userOrders'

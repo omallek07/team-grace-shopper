@@ -14,8 +14,6 @@ class SingleProduct extends Component {
   }
   render() {
     const book = this.props.singleBook;
-    console.log('BOOK', book)
-    console.log('PROPS    ', this.props)
     return (
       <div>
         {
@@ -68,7 +66,13 @@ class SingleProduct extends Component {
                           </Label.Detail>
                         </Label>
                         <Icon name='cart' size='big' onClick={() => {
-                          this.props.updateItem(this.props.cart.id, this.props.singleBook.id)
+                          if (this.props.user.id)
+                          {
+                            this.props.updateItem(this.props.singleBook.id, this.props.user.id)
+                          }
+                          else {
+                            this.props.updateItem(this.props.singleBook.id)
+                          }
                         }} />
                       </Label.Group>
                       {
@@ -105,7 +109,8 @@ class SingleProduct extends Component {
 const mapStateToProps = (state) => {
   return {
     singleBook: state.singleBook,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
@@ -115,10 +120,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getBookByIdThunk(id))
       dispatch(getBookReviewThunk(id))
     },
-    updateItem: (orderId, bookId) => {
+    updateItem: (bookId,userId) => {
       dispatch(updateItem({
-        orderId,
         bookId,
+        userId,
         orderQuantity: 1
       }))
     }

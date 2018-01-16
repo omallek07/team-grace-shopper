@@ -18,19 +18,19 @@ class SingleGenre extends Component {
         // console.log('books    ', books)
         const genre = this.props.singleGenre.name;
         // console.log('GENRE', genre)
-        console.log('PROPS    ',this.props)
+        // console.log('PROPS    ',this.props)
         return (
             <div>
             <h1>{genre} Books</h1>
-                {books && 
+                {books &&
                 books.map(book => {
                     return (<div key={book.id}>
-                        
+
                         {book.title}
                         </div>
                     )
                 } )
-                   
+
                 }
             </div>
         )
