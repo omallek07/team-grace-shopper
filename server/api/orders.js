@@ -24,22 +24,16 @@ function getCart(sessionId, userId) {
   }
 }
 
-router.get('/cart/:userId', async (req, res, next) => {
+router.get('/cart', async (req, res, next) => {
   try {
-    console.log('hello from route')
     let cart
     let id
     let lineItems
-    if (req.params.userId === 'undefined'){
-        if(req.user){
-          cart = await getCart(req.session.id, req.user.id)
-        }
-        else{
-          cart = await getCart(req.session.id)
-        }
+    if (req.user){
+      cart = await getCart(req.session.id, req.user.id)
     }
     else {
-      cart = await getCart(req.session.id, req.params.userId)
+      cart = await getCart(req.session.id)
     }
 
     id = cart.id
@@ -64,7 +58,7 @@ router.get('/cart/:userId', async (req, res, next) => {
 
 
 // Find all orders by user
-router.get('/:userId', async (req, res, next) => {
+router.get('/userId', async (req, res, next) => {
   try {
     let userOrder = await Order.findAll({
     include: [{
@@ -75,7 +69,7 @@ router.get('/:userId', async (req, res, next) => {
         }]
       }],
     where:
-      { userId: req.params.userId }
+      { userId: req.user.id }
     })
     res.json(userOrder)
   }
@@ -105,7 +99,6 @@ router.put('/cart', async (req, res, next) => {
     if (!orderQuantity) {
       orderQuantity = lineItem[0].orderQuantity + 1
     }
-    // console.log(lineItem)
     lineItem = await lineItem[0].update({ orderQuantity })
     if (typeof lineItem === 'number') {
       lineItem = { lineItem: 'destroyed' }
@@ -171,37 +164,42 @@ router.post('/checkout', async (req, res, next) => {
         .then(book => [book, item.orderQuantity, book.stockQuantity >= item.orderQuantity])
     }))
 
-    console.log('length is',stockCheck.filter(x=>x[2]).length)
-    console.log('stockCheck length is', stockCheck.length)
     if (stockCheck.filter(x => x[2]).length === stockCheck.length ) {
       await Promise.all(stockCheck.map(x => {
         let [book, orderQuantity, bool] = x
         let stockQuantity = book.stockQuantity - orderQuantity
         return book.update({ stockQuantity })
       }))
-console.log('hello')
+      let addressId
+
+      if (req.body.address){
+        addressId = req.body.address.id
+      }
+      else {
+        addressId = req.user.address.id
+      }
+
       if (req.user) {
         await cart.update({
           status: 'processing',
           userId: req.user.id,
+          addressId: addressId,
           purchaseTime: Date.now()
         })
       } else {
         await cart.update({
           status: 'processing',
-          purchaseTime: Date.now()
+          purchaseTime: Date.now(),
+          addressId: addressId
         })
       }
-
     }
     else {
       throw new Error('shit, dog. you ordered more of something than was in stock')
     }
-
     res.json('success')
-
   }
   catch (err) {
-    next(err)
+    res.status(500).send(err)
   }
 })

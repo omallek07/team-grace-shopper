@@ -113,6 +113,7 @@ const mapState = ({user, cart, currentOrder}) => {
     currentOrder: currentOrder
   }
 }
+
 const mapDispatch = (dispatch, state) => {
   return {
     changeCart(bookId, orderQuantity, userId){
@@ -125,11 +126,8 @@ const mapDispatch = (dispatch, state) => {
       dispatch(setOrderAddressAction({name,address}))
     },
     placeOrder(cart,user,currentOrder){
-      console.log('current cart is',cart)
-      console.log('user is',user)
-      console.log('currentOrder is',currentOrder)
-      dispatch(placeUserOrderThunk())
-      history.push('/home')
+      dispatch(placeUserOrderThunk(currentOrder))
+      history.push('/cart/orderStatus')
     }
   }
 }

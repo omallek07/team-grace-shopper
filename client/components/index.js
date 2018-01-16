@@ -16,4 +16,4 @@ export {default as ConfirmOrderInfo} from './ConfirmOrderInfo';
 export {default as UserAccountDashboard} from './UserAccountDashboard';
 export {default as AdminDashboard} from './AdminDashboard';
 export {default as OrderConfirmation} from './OrderConfirmation'
-export {default as AddressForm} from './AddressForm'
+export {default as AddressForm} from './AddressForm';
