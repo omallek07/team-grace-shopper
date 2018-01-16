@@ -30,7 +30,20 @@ router.get('/users', (req, res, next) => {
 
 //Admin can update order status
 router.put('/orders/:orderId', (req, res, next) => {
-  Order.findById(req.params.orderId)
+  Order.findById(req.params.orderId, {
+    include: [
+      { model: Address },
+      { model: User,
+        attributes: ['id', 'firstName', 'lastName']
+      },
+      {
+        model: LineItems,
+          include: [{ model: Book,
+            attributes: ['id', 'title', 'stockQuantity', 'currentPrice', 'photoUrl']
+          }]
+        }
+      ]
+  })
   .then(matchingOrder => {
     matchingOrder.update({status: req.body.status})
   .then(updatedOrder => {
