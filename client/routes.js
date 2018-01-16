@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Route, Switch, Router} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-
-import {ConfirmOrderInfo, Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard, OrderConfirmation} from './components'
-import {me, getCart, getAllBooksThunk} from './store'
+import { ConfirmOrderInfo, Main, Login, Signup, UserHome, Products, SingleProduct, SingleGenre, Cart, UserReviews, UserOrders, UserAccountDashboard, AdminDashboard, OrderConfirmation } from './components'
+import { me, getCart, getAllBooksThunk, getGenresThunk } from './store'
 
 
 /**
@@ -17,9 +16,9 @@ class Routes extends Component {
     this.props.loadInitialData()
   }
 
-  render () {
+  render() {
 
-    const {isLoggedIn, isAdmin} = this.props;
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <Router history={history}>
@@ -30,25 +29,25 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/products" component = {Products} />
-            <Route exact path="/cart/orderStatus" component = {ConfirmOrderInfo} />
-            <Route exact path="/cart/confirm" component = {OrderConfirmation} />
+            <Route exact path="/products" component={Products} />
+            <Route exact path="/cart/orderStatus" component={ConfirmOrderInfo} />
+            <Route exact path="/cart/confirm" component={OrderConfirmation} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products/:productId" component={SingleProduct} />
             <Route path="/products/genre/:genreId" component={SingleGenre} />
             {
               isLoggedIn &&
-                <Switch>
-                  {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
-                  <Route path="/userReviews" component={UserReviews} />
-                  <Route path="/userOrders" component={UserOrders} />
-                  <Route path="/userAccountDash" component={UserAccountDashboard} />
-                  {
-                    isAdmin &&
-                    <Route path="/adminDash" component={AdminDashboard} />
-                  }
-                </Switch>
+              <Switch>
+                {/* Routes placed here are only available after logging in */}
+                <Route path="/home" component={UserHome} />
+                <Route path="/userReviews" component={UserReviews} />
+                <Route path="/userOrders" component={UserOrders} />
+                <Route path="/userAccountDash" component={UserAccountDashboard} />
+                {
+                  isAdmin &&
+                  <Route path="/adminDash" component={AdminDashboard} />
+                }
+              </Switch>
             }
             {/* Displays our Home component as a fallback */}
             <Route component={UserHome} />
@@ -62,7 +61,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = ({user}) => {
+const mapState = ({ user }) => {
   return {
     isLoggedIn: !!user.id,
     isAdmin: !!user.isAdmin,
@@ -71,9 +70,11 @@ const mapState = ({user}) => {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData:  () => {
+    loadInitialData: () => {
       dispatch(me()).then((x) => {
-         dispatch(getCart(x.user.id))})
+        dispatch(getCart(x.user.id))
+        dispatch(getGenresThunk())
+      })
     }
   }
 }
