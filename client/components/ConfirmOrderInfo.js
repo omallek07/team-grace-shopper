@@ -9,13 +9,18 @@ const ConfirmOrderInfo = (props) => {
         <h1>Some of the items are OUT OF STOCK please order again</h1>
         :
         <div>
-          <h1>Order is placed for {props.currentOrder.name}</h1>
-          <h3>Your order is placed for delivery at :</h3>
-          <h4>{props.currentOrder.address.streetOne}</h4>
-          <h4>{props.currentOrder.address.streetTwo}</h4>
-          <h4>{props.currentOrder.address.city}</h4>
-          <h4>{props.currentOrder.address.state}</h4>
-          <h4>{props.currentOrder.address.zip}</h4>
+          {
+            props.currentOrder.address &&
+            <div>
+              <h1>Order is placed for {props.currentOrder.name}</h1>
+              <h3>Your order is placed for delivery at :</h3>
+              <h4>{props.currentOrder.address.streetOne}</h4>
+              <h4>{props.currentOrder.address.streetTwo}</h4>
+              <h4>{props.currentOrder.address.city}</h4>
+              <h4>{props.currentOrder.address.state}</h4>
+              <h4>{props.currentOrder.address.zip}</h4>
+            </div>
+          }
         </div>
       }
     </div>

@@ -8,14 +8,14 @@ const sendEmailAction = () => {
   }
 }
 
-export const sendEmailThunk = () => dispatch => {
+export const sendEmailThunk = (currentOrder) => dispatch => {
   return axios
-    .post(`/api/orders/email`)
+    .post(`/api/orders/email`, currentOrder)
     .then(res => res.data)
-    .then(function(){
+    .then(() => {
       dispatch(sendEmailAction)
     })
-    .catch(err => console.log(err))    
+    .catch(err => console.log(err))
 }
 
 export default function (userEmail = {}, action) {
@@ -25,8 +25,4 @@ export default function (userEmail = {}, action) {
       default:
         return {}
   }
-  
 }
-
-
-

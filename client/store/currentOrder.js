@@ -23,10 +23,10 @@ export const addError = (error) => {
   }
 }
 
-export const changeOrderAddressThunk = (name, address) => dispatch => {
+export const changeOrderAddressThunk = (name, email, address) => dispatch => {
   return axios.post('/api/address', address)
     .then(res => res.data)
-    .then(newAddress => dispatch(setOrderAddressAction({name, address: newAddress})))
+    .then(newAddress => dispatch(setOrderAddressAction({name, email, address: newAddress})))
 }
 
 export default function (currentOrder = {}, action){

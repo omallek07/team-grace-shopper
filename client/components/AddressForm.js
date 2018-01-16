@@ -16,8 +16,9 @@ import {changeOrderAddressThunk} from '../store'
      const state = evt.target.state.value
      const zip = evt.target.zip.value
      const name = evt.target.name.value
+     const email = evt.target.email.value
      const address = {streetOne,streetTwo,city,state,zip}
-     this.props.changeOrderAddress(name, address)
+     this.props.changeOrderAddress(name, email ,address)
      this.props.changeAddressFlag()
    }
   render(){
@@ -28,6 +29,13 @@ import {changeOrderAddressThunk} from '../store'
             <Form.Input name='name' placeholder='Enter Name' />
           </label>
         </Form.Field>
+        <br />
+        <Form.Field required >
+          <label>Email:
+            <Form.Input name='email' placeholder='Enter Email' />
+          </label>
+        </Form.Field>
+        <br />
         <Form.Field required >
           <label>Address line 1:
             <Form.Input name='addressOne' placeholder='Address line one' />
@@ -66,8 +74,8 @@ import {changeOrderAddressThunk} from '../store'
 
 const mapDispatch = (dispatch) => {
   return {
-    changeOrderAddress(name, address){
-      dispatch(changeOrderAddressThunk(name, address))
+    changeOrderAddress(name, email, address){
+      dispatch(changeOrderAddressThunk(name, email, address))
     }
   }
 }

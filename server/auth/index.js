@@ -26,28 +26,26 @@ router.post('/signup', async (req, res, next) => {
     const { email, password, firstName, lastName, streetOne, streetTwo, city, state, zip } = req.body
 
     let ourAddress = await Address.create({streetOne, streetTwo, city, state, zip})
-    console.log('addresscreated')
-    let ourUser
     let cart = await Order.find({
       where: {
         sid: req.session.id,
         status: 'cart'
       }
     })
-    console.log('cart found')
     User.create({ email, password, firstName, lastName, addressId: ourAddress.id})
       .then(user => {
-        console.log('user created')
-        ourUser = user
-        return cart.update({
-          userId: user.id,
-          sid: null
+        return User.findOne({where:{id:user.id},include:{all:true}})
+        .then((ourUser) => {
+          return cart.update({
+            userId: ourUser.id,
+            sid: null
+          })
+          .then(() => {
+            req.login(ourUser, err => (err ? next(err) : res.json(ourUser)))
+          })
         })
       })
-      .then(() => {
-        console.log('cart updated')
-        req.login(ourUser, err => (err ? next(err) : res.json(ourUser)))
-      })
+
 
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
