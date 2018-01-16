@@ -63,7 +63,7 @@ class ReviewInput extends Component {
               {this.props.ourReview.comment}
             </div>
             <Button onClick={() => {
-              this.setState({ editing: true, comment: '', rating: this.props.ourReview.rating })
+              this.setState({ editing: true, comment: this.props.ourReview.comment, rating: this.props.ourReview.rating })
             }}>
               Edit
             </Button>
@@ -80,7 +80,7 @@ class ReviewInput extends Component {
               name="rating"
               onRate={this.ratingChange}
             />
-            <Form.Field control={TextArea} label="Write a review:" placeholder="Write a review..." onChange={this.handleOnChange} width={16} name="comment" />
+            <Form.Field control={TextArea} label="Write a review:" defaultValue={this.state.comment} placeholder="Write a review..." onChange={this.handleOnChange} width={16} name="comment" />
             <Form.Field control={Button} disabled={!this.state.rating || this.state.comment.length < 3 || this.state.comment.length > 600} type="submit">Submit</Form.Field>
             ({this.state.comment.length}/600) {!this.state.rating && "(please give the product a rating in order to review)"}
           </Form >
