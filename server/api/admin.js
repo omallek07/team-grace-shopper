@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order, Address, LineItems, Book} = require('../db/models')
+const {User, Order, Address, LineItems, Book, Genre, Author} = require('../db/models')
 module.exports = router
 
 
@@ -73,4 +73,52 @@ router.get('/orders', async (req, res, next) => {
     res.json(allOrders)
   }
   catch (err) { next(err) }
+})
+
+
+// Admin can create book with authorId and GenreId created
+router.post('/books/', (req, res, next) => {
+  let authorId;
+  let genreId;
+
+  Author.findOrCreate((req.body[0], { where: {
+      lastName: req.body[0].lastName
+    }}))
+    .spread((author, created) => {
+      authorId = author.id
+    })
+    .catch(next)
+
+  Genre.findOrCreate((req.body[1], { where: {
+    name: req.body[1].name
+    }}))
+    .spread((genre, created) => {
+    genreId = genre.id
+    })
+    .catch(next)
+
+  if (authorId && genreId) {
+    Book.create(req.body[2])
+    .then(newBook => res.json(newBook))
+    .catch(next)
+  }
+});
+
+
+// Admin can update Book details
+router.put('/books/:bookId', (req, res, next) => {
+  console.log('update', req.body)
+  Book.findById(req.params.bookId)
+  .then(foundBook => foundBook.update(req.body))
+  .then(updatedBook => res.json(updatedBook))
+  .catch(next)
+})
+
+// Admin can delete Book
+router.delete('/books/:bookId', (req, res, next) => {
+  console.log(req.body)
+  Book.findById(req.params.bookId)
+  .then(foundBook => foundBook.delete())
+  .then(() => res.sendStatus(201))
+  .catch(next)
 })

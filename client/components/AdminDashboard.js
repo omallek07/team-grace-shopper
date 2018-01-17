@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import AdminOrdersList from './AdminOrdersList';
 import AdminAllUsers from './AdminAllUsers';
+import AdminCreateNewBook from './AdminCreateNewBook';
 import { Header } from 'semantic-ui-react';
 
 const AdminDashboard = () => {
@@ -15,6 +15,10 @@ const AdminDashboard = () => {
           <br />
           All Users Listed below:
             <AdminAllUsers />
+          <br />
+          <br />
+          Add New Book to Supply List:
+            <AdminCreateNewBook />
         </div>
     )
 }
