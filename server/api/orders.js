@@ -4,7 +4,8 @@ const nodemailer = require('nodemailer');
 module.exports = router
 
 async function getCart(req) {
-  let sessionCart = await Order.findOne({where: {sid: req.session.id, status: 'cart'}})
+  let sessionCart = await Order.findOrCreate({where: {sid: req.session.id, status: 'cart'}})
+  sessionCart = sessionCart[0]
   let lineItems = await LineItems.findAll({where: {orderId: sessionCart.id}})
 
   if (req.user && lineItems.length>0) {
