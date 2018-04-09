@@ -28,14 +28,17 @@ const deleteItem = (bookId) => {
 export const getCart = () => dispatch => {
   return axios
     .get(`/api/orders/cart/`)
-    .then(res => res.data)
+    .then(res => {
+      console.log(res.data)
+      return res.data})
     .then(cart => dispatch(setCart(cart)))
     .catch(err => console.log(err));
 }
 
 export const updateItem = (lineItem) => dispatch => {
   return axios.put('/api/orders/cart', lineItem)
-    .then(() => {
+    .then((item) => {
+      console.log(item)
       return axios.get(`/api/orders/cart`)
         .then(res => res.data)
         .then(cart => dispatch(setCart(cart)))

@@ -58,11 +58,14 @@ router.post('/signup', async (req, res, next) => {
 
 router.post('/logout', (req, res) => {
   req.logout()
+  // req.session.destroy()
   res.redirect('/')
 })
 
 router.get('/me', (req, res) => {
+  console.log(req.user);
+  console.log('SESSION:', req.session.id);
   res.json(req.user)
-})
+});
 
 router.use('/google', require('./google'))

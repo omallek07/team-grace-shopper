@@ -34,10 +34,10 @@ export const BookCard = (props) => {
                         {"$" + (book.currentPrice / 100)}
                         <Icon name='cart' link corner bordered onClick={() => {
                           if (props.user.id){
-                            props.updateItem(props.book.id, props.user.id)
+                            props.updateItem(book.id, props.user.id)
                           }
                           else {
-                            props.updateItem(props.book.id)
+                            props.updateItem(book.id)
                           }
                         }} />
                     </Grid.Column>
