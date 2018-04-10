@@ -4,10 +4,15 @@ const nodemailer = require('nodemailer');
 module.exports = router
 
 async function getCart(req) {
-  let sessionCart = await Order.findOne({where: {sid: req.session.id, status: 'cart'}})
+  // console.log(req.sessionID)
+  let sessionCart = await Order.findOrCreate({where: {sid: req.session.id, status: 'cart'}})
+  sessionCart = sessionCart[0]
+  // console.log(sessionCart)
   let lineItems = await LineItems.findAll({where: {orderId: sessionCart.id}})
+  // console.log(req.user)
 
-  if (req.user && lineItems.length>0) {
+  if (req.user && req.user.id && lineItems.length>0) {
+    // console.log('if happened')
 
     let userCart = await Order.findOrCreate({where: {userId: req.user.id, status: 'cart'}})
     userCart = userCart[0]
@@ -19,7 +24,7 @@ async function getCart(req) {
     return Order.findById(userCart.id)
 
   } else if (req.user) {
-
+    // console.log('else if happened')
 
 
     return Order.findOrCreate({
@@ -31,13 +36,18 @@ async function getCart(req) {
       .then(order => order[0])
   }
   else {
+    // console.log('else happened')
     return Order.findOrCreate({
       where: {
         status: 'cart',
         sid: req.session.id,
       }
     })
-      .then(order => order[0])
+      .then(order => {
+        // console.log(order[0])
+        return order[0]
+      })
+
   }
 }
 
@@ -45,6 +55,7 @@ router.get('/cart', async (req, res, next) => {
   try {
     const cart = await getCart(req)
     const id = cart.id
+    // console.log(id)
 
     const lineItems = await LineItems.findAll({
       where: {
@@ -57,6 +68,7 @@ router.get('/cart', async (req, res, next) => {
         }
       }]
     })
+    // console.log(lineItems.length)
     res.json(lineItems)
   }
   catch (err) {
@@ -68,6 +80,7 @@ router.get('/cart', async (req, res, next) => {
 // Find all orders by user
 router.get('/userId', async (req, res, next) => {
   try {
+    // console.log(req.user.id)
     let userOrder = await Order.findAll({
       include: [{
         model: LineItems,
@@ -92,6 +105,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/cart', async (req, res, next) => {
   try {
+    console.log(req.session.id)
     let cart = await getCart(req)
     let orderId = cart.id
     let bookId = req.body.bookId
