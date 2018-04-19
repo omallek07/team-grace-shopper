@@ -130,8 +130,7 @@ const mapDispatchToProps = (dispatch) => {
     updateItem: (bookId,userId) => {
       dispatch(updateItem({
         bookId,
-        userId,
-        orderQuantity: 1
+        userId
       }))
     }
   }
